@@ -32,6 +32,7 @@ h1 {
   list-style: none;
   /* Fix display: inline-block spacing issue */
   font-size: 0;
+  width:100%;
 }
 
 .timelines-years li {

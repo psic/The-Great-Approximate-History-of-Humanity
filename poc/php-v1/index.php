@@ -49,6 +49,8 @@ $data = [
         $tt_end = $tt_data["end"];
    }
 
+  $width = 100/(count($data)+2);
+  $half_width = $width/2;
 
       echo '<ul class="timeline-events">';
    foreach ($data as $tt_data){
@@ -62,9 +64,10 @@ $data = [
    echo '</ul>';
 
 
-   echo '<ul class="timelines-years">';
+   echo '<ul class="timelines-years" style="padding-left:'.  $half_width .'%; padding-right:'.  $half_width .'%">';
    for($i = $tt_start - $tt_year_pas; $i < $tt_end + $tt_year_pas ; $i = $i + $tt_year_pas){
-       echo '<li>';
+       echo '<li style="width:'.$width.'% ">';
+    // echo '<li width="300px">';
        echo $i;
        echo '</li>';
    }
