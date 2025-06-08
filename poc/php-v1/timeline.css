@@ -60,6 +60,7 @@ h1 {
   white-space: nowrap;
   /* Fix display: inline-block spacing issue */
   font-size: 0;
+  width:100%;
 }
 
 .timeline-events h2,
@@ -81,20 +82,20 @@ h1 {
 }
 
 .timeline-events li {
-  position: relative;
+/*  position: relative; */
   display: inline-block;
 }
 
-.timeline-events li:before {
+/*.timeline-events li:before {
   position: absolute;
   left: 0;
   bottom: -36px;
   height: 8px;
   border-radius: 8px;
   content: '';
-}
+}*/
 
-.timeline-events li:nth-child(1) {
+/*.timeline-events li:nth-child(1) {
   bottom: 0px;
 }
 
@@ -112,7 +113,7 @@ h1 {
 
 .timeline-events li:nth-child(5) {
   bottom: 64px;
-}
+}*/
 
 /* Timeline - Events - Colours */
 /* Grey/Green */

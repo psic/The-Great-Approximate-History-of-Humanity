@@ -41,6 +41,7 @@ $data = [
 
    $tt_start = $data[0]["start"];
    $tt_end = $data[0]["end"];
+   //min and max search
    foreach ($data as $tt_data)
    {
      if ($tt_data["start"] <$tt_start)
@@ -49,19 +50,33 @@ $data = [
         $tt_end = $tt_data["end"];
    }
 
+
+  //sort by date_start
+  usort($data, function ($a, $b) {
+if ($a['start'] == $b['start'])
+{
+   return 0;
+
+}
+return ($a['start'] > $b['start']) ? 1 : -1;});
+
   $width = 100/(count($data)+2);
   $half_width = $width/2;
-
-      echo '<ul class="timeline-events">';
+$left = $half_width;
+      echo '<ul class="timeline-events" style="padding-left:'.  $half_width + $width.'%;">';
    foreach ($data as $tt_data){
-       echo '<li>';
+       echo '<li style="width:' .($tt_data["end"] - $tt_data["start"]) * $width / $tt_year_pas  . '%">';
        echo '<h2>' . $tt_data["start"] . ' - ' . $tt_data["end"] . '</h2>';
       echo '<h3>' . $tt_data["title"] . '</h3>';
        echo '<h4>' . $tt_data["description"] .  '</h4>';
-
+      echo '<div style="background:'.rand_color().' ;height:20px;"/>';
        echo '</li>';
    }
    echo '</ul>';
+
+
+ //TODO : add padding-right entre la fin de l'evenement et la date de début du suivant ( (a[i+1][start]  - a[i][end]) x width / tt_year_pas
+//TODO : Mettre les évenements qui ont une date de début avant la date fin de l'evenement précédent sur une autre ligne
 
 
    echo '<ul class="timelines-years" style="padding-left:'.  $half_width .'%; padding-right:'.  $half_width .'%">';
@@ -76,6 +91,10 @@ $data = [
 
    echo "</body>
 </html>";
+
+function rand_color() {
+    return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
+}
 
 ?>
 
