@@ -20,7 +20,7 @@ $data = [
     ],
       1 =>[
       "start" =>2006,
-      "end"=>2008,
+      "end"=>2007,
       "title"=>"Second event",
       "description"=>"This is the second event"
     ],
@@ -63,20 +63,55 @@ return ($a['start'] > $b['start']) ? 1 : -1;});
   $width = 100/(count($data)+2);
   $half_width = $width/2;
 $left = $half_width;
+
+
+//TODO : Mettre les évenements qui ont une date de début avant la date fin de l'evenement précédent sur une autre ligne
+$data_temp = $data;
+
+//search for the max row (max recouvrement
+foreach($data_temp as $row){
+    $max_row_row= 1;
+    $max_row =1;
+      foreach($data_temp as $row2){
+        if($row != $row2){
+            if(
+              ($row2["start"] >= $row["start"] && $row2["start"] <= $row["end"] ) ||
+              ($row2["end"] >= $row["start"] && $row2["end"] <= $row["end"] ) ||
+              ($row2["start"] <= $row["start"] && $row2["end"] >= $row["end"] )
+            )
+              $max_row ++;
+        }
+    }
+    if ($max_row > $max_row_row){
+      $max_row_row = $max_row;
+    }
+    $max_row = 1;
+}
+
+$data = $data_temp;
+
+
+
+
       echo '<ul class="timeline-events" style="padding-left:'.  $half_width + $width.'%;">';
-   foreach ($data as $tt_data){
-       echo '<li style="width:' .($tt_data["end"] - $tt_data["start"]) * $width / $tt_year_pas  . '%">';
-       echo '<h2>' . $tt_data["start"] . ' - ' . $tt_data["end"] . '</h2>';
-      echo '<h3>' . $tt_data["title"] . '</h3>';
-       echo '<h4>' . $tt_data["description"] .  '</h4>';
+
+
+   for ($i=0; $i < count($data) ; $i++){
+     if($i == count($data)-1) {
+              echo '<li style="width:' .($data[$i]["end"] - $data[$i]["start"]) * $width / $tt_year_pas  . '%">';
+    }
+    else{
+       echo '<li style="width:' .($data[$i]["end"] - $data[$i]["start"]) * $width / $tt_year_pas  . '%; padding-right:'. ($data[$i+1]["start"] - $data[$i]["end"]) *$width / $tt_year_pas  .'%";>';
+    }
+       echo '<h2>' . $data[$i]["start"] . ' - ' . $data[$i]["end"] . '</h2>';
+      echo '<h3>' . $data[$i]["title"] . '</h3>';
+       echo '<h4>' . $data[$i]["description"] .  '</h4>';
       echo '<div style="background:'.rand_color().' ;height:20px;"/>';
        echo '</li>';
    }
    echo '</ul>';
 
 
- //TODO : add padding-right entre la fin de l'evenement et la date de début du suivant ( (a[i+1][start]  - a[i][end]) x width / tt_year_pas
-//TODO : Mettre les évenements qui ont une date de début avant la date fin de l'evenement précédent sur une autre ligne
 
 
    echo '<ul class="timelines-years" style="padding-left:'.  $half_width .'%; padding-right:'.  $half_width .'%">';
