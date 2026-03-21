@@ -260,4 +260,6 @@
 
   var btn = document.querySelector('.btn-refresh');
   if (btn) btn.addEventListener('click', refreshTimeline);
+
+  window.renderTimeline = renderTimeline;
 })();
