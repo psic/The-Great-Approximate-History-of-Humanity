@@ -1,0 +1,9 @@
+Options -Indexes
+RewriteEngine On
+
+# /fr et /fr/ → / (redirection permanente)
+RewriteRule ^fr/?$ / [R=301,L,QSA]
+
+# /en (sans slash final) → /en/
+RewriteCond %{REQUEST_URI} ^/en$
+RewriteRule ^ /en/ [R=301,L]

@@ -1,0 +1,356 @@
+/* --- Variables --- */
+:root {
+  --bg: #000000;
+  --surface: #1a1a1a;
+  --text: #e0e0e0;
+  --text-muted: #888888;
+  --accent: #7aa2f7;
+  --line: #333333;
+  --timeline-line: #666666;
+  --timeline-label: #b0b0b0;
+  --marker: #bb9af7;
+  --error: #f7768e;
+  --lane-height: 52px;
+}
+
+/* --- Reset & base --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* --- Layout --- */
+.header {
+  padding: 2rem 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--line);
+}
+
+.header h1 {
+  margin: 0 0 0.5rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.description {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.main {
+  width: 90vw;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.error {
+  color: var(--error);
+  padding: 1rem;
+  background: rgba(247, 118, 142, 0.1);
+  border-radius: 8px;
+}
+
+/* --- Frise chronologique --- */
+.timeline {
+  position: relative;
+  margin-top: 1rem;
+}
+
+/* Lignes verticales pointillées (échelle) sur toute la hauteur de la frise */
+.timeline-vertical-grid {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.timeline-vline {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  border-left: 1px dashed var(--timeline-line);
+  transform: translateX(-50%);
+}
+
+.timeline-section {
+  position: relative;
+  z-index: 1;
+}
+
+.timeline-section-title {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.timeline-section-evenements {
+  margin-top: 0;
+  padding-top: 1rem;
+}
+
+.timeline-tableaux,
+.timeline-evenements-frise,
+.timeline-axis-bottom,
+.timeline-scale-h {
+  position: relative;
+  z-index: 0;
+}
+
+/* Échelle horizontale (années) — en bas de la frise avec graduations */
+.timeline-axis-bottom {
+  position: relative;
+  height: 10px;
+  margin-top: 0.5rem;
+}
+
+.timeline-ticks {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  pointer-events: none;
+}
+
+.axis-tick {
+  position: absolute;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100%;
+  background: var(--timeline-line);
+}
+
+.timeline-line-h {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--timeline-line);
+}
+
+.timeline-scale-h {
+  position: relative;
+  height: 28px;
+  margin-top: 6px;
+}
+
+.axis-label-h {
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--timeline-label);
+  white-space: nowrap;
+}
+
+/* Un bloc par tableau = une ligne de la frise */
+.timeline-tableaux {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Séparation entre les deux frises = échelle des périodes (la ligne de l’échelle = ligne de séparation) */
+.timeline-separator {
+  margin-top: 3.75rem;
+  padding-top: 1.25rem;
+  position: relative;
+  z-index: 1;
+}
+
+.timeline-tableau {
+  position: relative;
+  height: calc(var(--lane-height) * var(--lanes, 1));
+  min-height: var(--lane-height);
+}
+
+.timeline-tableau[data-lanes] {
+  height: calc(var(--lane-height) * attr(data-lanes number));
+}
+
+.timeline-tableau-lanes {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: var(--lane-height);
+}
+
+/* Période : barre horizontale (left % / width %), une lane = une sous-ligne */
+.periode {
+  position: absolute;
+  min-height: calc(var(--lane-height) - 4px);
+  height: auto;
+  top: 2px;
+  min-width: 4%;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  overflow: visible;
+  pointer-events: auto;
+  box-sizing: border-box;
+}
+
+.periode-titre {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.35;
+  word-wrap: break-word;
+}
+
+/* Contraste texte sur couleur : fond coloré → texte lisible */
+.periode {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.periode-titre {
+  color: rgba(0, 0, 0, 0.95);
+}
+
+/* --- Événements sur la frise (épingles / pins avec titre) --- */
+.timeline-evenements-frise {
+  position: relative;
+  min-height: 4.5rem;
+  margin-top: 0.5rem;
+}
+
+.event-marker {
+  position: absolute;
+  top: 0;
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 0.35rem;
+  pointer-events: auto;
+  cursor: help;
+  max-width: 18rem;
+}
+
+.event-pin {
+  flex-shrink: 0;
+  width: 16px;
+  margin-left: -8px;
+  color: var(--marker);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+.event-pin svg {
+  display: block;
+  height: 24px;
+  width: auto;
+}
+
+.event-marker-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.45;
+  max-width: 16rem;
+  word-wrap: break-word;
+  margin-top: 0.15rem;
+}
+
+.event-marker:hover .event-pin {
+  color: var(--accent);
+}
+
+/* Hauteur du bloc tableaux : chaque .timeline-tableau a une hauteur dynamique */
+.timeline-tableau {
+  --lanes: 1;
+}
+
+.timeline-tableau[data-lanes="1"] { min-height: var(--lane-height); height: var(--lane-height); }
+.timeline-tableau[data-lanes="2"] { min-height: calc(var(--lane-height) * 2); height: calc(var(--lane-height) * 2); }
+.timeline-tableau[data-lanes="3"] { min-height: calc(var(--lane-height) * 3); height: calc(var(--lane-height) * 3); }
+.timeline-tableau[data-lanes="4"] { min-height: calc(var(--lane-height) * 4); height: calc(var(--lane-height) * 4); }
+.timeline-tableau[data-lanes="5"] { min-height: calc(var(--lane-height) * 5); height: calc(var(--lane-height) * 5); }
+
+/* --- Onglets des vues (en bas, ordre du plus large au plus restreint) --- */
+.timeline-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 2rem;
+  margin-bottom: 0;
+  justify-content: flex-start;
+}
+
+.tab-btn {
+  padding: 0.5rem 0.9rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.tab-btn:hover {
+  color: var(--text);
+  border-color: var(--text-muted);
+}
+
+.tab-btn.active {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: rgba(122, 162, 247, 0.1);
+}
+
+/* --- Bouton rafraîchir (AJAX) --- */
+.timeline-actions {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.btn-refresh {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  color: var(--accent);
+  background: transparent;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn-refresh:hover {
+  background: rgba(122, 162, 247, 0.15);
+}
+
+/* --- Footer --- */
+.footer {
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--line);
+}
+
+.footer code {
+  padding: 0.15em 0.4em;
+  background: var(--surface);
+  border-radius: 4px;
+  font-size: 0.9em;
+}

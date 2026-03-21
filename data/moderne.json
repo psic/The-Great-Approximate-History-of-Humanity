@@ -1,0 +1,99 @@
+{
+  "pas": 10,
+  "tableaux": [
+    [
+      {
+        "debut": 1880,
+        "fin": 1960,
+        "titre": "Colonisation et décolonisation",
+        "description": "Apogée des empires coloniaux (partage de l'Afrique, Asie), puis indépendances après 1945."
+      },
+      {
+        "debut": 1914,
+        "fin": 1918,
+        "titre": "Première Guerre mondiale",
+        "description": "Guerre mondiale."
+      },
+      {
+        "debut": 1939,
+        "fin": 1945,
+        "titre": "Seconde Guerre mondiale",
+        "description": "Guerre mondiale."
+      },
+      {
+        "debut": 1947,
+        "fin": 1991,
+        "titre": "Guerre froide",
+        "description": "Confrontation Est-Ouest."
+      },
+      {
+        "debut": 1946,
+        "fin": 1954,
+        "titre": "Guerre d'Indochine",
+        "description": "Conflit entre la France et le Việt Minh ; défaite de Diên Biên Phu, indépendance du Vietnam."
+      },
+      {
+        "debut": 1950,
+        "fin": 1953,
+        "titre": "Guerre de Corée",
+        "description": "Conflit entre Corée du Nord (et Chine) et Corée du Sud (et ONU) ; armistice, partition."
+      },
+      {
+        "debut": 1954,
+        "fin": 1962,
+        "titre": "Guerre d'Algérie",
+        "description": "Conflit entre la France et le FLN ; indépendance de l'Algérie en 1962."
+      },
+      {
+        "debut": 1955,
+        "fin": 1975,
+        "titre": "Guerre du Vietnam",
+        "description": "Conflit au Vietnam (Nord / Sud, implication américaine) ; chute de Saigon, réunification."
+      },
+      {
+        "debut": 1980,
+        "fin": 1988,
+        "titre": "Guerre Iran-Irak",
+        "description": "Conflit entre l'Iran et l'Irak ; statu quo."
+      },
+      {
+        "debut": 1990,
+        "fin": 1991,
+        "titre": "Guerre du Golfe",
+        "description": "Coalition internationale contre l'Irak après l'invasion du Koweït ; libération du Koweït."
+      },
+      {
+        "debut": 1991,
+        "fin": 2001,
+        "titre": "Guerres de Yougoslavie",
+        "description": "Éclatement de la Yougoslavie ; conflits en Croatie, Bosnie, Kosovo."
+      }
+    ]
+  ],
+  "evenements": [
+    { "date": 1900, "titre": "XXe siècle", "description": "Début du siècle." },
+    { "date": 1945, "titre": "Création de l'ONU", "description": "Organisation des Nations unies." },
+    { "date": 1969, "titre": "Premier pas sur la Lune", "description": "Neil Armstrong." },
+    { "date": 1989, "titre": "Chute du mur de Berlin", "description": "Fin du bloc de l'Est." },
+    { "date": 2001, "titre": "11 septembre", "description": "Attentats aux États-Unis." },
+    { "date": 1876, "titre": "Téléphone", "description": "Alexander Graham Bell — transmission de la voix à distance." },
+    { "date": 1879, "titre": "Ampoule électrique", "description": "Thomas Edison — éclairage à incandescence." },
+    { "date": 1886, "titre": "Automobile", "description": "Karl Benz — première voiture à moteur à explosion." },
+    { "date": 1895, "titre": "Rayons X", "description": "Wilhelm Röntgen — imagerie médicale." },
+    { "date": 1895, "titre": "Radio", "description": "Guglielmo Marconi — transmission sans fil." },
+    { "date": 1903, "titre": "Avion", "description": "Frères Wright — premier vol motorisé contrôlé." },
+    { "date": 1908, "titre": "Ford T", "description": "Production de masse et démocratisation de l'automobile." },
+    { "date": 1926, "titre": "Télévision", "description": "John Logie Baird — premières images télévisées." },
+    { "date": 1928, "titre": "Pénicilline", "description": "Alexander Fleming — premier antibiotique." },
+    { "date": 1942, "titre": "Réacteur nucléaire", "description": "Enrico Fermi — première réaction en chaîne contrôlée." },
+    { "date": 1947, "titre": "Transistor", "description": "Bell Labs — base de l'électronique moderne." },
+    { "date": 1957, "titre": "Spoutnik", "description": "Premier satellite artificiel — début de l'ère spatiale." },
+    { "date": 1960, "titre": "Pilule contraceptive", "description": "Première autorisation aux États-Unis — révolution sociale." },
+    { "date": 1969, "titre": "ARPANET", "description": "Réseau pionnier — ancêtre d'Internet." },
+    { "date": 1971, "titre": "Microprocesseur", "description": "Intel 4004 — ordinateur sur une puce." },
+    { "date": 1973, "titre": "Téléphone portable", "description": "Motorola DynaTAC — premier appel depuis un mobile." },
+    { "date": 1990, "titre": "World Wide Web", "description": "Tim Berners-Lee — liens hypertexte et navigation globale." },
+    { "date": 2007, "titre": "iPhone", "description": "Apple — smartphone et écosystème d'applications." },
+    { "date": 2012, "titre": "CRISPR", "description": "Édition génétique précise — révolution en biologie." }
+  ]
+}

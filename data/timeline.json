@@ -1,0 +1,79 @@
+{
+  "pas": 500,
+  "tableaux": [
+    [
+      {
+        "debut": -3500,
+        "fin": -300,
+        "titre": "Antiquité orientale et classique",
+        "description": "Mésopotamie, Égypte, Grèce, Rome jusqu'à la fin de la République."
+      },
+      {
+        "debut": -27,
+        "fin": 476,
+        "titre": "Empire romain",
+        "description": "De Auguste à la chute de l'Empire romain d'Occident."
+      },
+      {
+        "debut": 476,
+        "fin": 1492,
+        "titre": "Moyen Âge",
+        "description": "De la chute de Rome à la découverte de l'Amérique."
+      }
+    ],
+    [
+      {
+        "debut": -500,
+        "fin": 100,
+        "titre": "Grèce classique et hellénistique",
+        "description": "Apogée d'Athènes, conquêtes d'Alexandre."
+      },
+      {
+        "debut": -200,
+        "fin": 400,
+        "titre": "Rome impériale (chevauchement test)",
+        "description": "Période qui chevauche la précédente pour tester les lanes."
+      }
+    ],
+    [
+      {
+        "debut": 1789,
+        "fin": 1799,
+        "titre": "Révolution française",
+        "description": "De la prise de la Bastille au Consulat."
+      }
+    ]
+  ],
+  "evenements": [
+    {
+      "date": -3500,
+      "titre": "Invention de l'écriture",
+      "description": "Apparition de l'écriture cunéiforme en Mésopotamie."
+    },
+    {
+      "date": -44,
+      "titre": "Assassinat de César",
+      "description": "Jules César est assassiné aux ides de mars."
+    },
+    {
+      "date": 476,
+      "titre": "Chute de l'Empire romain d'Occident",
+      "description": "Déposition de Romulus Augustule par Odoacre."
+    },
+    {
+      "date": 1453,
+      "titre": "Chute de Constantinople",
+      "description": "Prise de Constantinople par les Ottomans."
+    },
+    {
+      "date": 1789,
+      "titre": "Prise de la Bastille",
+      "description": "14 juillet 1789, symbole de la Révolution française."
+    },
+    {
+      "date": 1969,
+      "titre": "Premier pas sur la Lune",
+      "description": "Neil Armstrong et Buzz Aldrin marchent sur la Lune."
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "pas": 250000000,
+  "tableaux": [
+    [
+      {
+        "debut": -4000000000,
+        "fin": -2500000000,
+        "titre": "Archéen",
+        "description": "Apparition de la vie."
+      },
+      {
+        "debut": -2500000000,
+        "fin": -540000000,
+        "titre": "Protérozoïque",
+        "description": "Vie primitive."
+      },
+      {
+        "debut": -540000000,
+        "fin": -250000000,
+        "titre": "Paléozoïque",
+        "description": "Explosion cambrienne, premiers vertébrés."
+      },
+      {
+        "debut": -250000000,
+        "fin": -66000000,
+        "titre": "Mésozoïque",
+        "description": "Ère des dinosaures."
+      },
+      {
+        "debut": -66000000,
+        "fin": 0,
+        "titre": "Cénozoïque",
+        "description": "Mammifères, apparition des hominidés."
+      },
+      {
+        "debut": -3800000000,
+        "fin": -2000000000,
+        "titre": "Vie unicellulaire",
+        "description": "Bactéries, archées — premières formes de vie (océans)."
+      },
+      {
+        "debut": -1800000000,
+        "fin": 0,
+        "titre": "Eucaryotes",
+        "description": "Cellules à noyau ; puis pluricellularité."
+      },
+      {
+        "debut": -1200000000,
+        "fin": 0,
+        "titre": "Vie pluricellulaire",
+        "description": "Algues, puis animaux (Édiacarien, Cambrien)."
+      },
+      {
+        "debut": -470000000,
+        "fin": -350000000,
+        "titre": "Conquête des terres",
+        "description": "Premières plantes terrestres, puis arthropodes et vertébrés (tétrapodes)."
+      },
+      {
+        "debut": -233000000,
+        "fin": -66000000,
+        "titre": "Dinosaures",
+        "description": "Ère des dinosaures — Trias, Jurassique, Crétacé ; domination des continents."
+      },
+      {
+        "debut": -220000000,
+        "fin": 0,
+        "titre": "Mammifères",
+        "description": "Premiers mammifères (Trias) ; diversification après extinction des dinosaures."
+      },
+      {
+        "debut": -7000000,
+        "fin": 0,
+        "titre": "Hominidés et premiers hommes",
+        "description": "Grands singes bipèdes ; genre Homo, outils, expansion."
+      }
+    ]
+  ],
+  "evenements": [
+    { "date": -4000000000, "titre": "Apparition de la vie", "description": "Formes unicellulaires (océans)." },
+    { "date": -540000000, "titre": "Explosion cambrienne", "description": "Diversification des animaux complexes." },
+    { "date": -450000000, "titre": "Apparition des dents", "description": "Premiers vertébrés à mâchoires et dents (gnathostomes)." },
+    { "date": -470000000, "titre": "Premières plantes terrestres", "description": "Sortie des eaux (mousses, puis vascularisation)." },
+    { "date": -370000000, "titre": "Premiers tétrapodes sur terre", "description": "Vertébrés à quatre pattes hors de l'eau." },
+    { "date": -233000000, "titre": "Apparition des dinosaures", "description": "Premiers dinosaures (Trias) ; diversification au Jurassique et Crétacé." },
+    { "date": -220000000, "titre": "Premiers mammifères", "description": "Apparition dans le Trias (petits, nocturnes)." },
+    { "date": -66000000, "titre": "Extinction des dinosaures", "description": "Météorite (Chicxulub) ; libération de niches pour les mammifères." },
+    { "date": -55000000, "titre": "Premiers primates", "description": "Ancêtres des singes et hominidés." },
+    { "date": -3000000, "titre": "Apparition du genre Homo", "description": "Outils, bipédie avancée." }
+  ]
+}
