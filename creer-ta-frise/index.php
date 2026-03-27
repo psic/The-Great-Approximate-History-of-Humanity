@@ -44,13 +44,12 @@ $base = $lang === 'en' ? '/en' : '';
     $altLabel = $lang === 'fr' ? 'English' : 'Français';
     ?>
     <header class="header">
-        <h1><a href="<?php echo $home; ?>"><?php echo htmlspecialchars($t['title']); ?></a></h1>
+        <h1><a href="<?php echo $home; ?>"><?php echo htmlspecialchars($t['creer_frise_title']); ?></a></h1>
         <a href="<?php echo $altUrl; ?>" class="lang-switch" title="<?php echo $altLabel; ?>" aria-label="<?php echo $altLabel; ?>"><?php echo $altFlag; ?></a>
     </header>
 
     <main class="main">
-        <h2><?php echo htmlspecialchars($t['creer_frise_title']); ?></h2>
-        <p class="description" style="margin-bottom:2rem"><?php echo htmlspecialchars($t['creer_frise_intro']); ?></p>
+<p class="description" style="margin-bottom:2rem"><?php echo htmlspecialchars($t['creer_frise_intro']); ?></p>
 
         <div class="editor-layout">
             <!-- Panneau gauche : upload + formulaire -->
@@ -106,6 +105,7 @@ $base = $lang === 'en' ? '/en' : '';
         <nav class="footer-nav">
             <a href="<?php echo $home; ?>"><?php echo htmlspecialchars($t['home']); ?></a>
             <a href="<?php echo $base; ?>/ma-frise/"><?php echo htmlspecialchars($t['nav_ma_frise']); ?></a>
+            <a href="<?php echo $base; ?>/contact/"><?php echo htmlspecialchars($t['nav_contact']); ?></a>
         </nav>
         <p><?php echo $t['footer']; ?></p>
     </footer>

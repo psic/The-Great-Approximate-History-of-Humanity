@@ -320,6 +320,7 @@ if (!is_readable($jsonPath)) {
             <?php $base = $lang === 'en' ? '/en' : ''; ?>
             <a href="<?php echo $base; ?>/ma-frise/"><?php echo htmlspecialchars($t['nav_ma_frise']); ?></a>
             <a href="<?php echo $base; ?>/creer-ta-frise/"><?php echo htmlspecialchars($t['nav_creer_frise']); ?></a>
+            <a href="<?php echo $base; ?>/contact/"><?php echo htmlspecialchars($t['nav_contact']); ?></a>
         </nav>
         <p><?php echo $t['footer']; ?></p>
     </footer>

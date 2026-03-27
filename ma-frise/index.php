@@ -19,13 +19,12 @@ $base = $lang === 'en' ? '/en' : '';
     $altLabel = $lang === 'fr' ? 'English' : 'Français';
     ?>
     <header class="header">
-        <h1><a href="<?php echo $home; ?>"><?php echo htmlspecialchars($t['title']); ?></a></h1>
+        <h1><a href="<?php echo $home; ?>"><?php echo htmlspecialchars($t['ma_frise_title']); ?></a></h1>
         <a href="<?php echo $altUrl; ?>" class="lang-switch" title="<?php echo $altLabel; ?>" aria-label="<?php echo $altLabel; ?>"><?php echo $altFlag; ?></a>
     </header>
 
     <main class="main">
-        <h2><?php echo htmlspecialchars($t['ma_frise_title']); ?></h2>
-        <p class="description" id="timeline-scale-desc" style="margin-bottom:1.5rem"></p>
+<p class="description" id="timeline-scale-desc" style="margin-bottom:1.5rem"></p>
         <div class="timeline" id="timeline"></div>
     </main>
 
@@ -33,6 +32,7 @@ $base = $lang === 'en' ? '/en' : '';
         <nav class="footer-nav">
             <a href="<?php echo $home; ?>"><?php echo htmlspecialchars($t['home']); ?></a>
             <a href="<?php echo $base; ?>/creer-ta-frise/"><?php echo htmlspecialchars($t['nav_creer_frise']); ?></a>
+            <a href="<?php echo $base; ?>/contact/"><?php echo htmlspecialchars($t['nav_contact']); ?></a>
         </nav>
         <p><?php echo $t['footer']; ?></p>
     </footer>
