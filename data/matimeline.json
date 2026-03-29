@@ -2,6 +2,14 @@
   "pas": 5,
   "tableaux": [
     [
+      { "titre": "Ballancourt",       "debut": 1979, "fin": 1998 },
+      { "titre": "Paris",          "debut": 1998, "fin": 1999 },
+      { "titre": "Orsay",                 "debut": 1999, "fin": 2004 },
+      { "titre": "Grenoble",       "debut": 2004, "fin": 2014 },
+            { "titre": "Pont-en-Royans",       "debut": 2014, "fin": 2024 },
+                  { "titre": "Rives",       "debut": 2024, "fin": 2026 }
+    ],
+[
       { "titre": "École maternelle",       "debut": 1982, "fin": 1985 },
       { "titre": "École primaire",          "debut": 1985, "fin": 1989 },
       { "titre": "Collège",                 "debut": 1989, "fin": 1993 },
@@ -10,7 +18,29 @@
       { "titre": "Licence / Maîtrise MIAGE","debut": 1999, "fin": 2002 },
       { "titre": "DEA",                     "debut": 2002, "fin": 2003 },
       { "titre": "Thèse de Doctorat",       "debut": 2003, "fin": 2006 }
-    ]
+    ],
+  [
+        { "titre": "École maternelle",       "debut": 1982, "fin": 1985 },
+      { "titre": "École primaire",          "debut": 1985, "fin": 1990 },
+      { "titre": "Collège",                 "debut": 1990, "fin": 1994 },
+   { "titre": "Lycée Marie Laurencin", "descriptioné": "Baccalauréat.", "debut": 1994, "fin": 1997 },
+    { "titre": "IUT Informatique", "description": "Formation en informatique à l'Université Joseph Fourier, Grenoble.", "debut": 1997, "fin": 1999 },
+    { "titre": "Maîtrise MIAGE", "description": "Méthodes Informatiques Appliquées à la Gestion des Entreprises, Université Joseph Fourier.", "debut": 1999, "fin": 2002 },
+    { "titre": "DEA Informatique et systèmes intelligents", "description": "DEA à l'Université Joseph Fourier, Grenoble.", "debut": 2002, "fin": 2003 },
+    { "titre": "Doctorat (PhD) Informatique", "description": "Thèse sur une infrastructure de gestion de l'information de contexte pour l'intelligence ambiante. Université Joseph Fourier / Orange Labs.", "debut": 2004, "fin": 2009 }
+  ],
+  [
+    { "titre": "Apprenti — TF1 Entreprises", "description": "Apprentissage en entreprise.", "debut": 1999, "fin": 2001 },
+    { "titre": "Doctorant — Orange Labs", "description": "Thèse sur la gestion de contexte pour l'intelligence ambiante. Web sémantique (OWL, RDF, SPARQL), Java, systèmes multi-agents (JADE).", "debut": 2004, "fin": 2007 },
+    { "titre": "Ingénieur R&D / Telecom — IVèS", "description": "Développement et maintenance d'un client SIP/RTP embarqué dans un navigateur Web (C++). Administration de serveurs Asterisk et OpenSer. Maintenance de sites web (PHP).", "debut": 2008, "fin": 2010 },
+    { "titre": "Développement, consulting et formation — Indépendant", "description": "Formation VBA à l'IAE pour des étudiants de M1. Développement d'un site intranet PHP/Zend. Développement de connecteurs YouTube pour Hadoop (Java).", "debut": 2011, "fin": 2012 },
+    { "titre": "Ingénieur R&D / Big Data — Hurence", "description": "Conception, développement et maintenance de logiciels pour le monde Big Data / Hadoop.", "debut": 2012, "fin": 2013 },
+    { "titre": "Créateur — Le Bar à Jus", "description": "Création et gestion d'un bar à jus de fruits frais et salades à Pont-en-Royans.", "debut": 2014, "fin": 2017 },
+    { "titre": "Dev BackEnd, Architect, DevOps — The Next One", "description": "Développement d'une application mobile de jeu de gestion sportive. Modélisation de données, architecture, backend API REST (Symfony), batchs Java, déploiement.", "debut": 2014, "fin": 2023 },
+    { "titre": "Formateur Simplon.co — Develo'Pont", "description": "Formation de public éloigné de l'emploi au métier de développeur web. Création de contenus pédagogiques HTML, CSS, PHP/Symfony, MySQL, WordPress.", "debut": 2017, "fin": 2021 },
+    { "titre": "Développeur FullStack PHP / WordPress — KRDS", "description": "Maintenance applicative WordPress/PHP. Gestion de 20 sites multi-langues. Authentification tierce, templates ACF, cron.", "debut": 2019, "fin": 2023 },
+    { "titre": "Développeur web — Prospectiva / Groupe Sarastro", "description": "Développement et maintenance d'un legacy Symfony. Support N2, animation SCRUM, gestion backlog JIRA, rédaction fonctionnelle et technique, relation client.", "debut": 2023, "fin": 2026 }
+]
   ],
   "evenements": [
     { "titre": "Naissance", "date": 1979 }
