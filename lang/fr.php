@@ -10,6 +10,7 @@ return [
     'tab_humanite'      => "Histoire de l'humanité",
     'tab_terre'         => 'Histoire de la Terre',
     'tab_univers'       => "Histoire de l'univers",
+    'tab_vie'           => 'Histoire Géologique',
     'error_file'        => 'Fichier introuvable ou illisible.',
     'error_json'        => 'Erreur de lecture du JSON : %s',
     'error_empty'       => 'Aucune période ni événement dans le fichier JSON.',

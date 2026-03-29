@@ -1,0 +1,79 @@
+{
+  "pas": 200000,
+  "tableaux": [
+    [
+      {
+        "debut": -3000000,
+        "fin": -300000,
+        "titre": "Paléolithique inférieur",
+        "description": "Premiers outils."
+      },
+      {
+        "debut": -300000,
+        "fin": -30000,
+        "titre": "Paléolithique moyen",
+        "description": "Neandertal, Homo sapiens."
+      },
+      {
+        "debut": -30000,
+        "fin": -10000,
+        "titre": "Paléolithique supérieur",
+        "description": "Art, expansion."
+      },
+      {
+        "debut": -10000,
+        "fin": -3500,
+        "titre": "Néolithique",
+        "description": "Agriculture, sédentarisation."
+      },
+      {
+        "debut": -3500,
+        "fin": 2025,
+        "titre": "Histoire écrite",
+        "description": "De l'écriture à aujourd'hui."
+      },
+      {
+        "debut": -4000000,
+        "fin": -2000000,
+        "titre": "Australopithèques",
+        "description": "Australopithecus (ex. Lucy, -3,2 Ma) — bipédie, Afrique."
+      },
+      {
+        "debut": -2400000,
+        "fin": -1400000,
+        "titre": "Homo habilis",
+        "description": "« Homme habile » — premiers outils en pierre taillée (Afrique)."
+      },
+      {
+        "debut": -1900000,
+        "fin": -100000,
+        "titre": "Homo erectus",
+        "description": "Sortie d'Afrique, maîtrise du feu ; Asie, Europe."
+      },
+      {
+        "debut": -800000,
+        "fin": -200000,
+        "titre": "Homo heidelbergensis",
+        "description": "Ancêtre commun probable de Néandertal et Sapiens ; Europe, Afrique."
+      },
+      {
+        "debut": -430000,
+        "fin": -40000,
+        "titre": "Néandertal (Homo neanderthalensis)",
+        "description": "Europe, Moyen-Orient ; outillage moustérien, sépultures."
+      },
+      {
+        "debut": -300000,
+        "fin": 2025,
+        "titre": "Homo sapiens",
+        "description": "Notre espèce — apparition en Afrique, expansion mondiale, art, symboles."
+      }
+    ]
+  ],
+  "evenements": [
+    { "date": -3000000, "titre": "Premiers outils", "description": "Afrique." },
+    { "date": -3500, "titre": "Invention de l'écriture", "description": "" },
+    { "date": 0, "titre": "Début de l'ère chrétienne", "description": "" },
+    { "date": 2025, "titre": "Aujourd'hui", "description": "" }
+  ]
+}

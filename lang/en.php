@@ -10,6 +10,7 @@ return [
     'tab_humanite'      => 'History of Humanity',
     'tab_terre'         => 'History of the Earth',
     'tab_univers'       => 'History of the Universe',
+    'tab_vie'           => 'Geological History',
     'error_file'        => 'Timeline file not found or not readable.',
     'error_json'        => 'JSON read error: %s',
     'error_empty'       => 'No periods or events found in the JSON file.',

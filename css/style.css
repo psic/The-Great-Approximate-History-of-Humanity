@@ -89,9 +89,15 @@ body {
 }
 
 /* --- Frise chronologique --- */
+.timeline-scroll-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 1rem;
+}
+
 .timeline {
   position: relative;
-  margin-top: 1rem;
+  min-width: 900px;
 }
 
 /* Lignes verticales pointillées (échelle) sur toute la hauteur de la frise */
@@ -208,6 +214,11 @@ body {
   position: relative;
   height: calc(var(--lane-height) * var(--lanes, 1));
   min-height: var(--lane-height);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.timeline-tableau:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .timeline-tableau[data-lanes] {

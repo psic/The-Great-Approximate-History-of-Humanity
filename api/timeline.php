@@ -12,6 +12,7 @@ $vues = [
     'humanite' => 'humanite.json',
     'terre'    => 'terre.json',
     'univers'  => 'univers.json',
+    'vie'      => 'vie.json',
 ];
 
 $vue = isset($_GET['vue']) ? trim($_GET['vue']) : '';
@@ -19,7 +20,8 @@ if ($vue === '' || !isset($vues[$vue])) {
     $vue = 'moderne';
 }
 
-$jsonPath = dirname(__DIR__) . '/data/' . $vues[$vue];
+$lang = (isset($_GET['lang']) && $_GET['lang'] === 'en') ? 'en' : 'fr';
+$jsonPath = dirname(__DIR__) . '/data_' . $lang . '/' . $vues[$vue];
 
 if (!is_readable($jsonPath)) {
     http_response_code(500);

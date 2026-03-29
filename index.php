@@ -16,9 +16,10 @@ $vues = [
     'humanite' => 'humanite.json',
     'terre'    => 'terre.json',
     'univers'  => 'univers.json',
+    'vie'      => 'vie.json',
 ];
 $vue = isset($_GET['vue']) && isset($vues[$_GET['vue']]) ? $_GET['vue'] : 'moderne';
-$jsonPath = __DIR__ . '/data/' . $vues[$vue];
+$jsonPath = __DIR__ . '/data_' . $lang . '/' . $vues[$vue];
 
 /**
  * Formate un nombre avec un espace comme séparateur de milliers (ex. 1 000 000, -3 500).
@@ -195,6 +196,7 @@ if (!is_readable($jsonPath)) {
         <?php if ($error) : ?>
             <p class="error"><?php echo htmlspecialchars($error); ?></p>
         <?php elseif (!empty($scaleYears)) : ?>
+<div class="timeline-scroll-wrapper">
 <div class="timeline" id="timeline" data-vue="<?php echo htmlspecialchars($vue); ?>" data-min="<?php echo (int) $scaleMin; ?>" data-max="<?php echo (int) $scaleMax; ?>" data-range="<?php echo (int) $range; ?>">
                 <!-- Lignes verticales pointillées (échelle) sur toute la frise -->
                 <div class="timeline-vertical-grid" aria-hidden="true">
@@ -209,32 +211,34 @@ if (!is_readable($jsonPath)) {
                     <div class="timeline-tableaux">
                         <?php foreach ($tableauxAvecLanes as $periodes) : ?>
                             <?php
-                            $nbLanes = 1;
+                            $byLane = [];
                             foreach ($periodes as $p) {
-                                $nbLanes = max($nbLanes, ($p['lane'] ?? 0) + 1);
+                                $byLane[(int) ($p['lane'] ?? 0)][] = $p;
                             }
+                            ksort($byLane);
+                            foreach ($byLane as $lanePeriodes) :
                             ?>
-                            <div class="timeline-tableau" data-lanes="<?php echo $nbLanes; ?>" style="height: <?php echo $nbLanes * $laneHeightPx; ?>px;">
+                            <div class="timeline-tableau" data-lanes="1" style="height: <?php echo $laneHeightPx; ?>px;">
                                 <div class="timeline-tableau-lanes">
-                                    <?php foreach ($periodes as $p) : ?>
+                                    <?php foreach ($lanePeriodes as $p) : ?>
                                         <?php
                                         $debut = (int) ($p['debut'] ?? 0);
                                         $fin = (int) ($p['fin'] ?? $debut);
                                         $leftPct = $range > 0 ? (($debut - $scaleMin) / $range) * 100 : 0;
                                         $widthPct = $range > 0 ? (max(0.5, $fin - $debut) / $range) * 100 : 1;
-                                        $lane = (int) ($p['lane'] ?? 0);
                                         $couleur = $p['couleur'] ?? 'hsl(210, 50%, 50%)';
                                         $tooltip = format_nombre($debut) . ' – ' . format_nombre($fin) . "\n" . ($p['titre'] ?? '');
                                         if (!empty($p['description'])) {
                                             $tooltip .= "\n" . $p['description'];
                                         }
                                         ?>
-                                        <div class="periode" style="left: <?php echo number_format($leftPct, 2, '.', ''); ?>%; width: <?php echo number_format($widthPct, 2, '.', ''); ?>%; top: <?php echo $lane * $laneHeightPx; ?>px; background: <?php echo htmlspecialchars($couleur); ?>; border-color: <?php echo htmlspecialchars($couleur); ?>;" title="<?php echo htmlspecialchars($tooltip); ?>">
+                                        <div class="periode" style="left: <?php echo number_format($leftPct, 2, '.', ''); ?>%; width: <?php echo number_format($widthPct, 2, '.', ''); ?>%; top: 2px; background: <?php echo htmlspecialchars($couleur); ?>; border-color: <?php echo htmlspecialchars($couleur); ?>;" title="<?php echo htmlspecialchars($tooltip); ?>">
                                             <span class="periode-titre"><?php echo htmlspecialchars($p['titre'] ?? ''); ?></span>
                                         </div>
                                     <?php endforeach; ?>
                                 </div>
                             </div>
+                            <?php endforeach; ?>
                         <?php endforeach; ?>
                     </div>
                 </section>
@@ -302,11 +306,13 @@ if (!is_readable($jsonPath)) {
                 </section>
 
             </div>
+</div>
             <nav class="timeline-tabs" role="tablist" aria-label="<?php echo htmlspecialchars($t['aria_tabs']); ?>">
                 <button type="button" class="tab-btn <?php echo $vue === 'moderne' ? 'active' : ''; ?>" role="tab" data-vue="moderne"><?php echo htmlspecialchars($t['tab_moderne']); ?></button>
                 <button type="button" class="tab-btn <?php echo $vue === 'histoire' ? 'active' : ''; ?>" role="tab" data-vue="histoire"><?php echo htmlspecialchars($t['tab_histoire']); ?></button>
                 <button type="button" class="tab-btn <?php echo $vue === 'humanite' ? 'active' : ''; ?>" role="tab" data-vue="humanite"><?php echo htmlspecialchars($t['tab_humanite']); ?></button>
                 <button type="button" class="tab-btn <?php echo $vue === 'terre' ? 'active' : ''; ?>" role="tab" data-vue="terre"><?php echo htmlspecialchars($t['tab_terre']); ?></button>
+                <button type="button" class="tab-btn <?php echo $vue === 'vie' ? 'active' : ''; ?>" role="tab" data-vue="vie"><?php echo htmlspecialchars($t['tab_vie']); ?></button>
                 <button type="button" class="tab-btn <?php echo $vue === 'univers' ? 'active' : ''; ?>" role="tab" data-vue="univers"><?php echo htmlspecialchars($t['tab_univers']); ?></button>
             </nav>
             <p class="description" id="timeline-scale-desc"><?php echo isset($pas) ? sprintf($t['scale_label'], format_nombre($pas)) : ''; ?></p>

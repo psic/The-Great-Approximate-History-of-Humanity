@@ -1,0 +1,49 @@
+{
+  "pas": 50000000,
+  "tableaux": [
+    [
+      { "titre": "Ediacaran", "description": "First complex multicellular organisms.", "debut": -635000000, "fin": -541000000 },
+      { "titre": "Cambrian", "description": "Cambrian explosion: rapid diversification of marine life.", "debut": -541000000, "fin": -485000000 },
+      { "titre": "Ordovician", "description": "Marine diversification and first land plants.", "debut": -485000000, "fin": -444000000 },
+      { "titre": "Silurian", "description": "Development of land plants and fish.", "debut": -444000000, "fin": -419000000 },
+      { "titre": "Devonian", "description": "Age of fishes and appearance of first tetrapods.", "debut": -419000000, "fin": -359000000 },
+      { "titre": "Carboniferous", "description": "Swamp forests and formation of major coal deposits.", "debut": -359000000, "fin": -299000000 },
+      { "titre": "Permian", "description": "Formation of Pangaea and diversification of reptiles.", "debut": -299000000, "fin": -252000000 },
+      { "titre": "Triassic", "description": "First dinosaurs and first mammals.", "debut": -252000000, "fin": -201000000 },
+      { "titre": "Jurassic", "description": "Dominance of the dinosaurs.", "debut": -201000000, "fin": -145000000 },
+      { "titre": "Cretaceous", "description": "Appearance of flowering plants.", "debut": -145000000, "fin": -66000000 },
+      { "titre": "Paleogene", "description": "Diversification of mammals.", "debut": -66000000, "fin": -23000000 },
+      { "titre": "Neogene", "description": "Formation of modern continents.", "debut": -23000000, "fin": -2600000 },
+      { "titre": "Quaternary", "description": "Ice ages and the emergence of modern humans.", "debut": -2600000, "fin": 2026 }
+    ],
+    [
+      {
+        "titre": "Quaternary",
+        "description": "Ice ages and the emergence of modern humans.",
+        "debut": -1000000,
+        "fin": 2026
+      }
+    ],
+    [
+      {
+        "titre": "Mammals",
+        "description": "Diversification after the extinction of the dinosaurs.",
+        "debut": -1000000,
+        "fin": 2026
+      },
+      {
+        "titre": "Hominids and early humans",
+        "description": "Emergence of humans and evolution of the genus Homo.",
+        "debut": -1000000,
+        "fin": 2026
+      }
+    ]
+  ],
+  "evenements": [
+    { "date": -300000, "titre": "Appearance of Homo sapiens", "description": "First anatomically modern humans, in Africa." },
+    { "date": -70000, "titre": "Out of Africa", "description": "Migration of Homo sapiens out of Africa and gradual peopling of the world." },
+    { "date": -12000, "titre": "Beginning of agriculture / Neolithic", "description": "Domestication of plants and animals, settlement of populations." },
+    { "date": -11700, "titre": "Beginning of the Holocene", "description": "End of the last glaciation, current geological epoch." },
+    { "date": -10000, "titre": "Pleistocene megafauna extinction", "description": "Disappearance of large mammals such as the woolly mammoth." }
+  ]
+}

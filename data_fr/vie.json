@@ -1,0 +1,49 @@
+{
+  "pas": 50000000,
+  "tableaux": [
+    [
+      { "titre": "Édiacarien", "description": "Premiers organismes multicellulaires complexes.", "debut": -635000000, "fin": -541000000 },
+      { "titre": "Cambrien", "description": "Explosion cambrienne : diversification rapide de la vie marine.", "debut": -541000000, "fin": -485000000 },
+      { "titre": "Ordovicien", "description": "Diversification marine et premières plantes terrestres.", "debut": -485000000, "fin": -444000000 },
+      { "titre": "Silurien", "description": "Développement des plantes terrestres et des poissons.", "debut": -444000000, "fin": -419000000 },
+      { "titre": "Dévonien", "description": "Âge des poissons et apparition des premiers tétrapodes.", "debut": -419000000, "fin": -359000000 },
+      { "titre": "Carbonifère", "description": "Forêts marécageuses et formation des grands gisements de charbon.", "debut": -359000000, "fin": -299000000 },
+      { "titre": "Permien", "description": "Formation de la Pangée et diversification des reptiles.", "debut": -299000000, "fin": -252000000 },
+      { "titre": "Trias", "description": "Début des dinosaures et premiers mammifères.", "debut": -252000000, "fin": -201000000 },
+      { "titre": "Jurassique", "description": "Domination des dinosaures.", "debut": -201000000, "fin": -145000000 },
+      { "titre": "Crétacé", "description": "Apparition des plantes à fleurs.", "debut": -145000000, "fin": -66000000 },
+      { "titre": "Paléogène", "description": "Diversification des mammifères.", "debut": -66000000, "fin": -23000000 },
+      { "titre": "Néogène", "description": "Formation des continents modernes.", "debut": -23000000, "fin": -2600000 },
+      { "titre": "Quaternaire", "description": "Glaciations et apparition de l'Homme moderne.", "debut": -2600000, "fin": 2026 }
+    ],
+    [
+      {
+        "titre": "Quaternaire",
+        "description": "Glaciations et apparition de l'Homme moderne.",
+        "debut": -1000000,
+        "fin": 2026
+      }
+    ],
+    [
+      {
+        "titre": "Mammifères",
+        "description": "Diversification après extinction des dinosaures.",
+        "debut": -1000000,
+        "fin": 2026
+      },
+      {
+        "titre": "Hominidés et premiers hommes",
+        "description": "Apparition des humains et évolution du genre Homo.",
+        "debut": -1000000,
+        "fin": 2026
+      }
+    ]
+  ],
+  "evenements": [
+    { "date": -300000, "titre": "Apparition d'Homo sapiens", "description": "Premiers humains anatomiquement modernes, en Afrique." },
+    { "date": -70000, "titre": "Exode hors d'Afrique", "description": "Migration d'Homo sapiens hors d'Afrique et peuplement progressif du monde." },
+    { "date": -12000, "titre": "Début de l'agriculture / Néolithique", "description": "Domestication des plantes et animaux, sédentarisation des populations." },
+    { "date": -11700, "titre": "Début de l'Holocène", "description": "Fin de la dernière glaciation, période actuelle." },
+    { "date": -10000, "titre": "Extinction de la mégafaune au Pléistocène", "description": "Disparition des grands mammifères comme le mammouth." }
+  ]
+}

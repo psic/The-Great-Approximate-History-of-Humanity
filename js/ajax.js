@@ -5,6 +5,7 @@
   'use strict';
 
   var apiUrl = '/api/timeline.php';
+  var pageLang = document.documentElement.lang || 'fr';
   var LANE_HEIGHT = 52;
   var i18n = window.TIMELINE_I18N || {
     periods:    'Périodes',
@@ -116,28 +117,33 @@
     var html = '<div class="timeline-tableaux">';
     (tableaux || []).forEach(function (tab) {
       var periodes = assignerLanes(tab || []);
-      var nbLanes = 0;
       periodes.forEach(function (p) {
         p.couleur = palette[idx % palette.length];
         idx++;
-        nbLanes = Math.max(nbLanes, (p.lane || 0) + 1);
       });
-      html += '<div class="timeline-tableau" data-lanes="' + nbLanes + '" style="height: ' + (nbLanes * LANE_HEIGHT) + 'px;">';
-      html += '<div class="timeline-tableau-lanes">';
+      var byLane = {};
       periodes.forEach(function (p) {
-        var debut = parseInt(p.debut, 10) || 0;
-        var fin = parseInt(p.fin, 10) || debut;
-        var leftPct = range > 0 ? ((debut - scaleMin) / range) * 100 : 0;
-        var widthPct = range > 0 ? (Math.max(0.5, fin - debut) / range) * 100 : 1;
         var lane = p.lane || 0;
-        var couleur = p.couleur || 'hsl(210, 50%, 50%)';
-        var titre = escapeHtml(p.titre || '');
-        var tooltip = formatNumber(debut) + ' – ' + formatNumber(fin) + '\n' + (p.titre || '') + (p.description ? '\n' + p.description : '');
-        var tooltipEsc = escapeHtml(tooltip).replace(/"/g, '&quot;');
-        html += '<div class="periode" style="left: ' + leftPct.toFixed(2) + '%; width: ' + widthPct.toFixed(2) + '%; top: ' + (lane * LANE_HEIGHT + 2) + 'px; background: ' + couleur + '; border-color: ' + couleur + ';" title="' + tooltipEsc + '">';
-        html += '<span class="periode-titre">' + titre + '</span></div>';
+        if (!byLane[lane]) byLane[lane] = [];
+        byLane[lane].push(p);
       });
-      html += '</div></div>';
+      Object.keys(byLane).map(Number).sort(function (a, b) { return a - b; }).forEach(function (laneIdx) {
+        html += '<div class="timeline-tableau" data-lanes="1" style="height: ' + LANE_HEIGHT + 'px;">';
+        html += '<div class="timeline-tableau-lanes">';
+        byLane[laneIdx].forEach(function (p) {
+          var debut = parseInt(p.debut, 10) || 0;
+          var fin = parseInt(p.fin, 10) || debut;
+          var leftPct = range > 0 ? ((debut - scaleMin) / range) * 100 : 0;
+          var widthPct = range > 0 ? (Math.max(0.5, fin - debut) / range) * 100 : 1;
+          var couleur = p.couleur || 'hsl(210, 50%, 50%)';
+          var titre = escapeHtml(p.titre || '');
+          var tooltip = formatNumber(debut) + ' – ' + formatNumber(fin) + '\n' + (p.titre || '') + (p.description ? '\n' + p.description : '');
+          var tooltipEsc = escapeHtml(tooltip).replace(/"/g, '&quot;');
+          html += '<div class="periode" style="left: ' + leftPct.toFixed(2) + '%; width: ' + widthPct.toFixed(2) + '%; top: 2px; background: ' + couleur + '; border-color: ' + couleur + ';" title="' + tooltipEsc + '">';
+          html += '<span class="periode-titre">' + titre + '</span></div>';
+        });
+        html += '</div></div>';
+      });
     });
     html += '</div>';
     return html;
@@ -223,7 +229,7 @@
     if (!container) return;
 
     var req = new XMLHttpRequest();
-    req.open('GET', apiUrl + '?vue=' + encodeURIComponent(vue), true);
+    req.open('GET', apiUrl + '?vue=' + encodeURIComponent(vue) + '&lang=' + encodeURIComponent(pageLang), true);
     req.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     req.onreadystatechange = function () {
       if (req.readyState !== 4) return;
