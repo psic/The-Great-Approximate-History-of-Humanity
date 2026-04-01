@@ -12,19 +12,23 @@ $base = $lang === 'en' ? '/en' : '';
     <title><?php echo htmlspecialchars($t['nav_creer_frise']); ?> — <?php echo htmlspecialchars($t['title']); ?></title>
     <link rel="stylesheet" href="/css/style.css">
     <style>
-        .editor-layout { display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap; }
-        .editor-panel { flex: 0 0 340px; }
-        .preview-panel { flex: 1; min-width: 0; }
+        .editor-layout { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; align-items: flex-start; }
+        @media (max-width: 800px) { .editor-layout { grid-template-columns: 1fr; } }
+        .preview-section { margin-top: 2rem; }
+        .download-bar { display: flex; justify-content: center; gap: 1rem; margin: 1.5rem 0; flex-wrap: wrap; }
+        .btn:disabled { opacity: .35; cursor: not-allowed; pointer-events: none; }
         .panel-title { font-size: 1rem; font-weight: 600; color: var(--text-muted); margin: 0 0 1rem; }
         .upload-area { border: 1px dashed var(--line); border-radius: 8px; padding: 1.25rem; margin-bottom: 1.5rem; }
         .upload-area label { display: block; margin-bottom: .5rem; color: var(--text-muted); font-size: .9rem; }
         .upload-area input[type=file] { color: var(--text); font-size: .9rem; }
         .divider { text-align: center; color: var(--text-muted); font-size: .85rem; margin: 1rem 0; }
-        .form-section { margin-bottom: 1.5rem; }
-        .form-section h3 { color: var(--text-muted); font-size: .9rem; font-weight: 600; margin: 0 0 .6rem; text-transform: uppercase; letter-spacing: .04em; }
+        .editor-col { min-width: 0; }
+        .col-title { color: var(--text-muted); font-size: .9rem; font-weight: 600; margin: 0 0 1rem; text-transform: uppercase; letter-spacing: .04em; }
         .field-row { display: flex; gap: .75rem; margin-bottom: .6rem; align-items: center; }
         .field-row label { color: var(--text-muted); font-size: .85rem; white-space: nowrap; min-width: 80px; }
-        .entry-row { display: flex; gap: .4rem; margin-bottom: .4rem; align-items: center; }
+        .entry-row { display: flex; flex-direction: column; gap: .25rem; margin-bottom: .6rem; }
+        .entry-line { display: flex; gap: .4rem; align-items: center; }
+        .entry-desc { width: 100%; font-size: .82rem; opacity: .85; }
         input[type=text], input[type=number] { flex: 1; padding: .35rem .6rem; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; color: var(--text); font-family: inherit; font-size: .9rem; min-width: 0; }
         input[type=text]:focus, input[type=number]:focus { outline: none; border-color: var(--accent); }
         .btn { padding: .35rem .7rem; font-size: .85rem; font-family: inherit; border-radius: 6px; cursor: pointer; border: 1px solid; }
@@ -51,52 +55,54 @@ $base = $lang === 'en' ? '/en' : '';
     <main class="main">
 <p class="description" style="margin-bottom:2rem"><?php echo htmlspecialchars($t['creer_frise_intro']); ?></p>
 
-        <div class="editor-layout">
-            <!-- Panneau gauche : upload + formulaire -->
-            <div class="editor-panel">
+        <!-- Aperçu pleine largeur -->
+        <div class="preview-section">
+            <p class="panel-title"><?php echo $lang === 'fr' ? 'Aperçu' : 'Preview'; ?></p>
+            <p id="preview-scale-desc"></p>
+            <div class="timeline-scroll-wrapper">
+                <div class="timeline" id="timeline">
+                    <p class="preview-empty"><?php echo $lang === 'fr' ? 'L\'aperçu apparaîtra ici.' : 'Preview will appear here.'; ?></p>
+                </div>
+            </div>
+        </div>
 
-                <!-- Upload -->
+        <!-- Boutons de téléchargement -->
+        <div class="download-bar">
+            <button type="button" class="btn btn-download" id="download-json"><?php echo htmlspecialchars($t['creer_download']); ?></button>
+            <button type="button" class="btn btn-download" id="download-image"><?php echo $lang === 'fr' ? 'Télécharger comme image' : 'Download as image'; ?></button>
+            <button type="button" class="btn btn-download" id="download-pdf"><?php echo $lang === 'fr' ? 'Télécharger comme PDF' : 'Download as PDF'; ?></button>
+        </div>
+
+        <div class="editor-layout">
+            <!-- Colonne 1 : import JSON -->
+            <div class="editor-col">
+                <h3 class="col-title"><?php echo $lang === 'fr' ? 'Import JSON' : 'JSON Import'; ?></h3>
                 <div class="upload-area">
                     <label for="json-upload"><?php echo $lang === 'fr' ? 'Charger un fichier JSON existant' : 'Load an existing JSON file'; ?></label>
                     <input type="file" id="json-upload" accept=".json">
                 </div>
-
-                <div class="divider"><?php echo $lang === 'fr' ? '— ou créer —' : '— or create —'; ?></div>
-
-                <!-- Formulaire -->
-                <div class="form-section">
-                    <div class="field-row">
-                        <label for="frise-name"><?php echo htmlspecialchars($t['creer_name_label']); ?></label>
-                        <input type="text" id="frise-name">
-                    </div>
-                    <div class="field-row">
-                        <label for="frise-pas"><?php echo htmlspecialchars($t['creer_step_label']); ?></label>
-                        <input type="number" id="frise-pas" value="100" min="1" style="max-width:100px">
-                    </div>
+                <div class="field-row">
+                    <label for="frise-name"><?php echo htmlspecialchars($t['creer_name_label']); ?></label>
+                    <input type="text" id="frise-name">
                 </div>
-
-                <div class="form-section">
-                    <h3><?php echo htmlspecialchars($t['creer_periods_title']); ?></h3>
-                    <div id="periods-list"></div>
-                    <button type="button" class="btn btn-add" id="add-period"><?php echo htmlspecialchars($t['creer_add_period']); ?></button>
+                <div class="field-row">
+                    <label for="frise-pas"><?php echo htmlspecialchars($t['creer_step_label']); ?></label>
+                    <input type="number" id="frise-pas" value="100" min="1" style="max-width:100px">
                 </div>
-
-                <div class="form-section">
-                    <h3><?php echo htmlspecialchars($t['creer_events_title']); ?></h3>
-                    <div id="events-list"></div>
-                    <button type="button" class="btn btn-add" id="add-event"><?php echo htmlspecialchars($t['creer_add_event']); ?></button>
-                </div>
-
-                <button type="button" class="btn btn-download" id="download-json"><?php echo htmlspecialchars($t['creer_download']); ?></button>
             </div>
 
-            <!-- Panneau droit : aperçu -->
-            <div class="preview-panel">
-                <p class="panel-title"><?php echo $lang === 'fr' ? 'Aperçu' : 'Preview'; ?></p>
-                <p id="preview-scale-desc"></p>
-                <div class="timeline" id="timeline">
-                    <p class="preview-empty"><?php echo $lang === 'fr' ? 'L\'aperçu apparaîtra ici.' : 'Preview will appear here.'; ?></p>
-                </div>
+            <!-- Colonne 2 : périodes -->
+            <div class="editor-col">
+                <h3 class="col-title"><?php echo htmlspecialchars($t['creer_periods_title']); ?></h3>
+                <div id="periods-list"></div>
+                <button type="button" class="btn btn-add" id="add-period"><?php echo htmlspecialchars($t['creer_add_period']); ?></button>
+            </div>
+
+            <!-- Colonne 3 : événements -->
+            <div class="editor-col">
+                <h3 class="col-title"><?php echo htmlspecialchars($t['creer_events_title']); ?></h3>
+                <div id="events-list"></div>
+                <button type="button" class="btn btn-add" id="add-event"><?php echo htmlspecialchars($t['creer_add_event']); ?></button>
             </div>
         </div>
     </main>
@@ -124,8 +130,10 @@ $base = $lang === 'en' ? '/en' : '';
             name:  <?php echo json_encode($t['creer_period_name']); ?>,
             start: <?php echo json_encode($t['creer_period_start']); ?>,
             end:   <?php echo json_encode($t['creer_period_end']); ?>,
+            desc:  <?php echo json_encode($t['creer_period_desc']); ?>,
             eName: <?php echo json_encode($t['creer_event_name']); ?>,
-            date:  <?php echo json_encode($t['creer_event_date']); ?>
+            date:  <?php echo json_encode($t['creer_event_date']); ?>,
+            eDesc: <?php echo json_encode($t['creer_event_desc']); ?>
         };
 
         function buildData() {
@@ -136,8 +144,11 @@ $base = $lang === 'en' ? '/en' : '';
                 var titre = inputs[0].value.trim();
                 var debut = parseInt(inputs[1].value, 10);
                 var fin   = parseInt(inputs[2].value, 10);
+                var desc  = inputs[3] ? inputs[3].value.trim() : '';
                 if (titre && !isNaN(debut) && !isNaN(fin)) {
-                    periods.push({ titre: titre, debut: debut, fin: fin });
+                    var p = { titre: titre, debut: debut, fin: fin };
+                    if (desc) p.description = desc;
+                    periods.push(p);
                 }
             });
             var events = [];
@@ -145,58 +156,93 @@ $base = $lang === 'en' ? '/en' : '';
                 var inputs = row.querySelectorAll('input');
                 var titre = inputs[0].value.trim();
                 var date  = parseInt(inputs[1].value, 10);
+                var desc  = inputs[2] ? inputs[2].value.trim() : '';
                 if (titre && !isNaN(date)) {
-                    events.push({ titre: titre, date: date });
+                    var e = { titre: titre, date: date };
+                    if (desc) e.description = desc;
+                    events.push(e);
                 }
             });
             return { pas: pas, tableaux: [periods], evenements: events };
         }
 
+        var exportBtns = ['download-json', 'download-image', 'download-pdf'].map(function (id) {
+            return document.getElementById(id);
+        });
+
+        function setExportEnabled(enabled) {
+            exportBtns.forEach(function (btn) { btn.disabled = !enabled; });
+        }
+
+        setExportEnabled(false);
+
         function updatePreview() {
             var data = buildData();
+            var hasContent = (data.tableaux[0] && data.tableaux[0].length > 0) || data.evenements.length > 0;
+            setExportEnabled(hasContent);
             // Met à jour le label d'échelle manuellement (l'élément id diffère de la page principale)
             var descEl = document.getElementById('preview-scale-desc');
             var i18n = window.TIMELINE_I18N;
             if (descEl && data.pas) {
-                descEl.textContent = i18n.scaleLabel.replace('%s', data.pas);
+                descEl.textContent = hasContent ? i18n.scaleLabel.replace('%s', data.pas) : '';
             }
             // Redirige renderTimeline vers #timeline (déjà l'id correct)
             if (window.renderTimeline) window.renderTimeline(data);
         }
 
-        function addPeriodRow(titre, debut, fin) {
+        function addPeriodRow(titre, debut, fin, desc) {
             var row = document.createElement('div');
             row.className = 'entry-row';
+            var line1 = document.createElement('div');
+            line1.className = 'entry-line';
             [[labels.name, 'text', titre || ''], [labels.start, 'number', debut != null ? debut : ''], [labels.end, 'number', fin != null ? fin : '']].forEach(function (f) {
                 var input = document.createElement('input');
                 input.type = f[1];
                 input.placeholder = f[0];
                 input.value = f[2];
                 input.addEventListener('input', updatePreview);
-                row.appendChild(input);
+                line1.appendChild(input);
             });
             var btn = document.createElement('button');
             btn.type = 'button'; btn.className = 'btn btn-remove'; btn.textContent = '×';
             btn.onclick = function () { row.remove(); updatePreview(); };
-            row.appendChild(btn);
+            line1.appendChild(btn);
+            var descInput = document.createElement('input');
+            descInput.type = 'text';
+            descInput.placeholder = labels.desc;
+            descInput.value = desc || '';
+            descInput.className = 'entry-desc';
+            descInput.addEventListener('input', updatePreview);
+            row.appendChild(line1);
+            row.appendChild(descInput);
             document.getElementById('periods-list').appendChild(row);
         }
 
-        function addEventRow(titre, date) {
+        function addEventRow(titre, date, desc) {
             var row = document.createElement('div');
             row.className = 'entry-row';
+            var line1 = document.createElement('div');
+            line1.className = 'entry-line';
             [[labels.eName, 'text', titre || ''], [labels.date, 'number', date != null ? date : '']].forEach(function (f) {
                 var input = document.createElement('input');
                 input.type = f[1];
                 input.placeholder = f[0];
                 input.value = f[2];
                 input.addEventListener('input', updatePreview);
-                row.appendChild(input);
+                line1.appendChild(input);
             });
             var btn = document.createElement('button');
             btn.type = 'button'; btn.className = 'btn btn-remove'; btn.textContent = '×';
             btn.onclick = function () { row.remove(); updatePreview(); };
-            row.appendChild(btn);
+            line1.appendChild(btn);
+            var descInput = document.createElement('input');
+            descInput.type = 'text';
+            descInput.placeholder = labels.eDesc;
+            descInput.value = desc || '';
+            descInput.className = 'entry-desc';
+            descInput.addEventListener('input', updatePreview);
+            row.appendChild(line1);
+            row.appendChild(descInput);
             document.getElementById('events-list').appendChild(row);
         }
 
@@ -220,9 +266,9 @@ $base = $lang === 'en' ? '/en' : '';
                     document.getElementById('events-list').innerHTML = '';
                     var tableaux = data.tableaux || (data.periodes ? [data.periodes] : []);
                     tableaux.forEach(function (tab) {
-                        (tab || []).forEach(function (p) { addPeriodRow(p.titre, p.debut, p.fin); });
+                        (tab || []).forEach(function (p) { addPeriodRow(p.titre, p.debut, p.fin, p.description); });
                     });
-                    (data.evenements || []).forEach(function (e) { addEventRow(e.titre, e.date); });
+                    (data.evenements || []).forEach(function (e) { addEventRow(e.titre, e.date, e.description); });
                     updatePreview();
                 } catch (err) {
                     console.error('JSON invalide', err);
@@ -241,6 +287,121 @@ $base = $lang === 'en' ? '/en' : '';
             a.download = name + '.json';
             a.click();
         };
+        // Téléchargement image PNG (dessin canvas depuis le DOM rendu)
+        document.getElementById('download-image').onclick = function () {
+            var el = document.getElementById('timeline');
+            var name = document.getElementById('frise-name').value.trim() || 'frise';
+            var W = el.scrollWidth, H = el.scrollHeight;
+            var canvas = document.createElement('canvas');
+            canvas.width = W; canvas.height = H;
+            var ctx = canvas.getContext('2d');
+            var base = el.getBoundingClientRect();
+            function rx(r) { return r.left - base.left; }
+            function ry(r) { return r.top - base.top; }
+
+            // Fond
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, W, H);
+
+            // Lignes de grille verticales
+            el.querySelectorAll('.timeline-vline').forEach(function (line) {
+                var r = line.getBoundingClientRect();
+                ctx.strokeStyle = '#222222'; ctx.lineWidth = 1;
+                ctx.beginPath(); ctx.moveTo(rx(r), 0); ctx.lineTo(rx(r), H); ctx.stroke();
+            });
+
+            // Titres de section
+            el.querySelectorAll('.timeline-section-title').forEach(function (t) {
+                var r = t.getBoundingClientRect();
+                ctx.fillStyle = '#888888';
+                ctx.font = 'bold 13px "Segoe UI",system-ui,sans-serif';
+                ctx.textAlign = 'left';
+                ctx.fillText(t.textContent, rx(r), ry(r) + 14);
+            });
+
+            // Barres de périodes
+            el.querySelectorAll('.periode').forEach(function (p) {
+                var r = p.getBoundingClientRect();
+                var x = rx(r), y = ry(r), pw = r.width, ph = r.height;
+                ctx.fillStyle = p.style.background || '#4a6fa5';
+                ctx.beginPath();
+                if (ctx.roundRect) { ctx.roundRect(x, y, pw, ph, 4); } else { ctx.rect(x, y, pw, ph); }
+                ctx.fill();
+                var titleEl = p.querySelector('.periode-titre');
+                if (titleEl && pw > 20) {
+                    ctx.save();
+                    ctx.beginPath(); ctx.rect(x + 2, y, pw - 4, ph); ctx.clip();
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = '11px "Segoe UI",system-ui,sans-serif';
+                    ctx.textAlign = 'left';
+                    ctx.fillText(titleEl.textContent, x + 5, y + ph / 2 + 4);
+                    ctx.restore();
+                }
+            });
+
+            // Ligne d'axe horizontale
+            el.querySelectorAll('.timeline-line-h').forEach(function (line) {
+                var r = line.getBoundingClientRect();
+                var y = ry(r) + r.height / 2;
+                ctx.strokeStyle = '#666666'; ctx.lineWidth = 1;
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+            });
+
+            // Tirets d'axe
+            el.querySelectorAll('.axis-tick').forEach(function (tick) {
+                var r = tick.getBoundingClientRect();
+                ctx.strokeStyle = '#666666'; ctx.lineWidth = 1;
+                ctx.beginPath(); ctx.moveTo(rx(r), ry(r)); ctx.lineTo(rx(r), ry(r) + r.height); ctx.stroke();
+            });
+
+            // Labels d'axe
+            el.querySelectorAll('.axis-label-h').forEach(function (label) {
+                var r = label.getBoundingClientRect();
+                ctx.fillStyle = '#b0b0b0';
+                ctx.font = '11px "Segoe UI",system-ui,sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(label.textContent, rx(r), ry(r) + 12);
+            });
+
+            // Marqueurs d'événements
+            el.querySelectorAll('.event-marker').forEach(function (marker) {
+                var r = marker.getBoundingClientRect();
+                var x = rx(r), y = ry(r);
+                ctx.fillStyle = '#bb9af7';
+                ctx.beginPath(); ctx.arc(x, y + 6, 6, 0, Math.PI * 2); ctx.fill();
+                ctx.strokeStyle = '#bb9af7'; ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.moveTo(x, y + 12); ctx.lineTo(x, y + r.height); ctx.stroke();
+                var titleEl = marker.querySelector('.event-marker-title');
+                if (titleEl) {
+                    var tr = titleEl.getBoundingClientRect();
+                    ctx.fillStyle = '#b0b0b0';
+                    ctx.font = '11px "Segoe UI",system-ui,sans-serif';
+                    ctx.textAlign = 'left';
+                    ctx.fillText(titleEl.textContent, rx(tr), ry(tr) + 11);
+                }
+            });
+
+            var a = document.createElement('a');
+            a.download = name + '.png';
+            a.href = canvas.toDataURL('image/png');
+            a.click();
+        };
+
+        // Téléchargement PDF via fenêtre d'impression
+        document.getElementById('download-pdf').onclick = async function () {
+            var el = document.getElementById('timeline');
+            var css = await fetch('/css/style.css').then(function (r) { return r.text(); });
+            var name = document.getElementById('frise-name').value.trim() || 'frise';
+            var win = window.open('', '_blank');
+            win.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' + name + '</title>'
+                + '<style>' + css + '@media print { body { margin:0; } .timeline { min-width: unset !important; } }</style>'
+                + '</head><body style="background:#000;padding:1rem">'
+                + el.outerHTML
+                + '<script>window.onload=function(){window.print();window.close();}<\/script>'
+                + '</body></html>');
+            win.document.close();
+        };
+
     })();
     </script>
 </body>

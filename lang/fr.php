@@ -31,10 +31,12 @@ return [
     'creer_period_name'  => 'Nom',
     'creer_period_start' => 'Début',
     'creer_period_end'   => 'Fin',
+    'creer_period_desc'  => 'Description',
     'creer_add_period'   => '+ Ajouter une période',
     'creer_events_title' => 'Événements',
     'creer_event_name'   => 'Nom',
     'creer_event_date'   => 'Date',
+    'creer_event_desc'   => 'Description',
     'creer_add_event'    => '+ Ajouter un événement',
     'creer_download'     => 'Télécharger le JSON',
 
