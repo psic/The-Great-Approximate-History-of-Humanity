@@ -71,9 +71,18 @@
     ]
   ],
   "evenements": [
-    { "date": -3000000, "titre": "Premiers outils", "description": "Afrique." },
-    { "date": -3500, "titre": "Invention de l'écriture", "description": "" },
-    { "date": 0, "titre": "Début de l'ère chrétienne", "description": "" },
-    { "date": 2025, "titre": "Aujourd'hui", "description": "" }
+    { "date": -3200000, "titre": "Lucy (Australopithecus afarensis)", "description": "Fossile emblématique découvert en Éthiopie — bipède, l'un des ancêtres les mieux documentés de la lignée humaine." },
+    { "date": -3000000, "titre": "Premiers outils taillés (Oldowayen)", "description": "Galets aménagés façonnés en Afrique de l'Est — naissance de la culture matérielle humaine." },
+    { "date": -1800000, "titre": "Homo erectus sort d'Afrique", "description": "Premières migrations hors du continent africain — peuplement progressif de l'Asie puis de l'Europe." },
+    { "date": -800000, "titre": "Maîtrise du feu", "description": "Homo erectus contrôle le feu — cuisson des aliments, chaleur, protection, lien social." },
+    { "date": -300000, "titre": "Apparition d'Homo sapiens", "description": "Premiers humains anatomiquement modernes, en Afrique du Nord (Maroc, Jebel Irhoud)." },
+    { "date": -70000, "titre": "Exode hors d'Afrique", "description": "Migration d'Homo sapiens hors d'Afrique et peuplement progressif du monde entier." },
+    { "date": -40000, "titre": "Art pariétal et pensée symbolique", "description": "Grottes ornées (Chauvet, Lascaux) — explosion créatrice attestant la pensée abstraite d'Homo sapiens." },
+    { "date": -40000, "titre": "Disparition de Néandertal", "description": "Extinction de l'Homme de Néandertal, probablement au contact et en concurrence avec Homo sapiens." },
+    { "date": -15000, "titre": "Domestication du chien", "description": "Premier animal domestiqué — alliance entre Homo sapiens et le loup gris." },
+    { "date": -10000, "titre": "Révolution néolithique", "description": "Agriculture et élevage — sédentarisation des populations, naissance des villages permanents." },
+    { "date": -3500, "titre": "Premières cités et invention de l'écriture", "description": "Uruk (Mésopotamie) — premières grandes villes, administration et écriture cunéiforme." },
+    { "date": 0, "titre": "Début de l'ère chrétienne", "description": "Point de référence du calendrier grégorien." },
+    { "date": 2026, "titre": "Aujourd'hui", "description": "" }
   ]
 }

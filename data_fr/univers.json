@@ -2,36 +2,31 @@
   "pas": 1000000000,
   "tableaux": [
     [
-      {
-        "debut": -13800000000,
-        "fin": -13800000000,
-        "titre": "Big Bang",
-        "description": "Origine de l'univers."
-      },
-      {
-        "debut": -13600000000,
-        "fin": -10000000000,
-        "titre": "Premières étoiles et galaxies",
-        "description": "Réionisation."
-      },
-      {
-        "debut": -4600000000,
-        "fin": -4600000000,
-        "titre": "Formation du Soleil et de la Terre",
-        "description": "Système solaire."
-      },
-      {
-        "debut": -13800000000,
-        "fin": -4000000000,
-        "titre": "De l'univers primordial à la Terre",
-        "description": "Nucléosynthèse, galaxies, système solaire."
-      }
+      { "titre": "Âge sombre de l'univers", "description": "Avant les premières étoiles — hydrogène et hélium neutres, aucune source lumineuse.", "debut": -13800000000, "fin": -13600000000 },
+      { "titre": "Réionisation et premières étoiles", "description": "Les premières étoiles massives (Population III) ionisent à nouveau le gaz intergalactique.", "debut": -13600000000, "fin": -13000000000 },
+      { "titre": "Ère des quasars et galaxies", "description": "Pic d'activité des trous noirs supermassifs, formation intense des étoiles et des galaxies.", "debut": -13000000000, "fin": -8000000000 },
+      { "titre": "Univers mature", "description": "Galaxies stabilisées, formation stellaire ralentie, expansion accélérée par l'énergie sombre.", "debut": -8000000000, "fin": 0 },
+      { "titre": "De l'univers primordial à la Terre", "description": "Nucléosynthèse primordiale, formation des galaxies, du Soleil et du système solaire.", "debut": -13800000000, "fin": -4000000000 }
+    ],
+    [
+      { "titre": "Formation de la Voie Lactée", "description": "Notre galaxie se forme par fusions successives de proto-galaxies.", "debut": -13500000000, "fin": -10000000000 },
+      { "titre": "Premières étoiles de population II (vieilles étoiles)", "description": "Étoiles riches en métaux lourds issus des premières supernovæ.", "debut": -13000000000, "fin": -5000000000 },
+      { "titre": "Nébuleuse solaire et système solaire", "description": "Effondrement d'un nuage moléculaire formant le Soleil et ses planètes.", "debut": -4600000000, "fin": -4400000000 },
+      { "titre": "Vie sur Terre", "description": "Des premières molécules organiques aux formes de vie complexes.", "debut": -3800000000, "fin": 0 }
     ]
   ],
   "evenements": [
-    { "date": -13800000000, "titre": "Big Bang", "description": "Il y a 13,8 milliards d'années." },
-    { "date": -4600000000, "titre": "Formation de la Terre", "description": "" },
-    { "date": -4000000000, "titre": "Apparition de la vie sur Terre", "description": "" },
-    { "date": 0, "titre": "Aujourd'hui", "description": "" }
+    { "date": -13800000000, "titre": "Big Bang", "description": "Origine de l'espace, du temps et de la matière — il y a 13,8 milliards d'années." },
+    { "date": -13800000000, "titre": "Fond diffus cosmologique (CMB)", "description": "380 000 ans après le Big Bang : l'univers refroidit assez pour que les atomes se forment et la lumière se propage librement." },
+    { "date": -13600000000, "titre": "Allumage des premières étoiles", "description": "Premières étoiles massives (Population III) — synthèse des premiers éléments lourds." },
+    { "date": -13200000000, "titre": "Formation des premières galaxies", "description": "Les proto-galaxies fusionnent sous l'effet de la gravité." },
+    { "date": -13000000000, "titre": "Formation de la Voie Lactée", "description": "Notre galaxie prend forme par accrétion et fusions successives." },
+    { "date": -4600000000, "titre": "Formation du Soleil", "description": "Effondrement d'un nuage de gaz et de poussières — naissance de notre étoile." },
+    { "date": -4500000000, "titre": "Formation de la Terre", "description": "Accrétion de planétésimaux autour du jeune Soleil." },
+    { "date": -4400000000, "titre": "Formation de la Lune", "description": "Collision de la Terre avec Théia — éjection de matière formant la Lune." },
+    { "date": -3800000000, "titre": "Apparition de la vie sur Terre", "description": "Premières molécules autoréplicantes dans les océans primitifs." },
+    { "date": -66000000, "titre": "Extinction des dinosaures", "description": "Impact de l'astéroïde Chicxulub — libération des niches écologiques pour les mammifères." },
+    { "date": -300000, "titre": "Apparition d'Homo sapiens", "description": "Notre espèce émerge en Afrique — dernière en date des grandes innovations de l'univers observable." },
+    { "date": 0, "titre": "Aujourd'hui", "description": "13,8 milliards d'années après le Big Bang." }
   ]
 }
