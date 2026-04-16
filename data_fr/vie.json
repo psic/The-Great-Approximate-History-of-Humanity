@@ -1,22 +1,87 @@
 {
   "pas": 50000000,
-  "tableaux": [
-    [
-      { "titre": "Édiacarien", "description": "Premiers organismes multicellulaires complexes.", "debut": -635000000, "fin": -541000000 },
-      { "titre": "Cambrien", "description": "Explosion cambrienne : diversification rapide de la vie marine.", "debut": -541000000, "fin": -485000000 },
-      { "titre": "Ordovicien", "description": "Diversification marine et premières plantes terrestres.", "debut": -485000000, "fin": -444000000 },
-      { "titre": "Silurien", "description": "Développement des plantes terrestres et des poissons.", "debut": -444000000, "fin": -419000000 },
-      { "titre": "Dévonien", "description": "Âge des poissons et apparition des premiers tétrapodes.", "debut": -419000000, "fin": -359000000 },
-      { "titre": "Carbonifère", "description": "Forêts marécageuses et formation des grands gisements de charbon.", "debut": -359000000, "fin": -299000000 },
-      { "titre": "Permien", "description": "Formation de la Pangée et diversification des reptiles.", "debut": -299000000, "fin": -252000000 },
-      { "titre": "Trias", "description": "Début des dinosaures et premiers mammifères.", "debut": -252000000, "fin": -201000000 },
-      { "titre": "Jurassique", "description": "Domination des dinosaures.", "debut": -201000000, "fin": -145000000 },
-      { "titre": "Crétacé", "description": "Apparition des plantes à fleurs.", "debut": -145000000, "fin": -66000000 },
-      { "titre": "Paléogène", "description": "Diversification des mammifères.", "debut": -66000000, "fin": -23000000 },
-      { "titre": "Néogène", "description": "Formation des continents modernes.", "debut": -23000000, "fin": -2600000 },
-      { "titre": "Quaternaire", "description": "Glaciations et apparition de l'Homme moderne.", "debut": -2600000, "fin": 2026 }
+  "tableaux": {
+    "Périodes géologiques": [
+      {
+        "titre": "Édiacarien",
+        "description": "Premiers organismes multicellulaires complexes.",
+        "debut": -635000000,
+        "fin": -541000000
+      },
+      {
+        "titre": "Cambrien",
+        "description": "Explosion cambrienne : diversification rapide de la vie marine.",
+        "debut": -541000000,
+        "fin": -485000000
+      },
+      {
+        "titre": "Ordovicien",
+        "description": "Diversification marine et premières plantes terrestres.",
+        "debut": -485000000,
+        "fin": -444000000
+      },
+      {
+        "titre": "Silurien",
+        "description": "Développement des plantes terrestres et des poissons.",
+        "debut": -444000000,
+        "fin": -419000000
+      },
+      {
+        "titre": "Dévonien",
+        "description": "Âge des poissons et apparition des premiers tétrapodes.",
+        "debut": -419000000,
+        "fin": -359000000
+      },
+      {
+        "titre": "Carbonifère",
+        "description": "Forêts marécageuses et formation des grands gisements de charbon.",
+        "debut": -359000000,
+        "fin": -299000000
+      },
+      {
+        "titre": "Permien",
+        "description": "Formation de la Pangée et diversification des reptiles.",
+        "debut": -299000000,
+        "fin": -252000000
+      },
+      {
+        "titre": "Trias",
+        "description": "Début des dinosaures et premiers mammifères.",
+        "debut": -252000000,
+        "fin": -201000000
+      },
+      {
+        "titre": "Jurassique",
+        "description": "Domination des dinosaures.",
+        "debut": -201000000,
+        "fin": -145000000
+      },
+      {
+        "titre": "Crétacé",
+        "description": "Apparition des plantes à fleurs.",
+        "debut": -145000000,
+        "fin": -66000000
+      },
+      {
+        "titre": "Paléogène",
+        "description": "Diversification des mammifères.",
+        "debut": -66000000,
+        "fin": -23000000
+      },
+      {
+        "titre": "Néogène",
+        "description": "Formation des continents modernes.",
+        "debut": -23000000,
+        "fin": -2600000
+      },
+      {
+        "titre": "Quaternaire",
+        "description": "Glaciations et apparition de l'Homme moderne.",
+        "debut": -2600000,
+        "fin": 2026
+      }
     ],
-    [
+    "Quaternaire": [
       {
         "titre": "Quaternaire",
         "description": "Glaciations et apparition de l'Homme moderne.",
@@ -24,7 +89,7 @@
         "fin": 2026
       }
     ],
-    [
+    "Groupes biologiques": [
       {
         "titre": "Mammifères",
         "description": "Diversification après extinction des dinosaures.",
@@ -38,31 +103,133 @@
         "fin": 2026
       }
     ]
-  ],
-  "evenements": [
-    { "date": -541000000, "titre": "Explosion cambrienne — les yeux, les dents, les membres", "description": "Diversification explosive en quelques millions d'années : apparition des yeux complexes, des mâchoires primitives, des exosquelettes et des systèmes nerveux." },
-    { "date": -525000000, "titre": "Premiers vertébrés", "description": "Haikouichthys et Myllokunmingia (Chine) — premiers animaux dotés d'une notocorde et d'une ébauche de crâne." },
-    { "date": -470000000, "titre": "Premières plantes terrestres", "description": "Colonisation des continents par les végétaux (bryophytes, puis plantes vasculaires) — transformation radicale des paysages." },
-    { "date": -450000000, "titre": "Premières dents et mâchoires (gnathostomes)", "description": "Apparition des vertébrés à mâchoires — révolution alimentaire et prédatrice ouvrant de nouvelles niches écologiques." },
-    { "date": -444000000, "titre": "Extinction Ordovicien-Silurien", "description": "Première grande extinction de masse — disparition d'environ 85 % des espèces marines." },
-    { "date": -370000000, "titre": "Premiers tétrapodes — sortie des eaux", "description": "Tiktaalik, Acanthostega — transition aquatique-terrestre, premiers membres à doigts, début de la respiration aérienne." },
-    { "date": -359000000, "titre": "Extinction du Dévonien", "description": "Crise biologique majeure affectant les écosystèmes marins et les poissons." },
-    { "date": -350000000, "titre": "Premier vol — insectes ailés", "description": "Apparition des premiers insectes capables de voler durant le Carbonifère — innovation sans précédent dans l'histoire du vivant." },
-    { "date": -312000000, "titre": "Premier œuf amniotique", "description": "Innovation clé permettant la reproduction hors de l'eau — membrane amniotique protégeant l'embryon, libère les reptiles du milieu aquatique." },
-    { "date": -252000000, "titre": "Grande extinction Permien-Trias", "description": "La plus grande extinction de l'histoire : ~90 % des espèces marines et ~70 % des espèces terrestres disparaissent." },
-    { "date": -230000000, "titre": "Premiers dinosaures", "description": "Apparition dans le Trias supérieur — ils domineront la vie terrestre pendant 165 millions d'années." },
-    { "date": -228000000, "titre": "Premier vol vertébré — ptérosaures", "description": "Les ptérosaures sont les premiers vertébrés à développer un vol actif battu, bien avant les oiseaux." },
-    { "date": -225000000, "titre": "Premiers mammifères et apparition des poils", "description": "Petits mammifères nocturnes issus des thérapsides — thermorégulation par les poils, allaitement des jeunes." },
-    { "date": -150000000, "titre": "Premières plumes — Archaeopteryx", "description": "Archaeopteryx (Jurassique supérieur) — lien évolutif entre dinosaures théropodes et oiseaux modernes ; premières plumes véritables." },
-    { "date": -130000000, "titre": "Premières plantes à fleurs (angiospermes)", "description": "Radiation explosive des angiospermes — co-évolution avec les insectes pollinisateurs, transformation des écosystèmes terrestres." },
-    { "date": -66000000, "titre": "Extinction Crétacé-Paléogène — fin des dinosaures", "description": "Impact de l'astéroïde Chicxulub — disparition des dinosaures non aviens, libération des niches écologiques pour les mammifères." },
-    { "date": -55000000, "titre": "Premiers primates", "description": "Apparition des ancêtres des singes, des grands singes et des hominidés." },
-    { "date": -7000000, "titre": "Divergence Homme / Chimpanzé", "description": "Dernier ancêtre commun entre la lignée humaine et celle des chimpanzés." },
-    { "date": -4000000, "titre": "Bipédie des hominidés (Australopithèques)", "description": "Marche debout permanente — libère les mains pour l'usage d'outils, adaptation aux savanes africaines." },
-    { "date": -300000, "titre": "Apparition d'Homo sapiens", "description": "Premiers humains anatomiquement modernes, en Afrique." },
-    { "date": -70000, "titre": "Exode hors d'Afrique", "description": "Migration d'Homo sapiens hors d'Afrique et peuplement progressif du monde." },
-    { "date": -12000, "titre": "Début de l'agriculture / Néolithique", "description": "Domestication des plantes et animaux, sédentarisation des populations." },
-    { "date": -11700, "titre": "Début de l'Holocène", "description": "Fin de la dernière glaciation, période actuelle." },
-    { "date": -10000, "titre": "Extinction de la mégafaune au Pléistocène", "description": "Disparition des grands mammifères comme le mammouth." }
-  ]
+  },
+  "evenements": {
+    "Innovations biologiques": [
+      {
+        "titre": "Explosion cambrienne — les yeux, les dents, les membres",
+        "date": -541000000,
+        "description": "Diversification explosive en quelques millions d'années : apparition des yeux complexes, des mâchoires primitives, des exosquelettes et des systèmes nerveux."
+      },
+      {
+        "titre": "Premiers vertébrés",
+        "date": -525000000,
+        "description": "Haikouichthys et Myllokunmingia (Chine) — premiers animaux dotés d'une notocorde et d'une ébauche de crâne."
+      },
+      {
+        "titre": "Premières plantes terrestres",
+        "date": -470000000,
+        "description": "Colonisation des continents par les végétaux (bryophytes, puis plantes vasculaires) — transformation radicale des paysages."
+      },
+      {
+        "titre": "Premières dents et mâchoires (gnathostomes)",
+        "date": -450000000,
+        "description": "Apparition des vertébrés à mâchoires — révolution alimentaire et prédatrice ouvrant de nouvelles niches écologiques."
+      },
+      {
+        "titre": "Premiers tétrapodes — sortie des eaux",
+        "date": -370000000,
+        "description": "Tiktaalik, Acanthostega — transition aquatique-terrestre, premiers membres à doigts, début de la respiration aérienne."
+      },
+      {
+        "titre": "Premier vol — insectes ailés",
+        "date": -350000000,
+        "description": "Apparition des premiers insectes capables de voler durant le Carbonifère — innovation sans précédent dans l'histoire du vivant."
+      },
+      {
+        "titre": "Premier œuf amniotique",
+        "date": -312000000,
+        "description": "Innovation clé permettant la reproduction hors de l'eau — membrane amniotique protégeant l'embryon, libère les reptiles du milieu aquatique."
+      },
+      {
+        "titre": "Premiers dinosaures",
+        "date": -230000000,
+        "description": "Apparition dans le Trias supérieur — ils domineront la vie terrestre pendant 165 millions d'années."
+      },
+      {
+        "titre": "Premier vol vertébré — ptérosaures",
+        "date": -228000000,
+        "description": "Les ptérosaures sont les premiers vertébrés à développer un vol actif battu, bien avant les oiseaux."
+      },
+      {
+        "titre": "Premiers mammifères et apparition des poils",
+        "date": -225000000,
+        "description": "Petits mammifères nocturnes issus des thérapsides — thermorégulation par les poils, allaitement des jeunes."
+      },
+      {
+        "titre": "Premières plumes — Archaeopteryx",
+        "date": -150000000,
+        "description": "Archaeopteryx (Jurassique supérieur) — lien évolutif entre dinosaures théropodes et oiseaux modernes ; premières plumes véritables."
+      },
+      {
+        "titre": "Premières plantes à fleurs (angiospermes)",
+        "date": -130000000,
+        "description": "Radiation explosive des angiospermes — co-évolution avec les insectes pollinisateurs, transformation des écosystèmes terrestres."
+      },
+      {
+        "titre": "Premiers primates",
+        "date": -55000000,
+        "description": "Apparition des ancêtres des singes, des grands singes et des hominidés."
+      }
+    ],
+    "Extinctions": [
+      {
+        "titre": "Extinction Ordovicien-Silurien",
+        "date": -444000000,
+        "description": "Première grande extinction de masse — disparition d'environ 85 % des espèces marines."
+      },
+      {
+        "titre": "Extinction du Dévonien",
+        "date": -359000000,
+        "description": "Crise biologique majeure affectant les écosystèmes marins et les poissons."
+      },
+      {
+        "titre": "Grande extinction Permien-Trias",
+        "date": -252000000,
+        "description": "La plus grande extinction de l'histoire : ~90 % des espèces marines et ~70 % des espèces terrestres disparaissent."
+      },
+      {
+        "titre": "Extinction Crétacé-Paléogène — fin des dinosaures",
+        "date": -66000000,
+        "description": "Impact de l'astéroïde Chicxulub — disparition des dinosaures non aviens, libération des niches écologiques pour les mammifères."
+      },
+      {
+        "titre": "Extinction de la mégafaune au Pléistocène",
+        "date": -10000,
+        "description": "Disparition des grands mammifères comme le mammouth."
+      }
+    ],
+    "Hominidés": [
+      {
+        "titre": "Divergence Homme / Chimpanzé",
+        "date": -7000000,
+        "description": "Dernier ancêtre commun entre la lignée humaine et celle des chimpanzés."
+      },
+      {
+        "titre": "Bipédie des hominidés (Australopithèques)",
+        "date": -4000000,
+        "description": "Marche debout permanente — libère les mains pour l'usage d'outils, adaptation aux savanes africaines."
+      },
+      {
+        "titre": "Apparition d'Homo sapiens",
+        "date": -300000,
+        "description": "Premiers humains anatomiquement modernes, en Afrique."
+      },
+      {
+        "titre": "Exode hors d'Afrique",
+        "date": -70000,
+        "description": "Migration d'Homo sapiens hors d'Afrique et peuplement progressif du monde."
+      },
+      {
+        "titre": "Début de l'agriculture / Néolithique",
+        "date": -12000,
+        "description": "Domestication des plantes et animaux, sédentarisation des populations."
+      },
+      {
+        "titre": "Début de l'Holocène",
+        "date": -11700,
+        "description": "Fin de la dernière glaciation, période actuelle."
+      }
+    ]
+  }
 }

@@ -71,9 +71,25 @@
     ]
   ],
   "evenements": [
-    { "date": -3000000, "titre": "Premiers outils", "description": "Afrique." },
-    { "date": -3500, "titre": "Invention de l'écriture", "description": "" },
-    { "date": 0, "titre": "Début de l'ère chrétienne", "description": "" },
-    { "date": 2025, "titre": "Aujourd'hui", "description": "" }
+    {
+      "date": -3000000,
+      "titre": "Premiers outils",
+      "description": "Afrique."
+    },
+    {
+      "date": -3500,
+      "titre": "Invention de l'écriture",
+      "description": ""
+    },
+    {
+      "date": 0,
+      "titre": "Début de l'ère chrétienne",
+      "description": ""
+    },
+    {
+      "date": 2025,
+      "titre": "Aujourd'hui",
+      "description": ""
+    }
   ]
 }

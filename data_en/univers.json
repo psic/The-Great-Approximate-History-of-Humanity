@@ -29,9 +29,25 @@
     ]
   ],
   "evenements": [
-    { "date": -13800000000, "titre": "Big Bang", "description": "Il y a 13,8 milliards d'années." },
-    { "date": -4600000000, "titre": "Formation de la Terre", "description": "" },
-    { "date": -4000000000, "titre": "Apparition de la vie sur Terre", "description": "" },
-    { "date": 0, "titre": "Aujourd'hui", "description": "" }
+    {
+      "date": -13800000000,
+      "titre": "Big Bang",
+      "description": "Il y a 13,8 milliards d'années."
+    },
+    {
+      "date": -4600000000,
+      "titre": "Formation de la Terre",
+      "description": ""
+    },
+    {
+      "date": -4000000000,
+      "titre": "Apparition de la vie sur Terre",
+      "description": ""
+    },
+    {
+      "date": 0,
+      "titre": "Aujourd'hui",
+      "description": ""
+    }
   ]
 }

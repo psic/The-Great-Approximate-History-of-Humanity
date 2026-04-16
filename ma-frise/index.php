@@ -1,6 +1,7 @@
 <?php
 if (!isset($lang)) $lang = 'fr';
 $t = require __DIR__ . '/../lang/' . $lang . '.php';
+if (!is_array($t)) { $t = require __DIR__ . '/../lang/fr.php'; }
 $home = $lang === 'en' ? '/en/' : '/';
 $base = $lang === 'en' ? '/en' : '';
 ?>

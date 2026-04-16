@@ -9,6 +9,9 @@ if (!isset($lang)) {
     $lang = 'fr';
 }
 $t = require __DIR__ . '/lang/' . $lang . '.php';
+if (!is_array($t)) {
+    $t = require __DIR__ . '/lang/fr.php';
+}
 
 $vues = [
     'moderne'  => 'moderne.json',
@@ -32,16 +35,16 @@ function format_nombre($n): string {
  * Palette de couleurs harmonieuses (HSL) — teintes réparties, saturation/luminosité douces
  */
 function palette_harmonieuse(int $n): array {
-    $couleurs = [];
-    $hueStep = 360 / max(1, (int) ceil(sqrt($n * 2)));
-    $s = 58;
-    $l = 48;
-    for ($i = 0; $i < $n; $i++) {
-        $h = ($i * $hueStep + 12) % 360;
-        $couleurs[] = 'hsl(' . $h . ', ' . $s . '%, ' . $l . '%)';
+    $count = max(12, $n);
+    $hueStep = 360 / $count;
+    $s = 42;
+    $l = 68;
+    $palette = [];
+    for ($i = 0; $i < $count; $i++) {
+        $h = (int) (($i * $hueStep + 20) % 360);
+        $palette[] = ['h' => $h, 'css' => 'hsl(' . $h . ', ' . $s . '%, ' . $l . '%)'];
     }
-    shuffle($couleurs);
-    return $couleurs;
+    return $palette;
 }
 
 /**
@@ -108,7 +111,20 @@ if (!is_readable($jsonPath)) {
         if ($pas <= 0) {
             $pas = 100;
         }
-        $evenements = $data['evenements'] ?? [];
+        // Normaliser evenements : format dict {"Catégorie": [{...},...]} ou array [{...},...]
+        $rawEvts = $data['evenements'] ?? [];
+        $evenementsParCategorie = []; // pour le rendu groupé
+        $evenements = [];             // plat pour le calcul d'échelle
+        if (!empty($rawEvts) && is_string(array_key_first($rawEvts))) {
+            foreach ($rawEvts as $categorie => $evts) {
+                $evts = is_array($evts) ? $evts : [];
+                $evenementsParCategorie[] = ['categorie' => $categorie, 'evenements' => $evts];
+                foreach ($evts as $e) { $evenements[] = $e; }
+            }
+        } else {
+            $evenements = array_values($rawEvts);
+            $evenementsParCategorie = [['categorie' => null, 'evenements' => $evenements]];
+        }
         usort($evenements, function ($a, $b) {
             return ($a['date'] ?? 0) <=> ($b['date'] ?? 0);
         });
@@ -119,10 +135,31 @@ if (!is_readable($jsonPath)) {
         }
         $tableaux = is_array($tableaux) ? $tableaux : [];
 
+        // Normaliser : 3 formats supportés :
+        // 1. Nouveau format dict  : {"Titre": [...], ...}
+        // 2. Format objet         : [{"titre":..., "periodes":[...]}, ...]
+        // 3. Format bare array    : [[{...}], [{...}]]
+        $tableauxNormes = [];
+        if (!empty($tableaux) && is_string(array_key_first($tableaux))) {
+            // Format dict : clé = titre, valeur = tableau de périodes
+            foreach ($tableaux as $titre => $periodes) {
+                $tableauxNormes[] = ['titre' => $titre, 'periodes' => is_array($periodes) ? $periodes : []];
+            }
+        } else {
+            foreach ($tableaux as $tab) {
+                if (isset($tab['titre']) && isset($tab['periodes'])) {
+                    $tableauxNormes[] = ['titre' => $tab['titre'], 'periodes' => $tab['periodes']];
+                } else {
+                    $tableauxNormes[] = ['titre' => null, 'periodes' => is_array($tab) ? $tab : []];
+                }
+            }
+        }
+        $tableaux = $tableauxNormes;
+
         $allYears = [];
         $toutesPeriodes = [];
-        foreach ($tableaux as $tab) {
-            foreach ($tab as $p) {
+        foreach ($tableaux as $tabData) {
+            foreach ($tabData['periodes'] as $p) {
                 $toutesPeriodes[] = $p;
                 if (isset($p['debut'])) $allYears[] = (int) $p['debut'];
                 if (isset($p['fin'])) $allYears[] = (int) $p['fin'];
@@ -151,22 +188,46 @@ if (!is_readable($jsonPath)) {
         }
 
         $palette = palette_harmonieuse(max(20, count($toutesPeriodes)));
+        $paletteSize = count($palette);
         $idxCouleur = 0;
         $tableauxAvecLanes = [];
-        foreach ($tableaux as $tab) {
-            $periodesAvecLanes = assigner_lanes($tab);
+        foreach ($tableaux as $tabData) {
+            $periodesAvecLanes = assigner_lanes($tabData['periodes']);
+            $prevFin = PHP_INT_MIN;
+            $prevHue = -999;
             foreach ($periodesAvecLanes as &$p) {
-                $p['couleur'] = $palette[$idxCouleur % count($palette)];
-                $idxCouleur++;
+                $debut = (int) ($p['debut'] ?? 0);
+                $contigu = ($prevFin >= $debut);
+                $idx = $idxCouleur;
+                for ($tries = 0; $tries < $paletteSize; $tries++) {
+                    $dist = abs($palette[$idx % $paletteSize]['h'] - $prevHue);
+                    if ($dist > 180) $dist = 360 - $dist;
+                    if (!$contigu || $dist >= 40) break;
+                    $idx++;
+                }
+                $chosen = $palette[$idx % $paletteSize];
+                $p['couleur'] = $chosen['css'];
+                $prevHue = $chosen['h'];
+                $prevFin = (int) ($p['fin'] ?? $debut);
+                $idxCouleur = $idx + 1;
             }
             unset($p);
-            $tableauxAvecLanes[] = $periodesAvecLanes;
+            $tableauxAvecLanes[] = ['titre' => $tabData['titre'], 'periodes' => $periodesAvecLanes];
         }
 
-        $evenementsAvecLanes = assigner_lanes_events($evenements, $scaleMin, $range, 26);
-        $nbEventLanes = 0;
-        foreach ($evenementsAvecLanes as $ev) {
-            $nbEventLanes = max($nbEventLanes, ($ev['lane'] ?? 0) + 1);
+        // Calcul des lanes par catégorie
+        $categoriesAvecLanes = [];
+        foreach ($evenementsParCategorie as $catGroup) {
+            $catEvtsAvecLanes = assigner_lanes_events($catGroup['evenements'], $scaleMin, $range, 26);
+            $catNbLanes = 0;
+            foreach ($catEvtsAvecLanes as $ev) {
+                $catNbLanes = max($catNbLanes, ($ev['lane'] ?? 0) + 1);
+            }
+            $categoriesAvecLanes[] = [
+                'categorie' => $catGroup['categorie'],
+                'evenements' => $catEvtsAvecLanes,
+                'nbLanes'    => $catNbLanes,
+            ];
         }
         $eventRowHeightRem = 2.85;
         $laneHeightPx = 52;
@@ -196,6 +257,15 @@ if (!is_readable($jsonPath)) {
         <?php if ($error) : ?>
             <p class="error"><?php echo htmlspecialchars($error); ?></p>
         <?php elseif (!empty($scaleYears)) : ?>
+            <nav class="timeline-tabs" role="tablist" aria-label="<?php echo htmlspecialchars($t['aria_tabs']); ?>">
+                <button type="button" class="tab-btn <?php echo $vue === 'moderne' ? 'active' : ''; ?>" role="tab" data-vue="moderne"><?php echo htmlspecialchars($t['tab_moderne']); ?></button>
+                <button type="button" class="tab-btn <?php echo $vue === 'histoire' ? 'active' : ''; ?>" role="tab" data-vue="histoire"><?php echo htmlspecialchars($t['tab_histoire']); ?></button>
+                <button type="button" class="tab-btn <?php echo $vue === 'humanite' ? 'active' : ''; ?>" role="tab" data-vue="humanite"><?php echo htmlspecialchars($t['tab_humanite']); ?></button>
+                <button type="button" class="tab-btn <?php echo $vue === 'terre' ? 'active' : ''; ?>" role="tab" data-vue="terre"><?php echo htmlspecialchars($t['tab_terre']); ?></button>
+                <button type="button" class="tab-btn <?php echo $vue === 'vie' ? 'active' : ''; ?>" role="tab" data-vue="vie"><?php echo htmlspecialchars($t['tab_vie']); ?></button>
+                <button type="button" class="tab-btn <?php echo $vue === 'univers' ? 'active' : ''; ?>" role="tab" data-vue="univers"><?php echo htmlspecialchars($t['tab_univers']); ?></button>
+            </nav>
+            <p class="description" id="timeline-scale-desc"><?php echo isset($pas) ? sprintf($t['scale_label'], format_nombre($pas)) : ''; ?></p>
 <div class="timeline-scroll-wrapper">
 <div class="timeline" id="timeline" data-vue="<?php echo htmlspecialchars($vue); ?>" data-min="<?php echo (int) $scaleMin; ?>" data-max="<?php echo (int) $scaleMax; ?>" data-range="<?php echo (int) $range; ?>">
                 <!-- Lignes verticales pointillées (échelle) sur toute la frise -->
@@ -205,40 +275,61 @@ if (!is_readable($jsonPath)) {
                         <span class="timeline-vline" style="left: <?php echo number_format($leftPct, 2, '.', ''); ?>%"></span>
                     <?php endforeach; ?>
                 </div>
+                <!-- Ligne d'années en haut -->
+                <div class="timeline-top-scale">
+                    <div class="timeline-axis-bottom">
+                        <div class="timeline-ticks">
+                            <?php foreach ($scaleYears as $y) : ?>
+                                <?php $leftPct = $range > 0 ? (($y - $scaleMin) / $range) * 100 : 0; ?>
+                                <span class="axis-tick" style="left: <?php echo number_format($leftPct, 2, '.', ''); ?>%"></span>
+                            <?php endforeach; ?>
+                        </div>
+                        <div class="timeline-line-h"></div>
+                    </div>
+                    <div class="timeline-scale-h">
+                        <?php foreach ($scaleYears as $y) : ?>
+                            <?php $leftPct = $range > 0 ? (($y - $scaleMin) / $range) * 100 : 0; ?>
+                            <span class="axis-label-h" style="left: <?php echo number_format($leftPct, 2, '.', ''); ?>%"><?php echo format_nombre($y); ?></span>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
                 <!-- Section Périodes -->
                 <section class="timeline-section timeline-section-periodes">
                     <h2 class="timeline-section-title"><?php echo htmlspecialchars($t['periods']); ?></h2>
                     <div class="timeline-tableaux">
-                        <?php foreach ($tableauxAvecLanes as $periodes) : ?>
+                        <?php foreach ($tableauxAvecLanes as $tabData) : ?>
                             <?php
+                            $tabTitre  = $tabData['titre'] ?? null;
+                            $periodes  = $tabData['periodes'] ?? [];
                             $byLane = [];
                             foreach ($periodes as $p) {
                                 $byLane[(int) ($p['lane'] ?? 0)][] = $p;
                             }
                             ksort($byLane);
-                            foreach ($byLane as $lanePeriodes) :
                             ?>
-                            <div class="timeline-tableau" data-lanes="1" style="height: <?php echo $laneHeightPx; ?>px;">
-                                <div class="timeline-tableau-lanes">
-                                    <?php foreach ($lanePeriodes as $p) : ?>
-                                        <?php
-                                        $debut = (int) ($p['debut'] ?? 0);
-                                        $fin = (int) ($p['fin'] ?? $debut);
-                                        $leftPct = $range > 0 ? (($debut - $scaleMin) / $range) * 100 : 0;
-                                        $widthPct = $range > 0 ? (max(0.5, $fin - $debut) / $range) * 100 : 1;
-                                        $couleur = $p['couleur'] ?? 'hsl(210, 50%, 50%)';
-                                        $tooltip = format_nombre($debut) . ' – ' . format_nombre($fin) . "\n" . ($p['titre'] ?? '');
-                                        if (!empty($p['description'])) {
-                                            $tooltip .= "\n" . $p['description'];
-                                        }
-                                        ?>
-                                        <div class="periode" style="left: <?php echo number_format($leftPct, 2, '.', ''); ?>%; width: <?php echo number_format($widthPct, 2, '.', ''); ?>%; top: 2px; background: <?php echo htmlspecialchars($couleur); ?>; border-color: <?php echo htmlspecialchars($couleur); ?>;" title="<?php echo htmlspecialchars($tooltip); ?>">
-                                            <span class="periode-titre"><?php echo htmlspecialchars($p['titre'] ?? ''); ?></span>
-                                        </div>
-                                    <?php endforeach; ?>
+                            <div class="timeline-tableau-group">
+                                <?php if ($tabTitre) : ?>
+                                    <div class="tableau-group-label"><?php echo htmlspecialchars($tabTitre); ?></div>
+                                <?php endif; ?>
+                                <?php foreach ($byLane as $lanePeriodes) : ?>
+                                <div class="timeline-tableau" data-lanes="1" style="height: <?php echo $laneHeightPx; ?>px;">
+                                    <div class="timeline-tableau-lanes">
+                                        <?php foreach ($lanePeriodes as $p) : ?>
+                                            <?php
+                                            $debut = (int) ($p['debut'] ?? 0);
+                                            $fin = (int) ($p['fin'] ?? $debut);
+                                            $leftPct = $range > 0 ? (($debut - $scaleMin) / $range) * 100 : 0;
+                                            $widthPct = $range > 0 ? (max(0.5, $fin - $debut) / $range) * 100 : 1;
+                                            $couleur = $p['couleur'] ?? 'hsl(210, 50%, 50%)';
+                                            ?>
+                                            <div class="periode" style="left: <?php echo number_format($leftPct, 2, '.', ''); ?>%; width: <?php echo number_format($widthPct, 2, '.', ''); ?>%; top: 2px; background: <?php echo htmlspecialchars($couleur); ?>; border-color: <?php echo htmlspecialchars($couleur); ?>;" data-debut="<?php echo $debut; ?>" data-fin="<?php echo $fin; ?>" data-titre="<?php echo htmlspecialchars($p['titre'] ?? ''); ?>" data-desc="<?php echo htmlspecialchars($p['description'] ?? ''); ?>">
+                                                <span class="periode-titre"><?php echo htmlspecialchars($p['titre'] ?? ''); ?></span>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
                                 </div>
+                                <?php endforeach; ?>
                             </div>
-                            <?php endforeach; ?>
                         <?php endforeach; ?>
                     </div>
                 </section>
@@ -265,29 +356,34 @@ if (!is_readable($jsonPath)) {
                 <!-- Section Événements -->
                 <section class="timeline-section timeline-section-evenements">
                     <h2 class="timeline-section-title"><?php echo htmlspecialchars($t['events']); ?></h2>
-                    <div class="timeline-evenements-frise" style="min-height: <?php echo (isset($nbEventLanes) && $nbEventLanes > 0) ? ($nbEventLanes * $eventRowHeightRem + 0.5) : 4.5; ?>rem;">
-                        <?php foreach ($evenementsAvecLanes ?? [] as $e) : ?>
-                            <?php
-                            $date = (int) ($e['date'] ?? 0);
-                            $leftPct = $e['leftPct'] ?? 0;
-                            $lane = (int) ($e['lane'] ?? 0);
-                            $topRem = $lane * ($eventRowHeightRem ?? 2.85);
-                            $tooltip = format_nombre($date);
-                            if (!empty($e['titre'])) {
-                                $tooltip .= ' — ' . $e['titre'];
-                            }
-                            if (!empty($e['description'])) {
-                                $tooltip .= "\n" . $e['description'];
-                            }
-                            ?>
-                            <span class="event-marker" style="left: <?php echo number_format($leftPct, 2, '.', ''); ?>%; top: <?php echo number_format($topRem, 2, '.', ''); ?>rem;" title="<?php echo htmlspecialchars($tooltip); ?>" data-date="<?php echo $date; ?>">
-                                <span class="event-pin" aria-hidden="true">
-                                    <svg viewBox="0 0 24 36" width="16" height="24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12c0 9 12 24 12 24s12-15 12-24C24 5.4 18.6 0 12 0z"/></svg>
-                                </span>
-                                <span class="event-marker-title"><?php echo htmlspecialchars($e['titre'] ?? format_nombre($date)); ?></span>
-                            </span>
-                        <?php endforeach; ?>
-                    </div>
+                    <?php foreach ($categoriesAvecLanes ?? [] as $catGroup) : ?>
+                        <?php
+                        $catLabel   = $catGroup['categorie'];
+                        $catNbLanes = $catGroup['nbLanes'];
+                        $catMinH    = ($catNbLanes > 0 ? $catNbLanes * $eventRowHeightRem + 0.5 : 2.5);
+                        ?>
+                        <div class="timeline-evenements-groupe">
+                            <?php if ($catLabel) : ?>
+                                <div class="tableau-group-label"><?php echo htmlspecialchars($catLabel); ?></div>
+                            <?php endif; ?>
+                            <div class="timeline-evenements-frise" style="min-height: <?php echo number_format($catMinH, 2, '.', ''); ?>rem;">
+                                <?php foreach ($catGroup['evenements'] as $e) : ?>
+                                    <?php
+                                    $date    = (int) ($e['date'] ?? 0);
+                                    $leftPct = $e['leftPct'] ?? 0;
+                                    $lane    = (int) ($e['lane'] ?? 0);
+                                    $topRem  = $lane * $eventRowHeightRem;
+                                    ?>
+                                    <span class="event-marker" style="left: <?php echo number_format($leftPct, 2, '.', ''); ?>%; top: <?php echo number_format($topRem, 2, '.', ''); ?>rem;" data-date="<?php echo $date; ?>" data-titre="<?php echo htmlspecialchars($e['titre'] ?? ''); ?>" data-desc="<?php echo htmlspecialchars($e['description'] ?? ''); ?>">
+                                        <span class="event-pin" aria-hidden="true">
+                                            <svg viewBox="0 0 24 36" width="16" height="24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12c0 9 12 24 12 24s12-15 12-24C24 5.4 18.6 0 12 0z"/></svg>
+                                        </span>
+                                        <span class="event-marker-title"><?php echo htmlspecialchars($e['titre'] ?? format_nombre($date)); ?></span>
+                                    </span>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                     <div class="timeline-axis-bottom">
                         <div class="timeline-ticks">
                             <?php foreach ($scaleYears as $y) : ?>
@@ -315,7 +411,6 @@ if (!is_readable($jsonPath)) {
                 <button type="button" class="tab-btn <?php echo $vue === 'vie' ? 'active' : ''; ?>" role="tab" data-vue="vie"><?php echo htmlspecialchars($t['tab_vie']); ?></button>
                 <button type="button" class="tab-btn <?php echo $vue === 'univers' ? 'active' : ''; ?>" role="tab" data-vue="univers"><?php echo htmlspecialchars($t['tab_univers']); ?></button>
             </nav>
-            <p class="description" id="timeline-scale-desc"><?php echo isset($pas) ? sprintf($t['scale_label'], format_nombre($pas)) : ''; ?></p>
         <?php else : ?>
             <p class="error"><?php echo htmlspecialchars($t['error_empty']); ?></p>
         <?php endif; ?>

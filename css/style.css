@@ -75,10 +75,10 @@ body {
 
 .main {
   flex: 1;
-  width: 90vw;
+  width: 100%;
   max-width: 100%;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
+  padding: 2rem 1rem;
 }
 
 .error {
@@ -209,10 +209,44 @@ body {
 .timeline-tableaux {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0;
+}
+
+/* Groupe de lanes d'un même tableau (avec son label) */
+.timeline-tableau-group {
+  display: block;
+  margin-top: 0.75rem;
+}
+
+.timeline-tableau-group:first-child {
+  margin-top: 0;
+}
+
+/* Label du groupe : sticky gauche pendant le scroll horizontal */
+.tableau-group-label {
+  position: sticky;
+  left: 0;
+  display: inline-block;
+  z-index: 4;
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  padding: 0 1.5rem 0.2rem 0;
+  background: linear-gradient(90deg, var(--bg) 78%, transparent 100%);
+  pointer-events: none;
 }
 
 /* Séparation entre les deux frises = échelle des périodes (la ligne de l’échelle = ligne de séparation) */
+.timeline-top-scale {
+  padding-bottom: 1rem;
+  margin-bottom: 0.25rem;
+  position: relative;
+  z-index: 1;
+}
+
 .timeline-separator {
   margin-top: 3.75rem;
   padding-top: 1.25rem;
@@ -252,7 +286,7 @@ body {
   padding: 0.4rem 0.6rem;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 6px;
-  overflow: visible;
+  overflow: hidden;
   pointer-events: auto;
   box-sizing: border-box;
 }
@@ -262,7 +296,9 @@ body {
   font-size: 0.8rem;
   font-weight: 600;
   line-height: 1.35;
-  word-wrap: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Contraste texte sur couleur : fond coloré → texte lisible */
@@ -275,10 +311,18 @@ body {
 }
 
 /* --- Événements sur la frise (épingles / pins avec titre) --- */
+.timeline-evenements-groupe {
+  margin-top: 0.75rem;
+}
+
+.timeline-evenements-groupe:first-child {
+  margin-top: 0;
+}
+
 .timeline-evenements-frise {
   position: relative;
-  min-height: 4.5rem;
-  margin-top: 0.5rem;
+  min-height: 2.5rem;
+  margin-top: 0.25rem;
 }
 
 .event-marker {
@@ -288,8 +332,12 @@ body {
   align-items: flex-end;
   gap: 0.35rem;
   pointer-events: auto;
-  cursor: help;
+  cursor: pointer;
   max-width: 18rem;
+}
+
+.periode {
+  cursor: pointer;
 }
 
 .event-pin {
@@ -336,8 +384,8 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
-  margin-top: 2rem;
-  margin-bottom: 0;
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
   justify-content: flex-start;
 }
 
@@ -383,6 +431,63 @@ body {
 
 .btn-refresh:hover {
   background: rgba(122, 162, 247, 0.15);
+}
+
+/* --- Popup (clic sur période ou événement) --- */
+.timeline-popup {
+  position: fixed;
+  z-index: 1000;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.75rem 1rem 0.75rem 1rem;
+  max-width: 22rem;
+  min-width: 12rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.7);
+  display: none;
+}
+
+.timeline-popup.visible {
+  display: block;
+}
+
+.timeline-popup-date {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.timeline-popup-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.35rem;
+  padding-right: 1.2rem;
+}
+
+.timeline-popup-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.timeline-popup-close {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0.2rem 0.3rem;
+}
+
+.timeline-popup-close:hover {
+  color: var(--text);
 }
 
 /* --- Footer --- */

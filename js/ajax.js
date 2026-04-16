@@ -7,10 +7,11 @@
   var apiUrl = '/api/timeline.php';
   var pageLang = document.documentElement.lang || 'fr';
   var LANE_HEIGHT = 52;
-  var i18n = window.TIMELINE_I18N || {
-    periods:    'Périodes',
-    events:     'Événements',
-    scaleLabel: 'Échelle : %s ans par graduation'
+  var _i18nBase = window.TIMELINE_I18N || {};
+  var i18n = {
+    periods:    _i18nBase.periods    || 'Périodes',
+    events:     _i18nBase.events     || 'Événements',
+    scaleLabel: _i18nBase.scaleLabel || 'Échelle : %s ans par graduation'
   };
 
   function escapeHtml(text) {
@@ -34,18 +35,15 @@
   }
 
   function paletteHarmonieuse(n) {
-    var couleurs = [];
-    var step = 360 / Math.max(1, Math.ceil(Math.sqrt(n * 2)));
-    var s = 58, l = 48;
-    for (var i = 0; i < n; i++) {
-      var h = (i * step + 12) % 360;
-      couleurs.push('hsl(' + h + ', ' + s + '%, ' + l + '%)');
+    var count = Math.max(12, n);
+    var step = 360 / count;
+    var s = 42, l = 68;
+    var palette = [];
+    for (var i = 0; i < count; i++) {
+      var h = Math.round((i * step + 20) % 360);
+      palette.push({ h: h, css: 'hsl(' + h + ', ' + s + '%, ' + l + '%)' });
     }
-    for (var j = couleurs.length - 1; j > 0; j--) {
-      var k = Math.floor(Math.random() * (j + 1));
-      var t = couleurs[j]; couleurs[j] = couleurs[k]; couleurs[k] = t;
-    }
-    return couleurs;
+    return palette;
   }
 
   function assignerLanes(periodes) {
@@ -64,13 +62,48 @@
     return periodes;
   }
 
+  // Normalise n'importe quel format d'événements vers [{titre, date, description, ...}]
+  function normaliserEvenements(raw) {
+    if (!raw) return [];
+    if (!Array.isArray(raw)) {
+      // Format dict : {"Catégorie": [{...},...]} — on aplatit
+      var result = [];
+      Object.keys(raw).forEach(function (cat) {
+        (raw[cat] || []).forEach(function (e) {
+          result.push(Object.assign({ categorie: cat }, e));
+        });
+      });
+      return result;
+    }
+    return raw;
+  }
+
+  // Normalise n'importe quel format de tableaux vers [{titre, periodes}]
+  function normaliserTableaux(raw, fallbackPeriodes) {
+    if (!raw && fallbackPeriodes) return [{ titre: null, periodes: fallbackPeriodes }];
+    if (!raw) return [];
+    if (!Array.isArray(raw)) {
+      // Format dict : {"Titre": [...], ...}
+      return Object.keys(raw).map(function (titre) {
+        return { titre: titre, periodes: raw[titre] || [] };
+      });
+    }
+    // Format tableau (objet ou bare array)
+    return raw.map(function (tab) {
+      if (tab && !Array.isArray(tab) && tab.periodes !== undefined) {
+        return { titre: tab.titre || null, periodes: tab.periodes };
+      }
+      return { titre: null, periodes: Array.isArray(tab) ? tab : [] };
+    });
+  }
+
   function computeScale(data) {
     var pas = Math.max(1, parseInt(data.pas, 10) || 100);
-    var tableaux = data.tableaux || (data.periodes ? [ data.periodes ] : []);
-    var evenements = data.evenements || [];
+    var tableaux = normaliserTableaux(data.tableaux, data.periodes);
+    var evenements = normaliserEvenements(data.evenements);
     var allYears = [];
     tableaux.forEach(function (tab) {
-      (tab || []).forEach(function (p) {
+      (tab.periodes || []).forEach(function (p) {
         if (p.debut != null) allYears.push(parseInt(p.debut, 10));
         if (p.fin != null) allYears.push(parseInt(p.fin, 10));
       });
@@ -114,12 +147,30 @@
 
   function renderTableaux(tableaux, scaleMin, range, palette) {
     var idx = 0;
+    var paletteSize = palette.length;
     var html = '<div class="timeline-tableaux">';
     (tableaux || []).forEach(function (tab) {
-      var periodes = assignerLanes(tab || []);
+      var tabTitre = tab.titre || null;
+      var tabPeriodes = tab.periodes || [];
+
+      var periodes = assignerLanes(tabPeriodes);
+      var prevFin = -Infinity;
+      var prevHue = -999;
       periodes.forEach(function (p) {
-        p.couleur = palette[idx % palette.length];
-        idx++;
+        var debut = parseInt(p.debut, 10) || 0;
+        var contigu = prevFin >= debut;
+        var i = idx;
+        for (var t = 0; t < paletteSize; t++) {
+          var dist = Math.abs(palette[i % paletteSize].h - prevHue);
+          if (dist > 180) dist = 360 - dist;
+          if (!contigu || dist >= 40) break;
+          i++;
+        }
+        var chosen = palette[i % paletteSize];
+        p.couleur = chosen.css;
+        prevHue = chosen.h;
+        prevFin = parseInt(p.fin, 10) || debut;
+        idx = i + 1;
       });
       var byLane = {};
       periodes.forEach(function (p) {
@@ -127,6 +178,11 @@
         if (!byLane[lane]) byLane[lane] = [];
         byLane[lane].push(p);
       });
+
+      html += '<div class="timeline-tableau-group">';
+      if (tabTitre) {
+        html += '<div class="tableau-group-label">' + escapeHtml(tabTitre) + '</div>';
+      }
       Object.keys(byLane).map(Number).sort(function (a, b) { return a - b; }).forEach(function (laneIdx) {
         html += '<div class="timeline-tableau" data-lanes="1" style="height: ' + LANE_HEIGHT + 'px;">';
         html += '<div class="timeline-tableau-lanes">';
@@ -137,13 +193,14 @@
           var widthPct = range > 0 ? (Math.max(0.5, fin - debut) / range) * 100 : 1;
           var couleur = p.couleur || 'hsl(210, 50%, 50%)';
           var titre = escapeHtml(p.titre || '');
-          var tooltip = formatNumber(debut) + ' – ' + formatNumber(fin) + '\n' + (p.titre || '') + (p.description ? '\n' + p.description : '');
-          var tooltipEsc = escapeHtml(tooltip).replace(/"/g, '&quot;');
-          html += '<div class="periode" style="left: ' + leftPct.toFixed(2) + '%; width: ' + widthPct.toFixed(2) + '%; top: 2px; background: ' + couleur + '; border-color: ' + couleur + ';" title="' + tooltipEsc + '">';
+          var titreEsc = escapeHtml(p.titre || '').replace(/"/g, '&quot;');
+          var descEsc = escapeHtml(p.description || '').replace(/"/g, '&quot;');
+          html += '<div class="periode" style="left: ' + leftPct.toFixed(2) + '%; width: ' + widthPct.toFixed(2) + '%; top: 2px; background: ' + couleur + '; border-color: ' + couleur + ';" data-debut="' + debut + '" data-fin="' + fin + '" data-titre="' + titreEsc + '" data-desc="' + descEsc + '">';
           html += '<span class="periode-titre">' + titre + '</span></div>';
         });
         html += '</div></div>';
       });
+      html += '</div>';
     });
     html += '</div>';
     return html;
@@ -170,11 +227,11 @@
     return list;
   }
 
-  function renderEvenementsFrise(evenements, scaleMin, range) {
+  function renderFriseGroupe(evenements, scaleMin, range) {
     var withLanes = assignerLanesEvents(evenements, scaleMin, range);
     var nbLanes = 0;
     withLanes.forEach(function (e) { nbLanes = Math.max(nbLanes, (e.lane || 0) + 1); });
-    var minHeightRem = nbLanes > 0 ? nbLanes * EVENT_ROW_HEIGHT_REM + 0.5 : 4.5;
+    var minHeightRem = nbLanes > 0 ? nbLanes * EVENT_ROW_HEIGHT_REM + 0.5 : 2.5;
     var pinSvg = '<span class="event-pin" aria-hidden="true"><svg viewBox="0 0 24 36" width="16" height="24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12c0 9 12 24 12 24s12-15 12-24C24 5.4 18.6 0 12 0z"/></svg></span>';
     var html = '';
     withLanes.forEach(function (e) {
@@ -182,12 +239,34 @@
       var leftPct = e.leftPct;
       var lane = e.lane || 0;
       var topRem = lane * EVENT_ROW_HEIGHT_REM;
-      var tooltip = formatNumber(date) + (e.titre ? ' — ' + e.titre : '') + (e.description ? '\n' + e.description : '');
-      var tooltipEsc = escapeHtml(tooltip).replace(/"/g, '&quot;');
       var titre = escapeHtml(e.titre || formatNumber(date));
-      html += '<span class="event-marker" style="left: ' + leftPct.toFixed(2) + '%; top: ' + topRem.toFixed(2) + 'rem;" title="' + tooltipEsc + '" data-date="' + date + '">' + pinSvg + '<span class="event-marker-title">' + titre + '</span></span>';
+      var titreEsc = escapeHtml(e.titre || '').replace(/"/g, '&quot;');
+      var descEsc = escapeHtml(e.description || '').replace(/"/g, '&quot;');
+      html += '<span class="event-marker" style="left: ' + leftPct.toFixed(2) + '%; top: ' + topRem.toFixed(2) + 'rem;" data-date="' + date + '" data-titre="' + titreEsc + '" data-desc="' + descEsc + '">' + pinSvg + '<span class="event-marker-title">' + titre + '</span></span>';
     });
     return '<div class="timeline-evenements-frise" style="min-height: ' + minHeightRem + 'rem;">' + html + '</div>';
+  }
+
+  function renderEvenementsFrise(rawEvenements, scaleMin, range) {
+    // Normaliser en groupes [{categorie, evenements}]
+    var groupes;
+    if (rawEvenements && !Array.isArray(rawEvenements)) {
+      groupes = Object.keys(rawEvenements).map(function (cat) {
+        return { categorie: cat, evenements: rawEvenements[cat] || [] };
+      });
+    } else {
+      groupes = [{ categorie: null, evenements: rawEvenements || [] }];
+    }
+    var html = '';
+    groupes.forEach(function (g) {
+      html += '<div class="timeline-evenements-groupe">';
+      if (g.categorie) {
+        html += '<div class="tableau-group-label">' + escapeHtml(g.categorie) + '</div>';
+      }
+      html += renderFriseGroupe(g.evenements, scaleMin, range);
+      html += '</div>';
+    });
+    return html;
   }
 
   var data = null;
@@ -200,9 +279,9 @@
     if (descEl && data.pas) descEl.textContent = i18n.scaleLabel.replace('%s', formatNumber(data.pas));
 
     var scale = computeScale(data);
-    var tableaux = data.tableaux || (data.periodes ? [ data.periodes ] : []);
+    var tableaux = normaliserTableaux(data.tableaux, data.periodes);
     var totalPeriodes = 0;
-    tableaux.forEach(function (t) { totalPeriodes += (t || []).length; });
+    tableaux.forEach(function (t) { totalPeriodes += (t.periodes || []).length; });
     var palette = paletteHarmonieuse(Math.max(20, totalPeriodes));
 
     container.setAttribute('data-min', scale.scaleMin);
@@ -212,6 +291,7 @@
     var scaleBlock = renderScaleH(scale.scaleYears, scale.scaleMin, scale.range);
     container.innerHTML =
       renderVerticalGrid(scale.scaleYears, scale.scaleMin, scale.range) +
+      '<div class="timeline-top-scale">' + scaleBlock + '</div>' +
       '<section class="timeline-section timeline-section-periodes">' +
         '<h2 class="timeline-section-title">' + escapeHtml(i18n.periods) + '</h2>' +
         renderTableaux(tableaux, scale.scaleMin, scale.range, palette) +
@@ -268,4 +348,85 @@
   if (btn) btn.addEventListener('click', refreshTimeline);
 
   window.renderTimeline = renderTimeline;
+
+  // --- Popup au clic ---
+  (function () {
+    var popup = document.createElement('div');
+    popup.className = 'timeline-popup';
+    popup.setAttribute('role', 'tooltip');
+    popup.innerHTML =
+      '<button class="timeline-popup-close" aria-label="Fermer">×</button>' +
+      '<div class="timeline-popup-date"></div>' +
+      '<div class="timeline-popup-title"></div>' +
+      '<div class="timeline-popup-desc"></div>';
+    document.body.appendChild(popup);
+
+    var dateEl  = popup.querySelector('.timeline-popup-date');
+    var titleEl = popup.querySelector('.timeline-popup-title');
+    var descEl  = popup.querySelector('.timeline-popup-desc');
+
+    function showPopup(x, y, dateText, titre, desc) {
+      dateEl.textContent  = dateText;
+      titleEl.textContent = titre || '';
+      titleEl.style.display = titre ? '' : 'none';
+      descEl.textContent  = desc || '';
+      descEl.style.display = desc ? '' : 'none';
+
+      popup.style.left = '-9999px';
+      popup.style.top  = '-9999px';
+      popup.classList.add('visible');
+
+      var margin = 12;
+      var pw = popup.offsetWidth;
+      var ph = popup.offsetHeight;
+      var wx = window.innerWidth;
+      var wy = window.innerHeight;
+
+      var left = x + margin;
+      var top  = y + margin;
+      if (left + pw > wx - margin) left = x - pw - margin;
+      if (top  + ph > wy - margin) top  = y - ph - margin;
+      if (left < margin) left = margin;
+      if (top  < margin) top  = margin;
+
+      popup.style.left = left + 'px';
+      popup.style.top  = top  + 'px';
+    }
+
+    function hidePopup() {
+      popup.classList.remove('visible');
+    }
+
+    popup.querySelector('.timeline-popup-close').addEventListener('click', function (e) {
+      e.stopPropagation();
+      hidePopup();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') hidePopup();
+    });
+
+    document.addEventListener('click', function (e) {
+      var periode = e.target.closest('.periode');
+      var marker  = e.target.closest('.event-marker');
+
+      if (periode) {
+        e.stopPropagation();
+        var debut    = parseInt(periode.getAttribute('data-debut') || '0', 10);
+        var fin      = parseInt(periode.getAttribute('data-fin')   || '0', 10);
+        var titre    = periode.getAttribute('data-titre') || '';
+        var desc     = periode.getAttribute('data-desc')  || '';
+        var dateText = formatNumber(debut) + ' – ' + formatNumber(fin);
+        showPopup(e.clientX, e.clientY, dateText, titre, desc);
+      } else if (marker) {
+        e.stopPropagation();
+        var date  = parseInt(marker.getAttribute('data-date')  || '0', 10);
+        var titre = marker.getAttribute('data-titre') || '';
+        var desc  = marker.getAttribute('data-desc')  || '';
+        showPopup(e.clientX, e.clientY, formatNumber(date), titre, desc);
+      } else if (!popup.contains(e.target)) {
+        hidePopup();
+      }
+    });
+  }());
 })();

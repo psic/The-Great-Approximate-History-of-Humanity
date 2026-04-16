@@ -46,33 +46,33 @@
   ],
   "evenements": [
     {
-      "date": -3500,
       "titre": "Invention de l'écriture",
+      "date": -3500,
       "description": "Apparition de l'écriture cunéiforme en Mésopotamie."
     },
     {
-      "date": -44,
       "titre": "Assassinat de César",
+      "date": -44,
       "description": "Jules César est assassiné aux ides de mars."
     },
     {
-      "date": 476,
       "titre": "Chute de l'Empire romain d'Occident",
+      "date": 476,
       "description": "Déposition de Romulus Augustule par Odoacre."
     },
     {
-      "date": 1453,
       "titre": "Chute de Constantinople",
+      "date": 1453,
       "description": "Prise de Constantinople par les Ottomans."
     },
     {
-      "date": 1789,
       "titre": "Prise de la Bastille",
+      "date": 1789,
       "description": "14 juillet 1789, symbole de la Révolution française."
     },
     {
-      "date": 1969,
       "titre": "Premier pas sur la Lune",
+      "date": 1969,
       "description": "Neil Armstrong et Buzz Aldrin marchent sur la Lune."
     }
   ]

@@ -49,9 +49,13 @@ if (!isset($data['tableaux']) && isset($data['periodes'])) {
 }
 
 $evenements = $data['evenements'] ?? [];
-usort($evenements, function ($a, $b) {
-    return ($a['date'] ?? 0) <=> ($b['date'] ?? 0);
-});
-$data['evenements'] = $evenements;
+// Ne trier que si format plat (array) — le format dict {"Catégorie": [...]} ne doit pas être touché
+// car usort() détruirait les clés associatives (noms de catégories)
+if (!empty($evenements) && !is_string(array_key_first($evenements))) {
+    usort($evenements, function ($a, $b) {
+        return ($a['date'] ?? 0) <=> ($b['date'] ?? 0);
+    });
+    $data['evenements'] = $evenements;
+}
 
 echo json_encode($data, JSON_UNESCAPED_UNICODE);

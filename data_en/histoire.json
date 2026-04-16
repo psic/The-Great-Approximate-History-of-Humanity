@@ -35,11 +35,35 @@
     ]
   ],
   "evenements": [
-    { "date": -3500, "titre": "Invention de l'écriture", "description": "Mésopotamie." },
-    { "date": -508, "titre": "Démocratie athénienne", "description": "Réformes de Clisthène." },
-    { "date": 476, "titre": "Chute de l'Empire romain d'Occident", "description": "" },
-    { "date": 1453, "titre": "Chute de Constantinople", "description": "" },
-    { "date": 1789, "titre": "Révolution française", "description": "" },
-    { "date": 1969, "titre": "Premier pas sur la Lune", "description": "" }
+    {
+      "date": -3500,
+      "titre": "Invention de l'écriture",
+      "description": "Mésopotamie."
+    },
+    {
+      "date": -508,
+      "titre": "Démocratie athénienne",
+      "description": "Réformes de Clisthène."
+    },
+    {
+      "date": 476,
+      "titre": "Chute de l'Empire romain d'Occident",
+      "description": ""
+    },
+    {
+      "date": 1453,
+      "titre": "Chute de Constantinople",
+      "description": ""
+    },
+    {
+      "date": 1789,
+      "titre": "Révolution française",
+      "description": ""
+    },
+    {
+      "date": 1969,
+      "titre": "Premier pas sur la Lune",
+      "description": ""
+    }
   ]
 }
