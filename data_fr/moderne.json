@@ -89,6 +89,12 @@
         "fin": 1918
       },
       {
+        "titre": "Guerre civile espagnole",
+        "description": "Conflit entre républicains et nationalistes de Franco ; premier emploi massif de l'aviation de guerre nazie, prélude direct à la Seconde Guerre mondiale.",
+        "debut": 1936,
+        "fin": 1939
+      },
+      {
         "titre": "Seconde Guerre mondiale",
         "description": "70 à 85 millions de morts ; génocide des Juifs d'Europe, capitulation du Japon.",
         "debut": 1939,
@@ -169,8 +175,14 @@
         "fin": 1914
       },
       {
-        "titre": "Décolonisation",
-        "description": "Accession à l'indépendance des peuples d'Afrique, d'Asie et d'Océanie.",
+        "titre": "Grande Dépression",
+        "description": "Effondrement économique mondial déclenché par le krach de 1929 ; chômage de masse, montée des populismes.",
+        "debut": 1929,
+        "fin": 1939
+      },
+      {
+        "titre": "Les Trente Glorieuses",
+        "description": "Croissance économique exceptionnelle en Europe occidentale ; plein emploi, État-providence, société de consommation.",
         "debut": 1945,
         "fin": 1975
       },
@@ -240,9 +252,24 @@
         "description": "Amélioration décisive de la machine à vapeur — moteur de la révolution industrielle."
       },
       {
+        "titre": "Pile de Volta",
+        "date": 1800,
+        "description": "Alessandro Volta invente la première source de courant électrique continu — rend l'électricité exploitable et ouvre la voie à toute l'électrotechnique moderne."
+      },
+      {
         "titre": "Premier chemin de fer commercial (Stockton-Darlington)",
         "date": 1825,
         "description": "Début de l'ère ferroviaire — transformation du commerce et du territoire."
+      },
+      {
+        "titre": "Induction électromagnétique (Faraday)",
+        "date": 1831,
+        "description": "Michael Faraday découvre qu'un champ magnétique variable produit un courant électrique — principe fondateur de tous les générateurs et alternateurs."
+      },
+      {
+        "titre": "Télégraphe électrique (Morse)",
+        "date": 1844,
+        "description": "Samuel Morse relie Baltimore à Washington — première communication électrique longue distance, précurseur du téléphone et d'Internet."
       },
       {
         "titre": "Premier moteur à explosion (Lenoir)",
@@ -432,9 +459,14 @@
         "description": "Fin de l'Union soviétique — fin de la Guerre froide et recomposition géopolitique mondiale."
       },
       {
-        "titre": "Génocide au Rwanda et fin de l'apartheid",
+        "titre": "Génocide au Rwanda",
         "date": 1994,
-        "description": "800 000 Tutsis massacrés en 100 jours ; Nelson Mandela élu président, fin de l'apartheid."
+        "description": "800 000 Tutsis massacrés en 100 jours par les milices hutues — échec de la communauté internationale à intervenir."
+      },
+      {
+        "titre": "Élection de Nelson Mandela — fin de l'apartheid",
+        "date": 1994,
+        "description": "Premier président noir d'Afrique du Sud — aboutissement de 40 ans de lutte contre la ségrégation raciale institutionnalisée."
       },
       {
         "titre": "Rétrocession de Hong Kong à la Chine",
@@ -459,6 +491,16 @@
         "description": "Première vaccination réussie — fondement de la médecine préventive."
       },
       {
+        "titre": "Pasteur — théorie microbienne des maladies",
+        "date": 1865,
+        "description": "Louis Pasteur démontre que les maladies infectieuses sont causées par des micro-organismes — révolution qui fonde la médecine moderne et l'hygiène."
+      },
+      {
+        "titre": "Grippe espagnole",
+        "date": 1918,
+        "description": "Pandémie de grippe H1N1 ; 50 à 100 millions de morts dans le monde — plus meurtrière que la Première Guerre mondiale. Touche surtout les 20-40 ans."
+      },
+      {
         "titre": "Insuline (Banting & Best)",
         "date": 1922,
         "description": "Première injection d'insuline à un patient diabétique — victoire de la médecine sur une maladie mortelle."
@@ -474,11 +516,6 @@
         "description": "Première autorisation aux États-Unis — révolution sociale et émancipation des femmes."
       },
       {
-        "titre": "Première transplantation du foie (Thomas Starzl)",
-        "date": 1963,
-        "description": "Denver, Colorado — première greffe hépatique sur un humain, ouvrant la voie à la chirurgie des transplantations."
-      },
-      {
         "titre": "Première transplantation cardiaque (Christiaan Barnard)",
         "date": 1967,
         "description": "Le Pr Barnard réalise la première greffe du cœur à Cape Town — révolution de la chirurgie cardiaque."
@@ -489,14 +526,14 @@
         "description": "Première image médicale par résonance magnétique — révolution de l'imagerie diagnostique non invasive."
       },
       {
+        "titre": "Éradication de la variole",
+        "date": 1980,
+        "description": "L'OMS certifie l'extinction complète de la variole — premier et unique cas d'éradication d'une maladie infectieuse humaine dans l'Histoire, grâce à la vaccination."
+      },
+      {
         "titre": "Identification du VIH/Sida",
         "date": 1983,
         "description": "Découverte du virus de l'immunodéficience humaine — pandémie mondiale."
-      },
-      {
-        "titre": "Première greffe cardiaque sur un nouveau-né (Baby Fae)",
-        "date": 1984,
-        "description": "Chirurgie du Pr Leonard Bailey à Loma Linda — tentative pionnière de xénogreffe utilisant un cœur de babouin."
       },
       {
         "titre": "Pandémie de COVID-19",
@@ -593,11 +630,6 @@
         "description": "Neil Armstrong pose le pied sur la Lune, 21 juillet 1969."
       },
       {
-        "titre": "Catastrophe de Tchernobyl",
-        "date": 1986,
-        "description": "Explosion du réacteur nucléaire en Ukraine soviétique — remise en cause du nucléaire civil."
-      },
-      {
         "titre": "Télescope Hubble mis en orbite",
         "date": 1990,
         "description": "Lancé par la NASA en avril 1990 — révolution de l'astronomie observationnelle."
@@ -611,6 +643,11 @@
         "titre": "Dolly la brebis — premier mammifère cloné",
         "date": 1996,
         "description": "Institut Roslin (Écosse) — premier clonage par transfert de noyau somatique, révolution en biologie."
+      },
+      {
+        "titre": "Séquençage du génome humain",
+        "date": 2003,
+        "description": "Achèvement du Projet Génome humain — cartographie complète des ~3 milliards de paires de bases de l'ADN humain ; révolution en médecine et biologie."
       },
       {
         "titre": "CRISPR",
@@ -630,11 +667,6 @@
         "description": "13e amendement à la Constitution américaine."
       },
       {
-        "titre": "Naufrage du Titanic",
-        "date": 1912,
-        "description": "Plus de 1 500 morts — symbole des limites du progrès et de la confiance technologique."
-      },
-      {
         "titre": "Krach boursier de Wall Street",
         "date": 1929,
         "description": "Effondrement des marchés financiers — début de la Grande Dépression mondiale."
@@ -650,9 +682,29 @@
         "description": "Interdiction de la ségrégation raciale — victoire du mouvement pour les droits civiques."
       },
       {
-        "titre": "Assassinat de Martin Luther King et Mai 68",
+        "titre": "Assassinat de Martin Luther King",
         "date": 1968,
-        "description": "Leader des droits civiques assassiné à Memphis ; vague contestataire mondiale."
+        "description": "Leader du mouvement des droits civiques américains assassiné à Memphis le 4 avril 1968."
+      },
+      {
+        "titre": "Mai 68",
+        "date": 1968,
+        "description": "Grève générale et révolte étudiante en France ; vague contestataire mondiale contre l'ordre établi."
+      },
+      {
+        "titre": "Droit de vote des femmes — Nouvelle-Zélande",
+        "date": 1893,
+        "description": "Premier pays au monde à accorder le suffrage universel féminin — début d'un mouvement qui s'étend à l'Europe et aux Amériques au XXe siècle."
+      },
+      {
+        "titre": "19e amendement — suffrage féminin aux États-Unis",
+        "date": 1920,
+        "description": "Les femmes américaines obtiennent le droit de vote après des décennies de militantisme suffragiste."
+      },
+      {
+        "titre": "Droit de vote des femmes en France",
+        "date": 1944,
+        "description": "Ordonnance du Comité français de libération nationale — les Françaises votent pour la première fois en avril 1945."
       },
       {
         "titre": "Choc pétrolier et fin des Trente Glorieuses",
@@ -660,14 +712,91 @@
         "description": "Embargo des pays arabes — crise économique mondiale, fin de la croissance d'après-guerre."
       },
       {
-        "titre": "Tsunami en Asie du Sud-Est",
-        "date": 2004,
-        "description": "Séisme et tsunami dévastateurs dans l'océan Indien — plus de 230 000 morts, 14 pays touchés."
-      },
-      {
         "titre": "Crise financière mondiale",
         "date": 2008,
         "description": "Effondrement des marchés après la crise des subprimes aux États-Unis."
+      }
+    ],
+    "Catastrophes naturelles & industrielles": [
+      {
+        "titre": "Séisme de Lisbonne",
+        "date": 1755,
+        "description": "Magnitude ~8,7 ; 30 000 à 60 000 morts. Suivi d'un tsunami et d'incendies qui détruisent 85 % de la ville ; ébranle l'optimisme des Lumières."
+      },
+      {
+        "titre": "Naufrage du Titanic",
+        "date": 1912,
+        "description": "Plus de 1 500 morts dans l'Atlantique Nord — symbole des limites de la confiance technologique de la Belle Époque."
+      },
+      {
+        "titre": "Éruption du Tambora (Indonésie)",
+        "date": 1815,
+        "description": "Plus grande éruption volcanique de l'Histoire moderne (~71 000 morts). Provoque l'« Année sans été » de 1816 et des famines sur plusieurs continents."
+      },
+      {
+        "titre": "Éruption du Krakatoa (Indonésie)",
+        "date": 1883,
+        "description": "~36 000 morts par l'éruption et le tsunami consécutif. Refroidissement climatique mondial et couchers de soleil rouges observés dans le monde entier."
+      },
+      {
+        "titre": "Éruption de la Montagne Pelée (Martinique)",
+        "date": 1902,
+        "description": "Nuée ardente détruisant Saint-Pierre en quelques minutes ; ~30 000 morts. L'une des pires catastrophes volcaniques du XXe siècle."
+      },
+      {
+        "titre": "Séisme de Messine (Sicile)",
+        "date": 1908,
+        "description": "Magnitude 7,1 ; 75 000 à 200 000 morts. La ville est rasée en moins de 40 secondes, suivie d'un tsunami."
+      },
+      {
+        "titre": "Grand séisme du Kantō (Japon)",
+        "date": 1923,
+        "description": "Magnitude 7,9 ; ~142 000 morts à Tokyo et Yokohama, incendies géants et tsunami."
+      },
+      {
+        "titre": "Inondations catastrophiques en Chine",
+        "date": 1931,
+        "description": "Crues du Yangtsé et du Huai He ; entre 1 et 4 millions de morts. L'une des plus grandes catastrophes naturelles de l'Histoire."
+      },
+      {
+        "titre": "Cyclone de Bhola (Bangladesh)",
+        "date": 1970,
+        "description": "~500 000 morts dans le delta du Gange-Brahmapoutre — l'un des cyclones les plus meurtriers jamais enregistrés."
+      },
+      {
+        "titre": "Séisme de Tangshan (Chine)",
+        "date": 1976,
+        "description": "Magnitude 7,8 ; 240 000 à 655 000 morts selon les sources. Ville industrielle rasée en 15 secondes ; catastrophe occultée par le régime de Mao."
+      },
+      {
+        "titre": "Catastrophe de Bhopal (Inde)",
+        "date": 1984,
+        "description": "Fuite de méthylisocyanate depuis l'usine Union Carbide ; 3 500 à 15 000 morts immédiats, des centaines de milliers d'affectés chroniques. Plus grande catastrophe industrielle de l'Histoire."
+      },
+      {
+        "titre": "Catastrophe de Tchernobyl (Ukraine)",
+        "date": 1986,
+        "description": "Explosion du réacteur n°4 ; contamination radioactive de l'Europe entière. Accélère l'effondrement de l'URSS et la prise de conscience des risques du nucléaire civil."
+      },
+      {
+        "titre": "Tsunami de l'océan Indien",
+        "date": 2004,
+        "description": "Séisme de magnitude 9,1 au large de Sumatra ; ~230 000 morts dans 14 pays. Révèle l'absence de système d'alerte dans l'océan Indien."
+      },
+      {
+        "titre": "Séisme d'Haïti",
+        "date": 2010,
+        "description": "Magnitude 7,0 ; ~220 000 morts, 1,5 million de sans-abri. Catastrophe humanitaire majeure dans le pays le plus pauvre des Amériques."
+      },
+      {
+        "titre": "Marée noire Deepwater Horizon (Golfe du Mexique)",
+        "date": 2010,
+        "description": "Explosion de la plateforme pétrolière BP ; 11 morts et ~5 millions de barils déversés — plus grande marée noire accidentelle de l'Histoire."
+      },
+      {
+        "titre": "Séisme, tsunami et Fukushima (Japon)",
+        "date": 2011,
+        "description": "Magnitude 9,1 au large du Tōhoku ; ~20 000 morts, fusion partielle de 3 réacteurs à Fukushima. Remet en question la politique nucléaire mondiale."
       }
     ]
   }

@@ -1,195 +1,803 @@
 {
   "pas": 10,
-  "tableaux": [
-    [
+  "tableaux": {
+    "Major Political Periods": [
       {
-        "debut": 1880,
-        "fin": 1960,
-        "titre": "Colonisation et décolonisation",
-        "description": "Apogée des empires coloniaux (partage de l'Afrique, Asie), puis indépendances après 1945."
+        "titre": "French Revolution and First Republic",
+        "description": "Fall of the Ancien Régime, Declaration of the Rights of Man, the Terror and Directory.",
+        "debut": 1789,
+        "fin": 1799
       },
       {
-        "debut": 1914,
-        "fin": 1918,
-        "titre": "Première Guerre mondiale",
-        "description": "Guerre mondiale."
+        "titre": "Napoleonic Empire",
+        "description": "Napoleon Bonaparte's European conquests, the Civil Code, reorganisation of Europe.",
+        "debut": 1799,
+        "fin": 1815
       },
       {
-        "debut": 1939,
-        "fin": 1945,
-        "titre": "Seconde Guerre mondiale",
-        "description": "Guerre mondiale."
+        "titre": "Restoration and Liberal Monarchies",
+        "description": "Return of monarchies, rise of nationalism, revolutionary waves of 1830 and 1848.",
+        "debut": 1815,
+        "fin": 1848
       },
       {
+        "titre": "Nationalism and National Unifications",
+        "description": "Italian and German unifications, emergence of modern nation-states.",
+        "debut": 1848,
+        "fin": 1871
+      },
+      {
+        "titre": "Belle Époque",
+        "description": "Industrial boom, colonial imperialism, technological optimism before the Great War.",
+        "debut": 1871,
+        "fin": 1914
+      },
+      {
+        "titre": "Interwar Period",
+        "description": "Global economic crisis, rise of totalitarianism, political instability.",
+        "debut": 1919,
+        "fin": 1939
+      },
+      {
+        "titre": "Cold War",
+        "description": "Ideological confrontation between the United States and the USSR; arms race and space race.",
         "debut": 1947,
-        "fin": 1991,
-        "titre": "Guerre froide",
-        "description": "Confrontation Est-Ouest."
+        "fin": 1991
       },
       {
-        "debut": 1946,
-        "fin": 1954,
-        "titre": "Guerre d'Indochine",
-        "description": "Conflit entre la France et le Việt Minh ; défaite de Diên Biên Phu, indépendance du Vietnam."
+        "titre": "Decolonisation",
+        "description": "Independence movements in Asia, Africa and Oceania after the Second World War.",
+        "debut": 1945,
+        "fin": 1975
       },
       {
-        "debut": 1950,
-        "fin": 1953,
-        "titre": "Guerre de Corée",
-        "description": "Conflit entre Corée du Nord (et Chine) et Corée du Sud (et ONU) ; armistice, partition."
-      },
-      {
-        "debut": 1954,
-        "fin": 1962,
-        "titre": "Guerre d'Algérie",
-        "description": "Conflit entre la France et le FLN ; indépendance de l'Algérie en 1962."
-      },
-      {
-        "debut": 1955,
-        "fin": 1975,
-        "titre": "Guerre du Vietnam",
-        "description": "Conflit au Vietnam (Nord / Sud, implication américaine) ; chute de Saigon, réunification."
-      },
-      {
-        "debut": 1980,
-        "fin": 1988,
-        "titre": "Guerre Iran-Irak",
-        "description": "Conflit entre l'Iran et l'Irak ; statu quo."
-      },
-      {
-        "debut": 1990,
-        "fin": 1991,
-        "titre": "Guerre du Golfe",
-        "description": "Coalition internationale contre l'Irak après l'invasion du Koweït ; libération du Koweït."
-      },
-      {
+        "titre": "Globalisation",
+        "description": "Worldwide integration of economies, cultures and technologies after the end of the Cold War.",
         "debut": 1991,
-        "fin": 2001,
-        "titre": "Guerres de Yougoslavie",
-        "description": "Éclatement de la Yougoslavie ; conflits en Croatie, Bosnie, Kosovo."
+        "fin": 2026
+      }
+    ],
+    "Wars & Conflicts": [
+      {
+        "titre": "Napoleonic Wars",
+        "description": "Napoleon's military campaigns across Europe, from Spain to Russia.",
+        "debut": 1803,
+        "fin": 1815
+      },
+      {
+        "titre": "Crimean War",
+        "description": "France, the United Kingdom and the Ottoman Empire against Russia; one of the first mediatised wars.",
+        "debut": 1853,
+        "fin": 1856
+      },
+      {
+        "titre": "American Civil War",
+        "description": "Conflict between Northern and Southern states over slavery and national unity.",
+        "debut": 1861,
+        "fin": 1865
+      },
+      {
+        "titre": "Franco-Prussian War",
+        "description": "French defeat, German unification, Paris Commune.",
+        "debut": 1870,
+        "fin": 1871
+      },
+      {
+        "titre": "World War I",
+        "description": "20 million deaths; collapse of the Austro-Hungarian, Ottoman, Russian and German empires.",
+        "debut": 1914,
+        "fin": 1918
+      },
+      {
+        "titre": "Spanish Civil War",
+        "description": "Conflict between republicans and Franco's nationalists; first mass use of Nazi air warfare, direct prelude to World War II.",
+        "debut": 1936,
+        "fin": 1939
+      },
+      {
+        "titre": "World War II",
+        "description": "70 to 85 million deaths; genocide of European Jews, Japan's surrender.",
+        "debut": 1939,
+        "fin": 1945
+      },
+      {
+        "titre": "First Indochina War",
+        "description": "Conflict between France and the Việt Minh; defeat at Diên Biên Phu, Vietnamese independence.",
+        "debut": 1946,
+        "fin": 1954
+      },
+      {
+        "titre": "Korean War",
+        "description": "Conflict between North Korea (and China) and South Korea (and the UN); armistice, partition.",
+        "debut": 1950,
+        "fin": 1953
+      },
+      {
+        "titre": "Algerian War",
+        "description": "Conflict between France and the FLN; Algerian independence in 1962.",
+        "debut": 1954,
+        "fin": 1962
+      },
+      {
+        "titre": "Vietnam War",
+        "description": "American involvement; fall of Saigon in 1975, Vietnamese reunification.",
+        "debut": 1955,
+        "fin": 1975
+      },
+      {
+        "titre": "Iran-Iraq War",
+        "description": "Border and ideological conflict between Khomeinist Iran and Saddam Hussein's Iraq.",
+        "debut": 1980,
+        "fin": 1988
+      },
+      {
+        "titre": "Gulf War",
+        "description": "International coalition against Iraq following the invasion of Kuwait; liberation of Kuwait.",
+        "debut": 1990,
+        "fin": 1991
+      },
+      {
+        "titre": "Yugoslav Wars",
+        "description": "Breakup of Yugoslavia; conflicts in Croatia, Bosnia, Kosovo; ethnic cleansing.",
+        "debut": 1991,
+        "fin": 2001
+      },
+      {
+        "titre": "War in Afghanistan",
+        "description": "American and NATO intervention after 9/11; withdrawal in 2021.",
+        "debut": 2001,
+        "fin": 2021
+      },
+      {
+        "titre": "War in Ukraine",
+        "description": "Large-scale Russian invasion; largest war in Europe since 1945.",
+        "debut": 2022,
+        "fin": 2026
+      }
+    ],
+    "Society & Economy": [
+      {
+        "titre": "Industrial Revolution",
+        "description": "Mechanisation, railways, mass urbanisation, transformation of societies.",
+        "debut": 1769,
+        "fin": 1870
+      },
+      {
+        "titre": "Labour Movement and Trade Unionism",
+        "description": "Social struggles, birth of socialism, trade unions and workers' parties.",
+        "debut": 1830,
+        "fin": 1920
+      },
+      {
+        "titre": "Imperialism and Colonisation",
+        "description": "Partition of the world between European powers; exploitation of colonised peoples.",
+        "debut": 1870,
+        "fin": 1914
+      },
+      {
+        "titre": "Great Depression",
+        "description": "Global economic collapse triggered by the 1929 crash; mass unemployment, rise of populism.",
+        "debut": 1929,
+        "fin": 1939
+      },
+      {
+        "titre": "The Thirty Glorious Years",
+        "description": "Exceptional economic growth in Western Europe; full employment, welfare state, consumer society.",
+        "debut": 1945,
+        "fin": 1975
+      },
+      {
+        "titre": "European Integration",
+        "description": "From the ECSC to the Treaty of Rome and then the European Union.",
+        "debut": 1951,
+        "fin": 2026
+      },
+      {
+        "titre": "Environmental Crisis and Ecological Transition",
+        "description": "Growing awareness of climate change, Paris Agreement, energy transition.",
+        "debut": 1972,
+        "fin": 2026
+      }
+    ],
+    "Technological Revolutions": [
+      {
+        "titre": "Age of Steam and Iron",
+        "description": "Steam engine, railways, steelmaking — drivers of the first industrialisation.",
+        "debut": 1769,
+        "fin": 1880
+      },
+      {
+        "titre": "Age of Electricity",
+        "description": "Electrification of cities, telegraph, telephone, radio, electric motors.",
+        "debut": 1879,
+        "fin": 1950
+      },
+      {
+        "titre": "Age of Oil and the Automobile",
+        "description": "Internal combustion engine, automobile, aircraft, mass production.",
+        "debut": 1886,
+        "fin": 2026
+      },
+      {
+        "titre": "Atomic Age",
+        "description": "Nuclear fission, atomic bombs, nuclear power plants, arms race.",
+        "debut": 1938,
+        "fin": 2026
+      },
+      {
+        "titre": "Space Age",
+        "description": "Satellites, first humans in space, planetary probes, International Space Station.",
+        "debut": 1957,
+        "fin": 2026
+      },
+      {
+        "titre": "Computing Revolution and the Internet",
+        "description": "Personal computers, the Internet, mobile phones, social networks.",
+        "debut": 1969,
+        "fin": 2026
+      },
+      {
+        "titre": "Artificial Intelligence",
+        "description": "Machine learning, large language models, generative AI.",
+        "debut": 2010,
+        "fin": 2026
       }
     ]
-  ],
-  "evenements": [
-    {
-      "date": 1900,
-      "titre": "XXe siècle",
-      "description": "Début du siècle."
-    },
-    {
-      "date": 1945,
-      "titre": "Création de l'ONU",
-      "description": "Organisation des Nations unies."
-    },
-    {
-      "date": 1969,
-      "titre": "Premier pas sur la Lune",
-      "description": "Neil Armstrong."
-    },
-    {
-      "date": 1989,
-      "titre": "Chute du mur de Berlin",
-      "description": "Fin du bloc de l'Est."
-    },
-    {
-      "date": 2001,
-      "titre": "11 septembre",
-      "description": "Attentats aux États-Unis."
-    },
-    {
-      "date": 1876,
-      "titre": "Téléphone",
-      "description": "Alexander Graham Bell — transmission de la voix à distance."
-    },
-    {
-      "date": 1879,
-      "titre": "Ampoule électrique",
-      "description": "Thomas Edison — éclairage à incandescence."
-    },
-    {
-      "date": 1886,
-      "titre": "Automobile",
-      "description": "Karl Benz — première voiture à moteur à explosion."
-    },
-    {
-      "date": 1895,
-      "titre": "Rayons X",
-      "description": "Wilhelm Röntgen — imagerie médicale."
-    },
-    {
-      "date": 1895,
-      "titre": "Radio",
-      "description": "Guglielmo Marconi — transmission sans fil."
-    },
-    {
-      "date": 1903,
-      "titre": "Avion",
-      "description": "Frères Wright — premier vol motorisé contrôlé."
-    },
-    {
-      "date": 1908,
-      "titre": "Ford T",
-      "description": "Production de masse et démocratisation de l'automobile."
-    },
-    {
-      "date": 1926,
-      "titre": "Télévision",
-      "description": "John Logie Baird — premières images télévisées."
-    },
-    {
-      "date": 1928,
-      "titre": "Pénicilline",
-      "description": "Alexander Fleming — premier antibiotique."
-    },
-    {
-      "date": 1942,
-      "titre": "Réacteur nucléaire",
-      "description": "Enrico Fermi — première réaction en chaîne contrôlée."
-    },
-    {
-      "date": 1947,
-      "titre": "Transistor",
-      "description": "Bell Labs — base de l'électronique moderne."
-    },
-    {
-      "date": 1957,
-      "titre": "Spoutnik",
-      "description": "Premier satellite artificiel — début de l'ère spatiale."
-    },
-    {
-      "date": 1960,
-      "titre": "Pilule contraceptive",
-      "description": "Première autorisation aux États-Unis — révolution sociale."
-    },
-    {
-      "date": 1969,
-      "titre": "ARPANET",
-      "description": "Réseau pionnier — ancêtre d'Internet."
-    },
-    {
-      "date": 1971,
-      "titre": "Microprocesseur",
-      "description": "Intel 4004 — ordinateur sur une puce."
-    },
-    {
-      "date": 1973,
-      "titre": "Téléphone portable",
-      "description": "Motorola DynaTAC — premier appel depuis un mobile."
-    },
-    {
-      "date": 1990,
-      "titre": "World Wide Web",
-      "description": "Tim Berners-Lee — liens hypertexte et navigation globale."
-    },
-    {
-      "date": 2007,
-      "titre": "iPhone",
-      "description": "Apple — smartphone et écosystème d'applications."
-    },
-    {
-      "date": 2012,
-      "titre": "CRISPR",
-      "description": "Édition génétique précise — révolution en biologie."
-    }
-  ]
+  },
+  "evenements": {
+    "Technology & Innovation": [
+      {
+        "titre": "James Watt's Steam Engine",
+        "date": 1769,
+        "description": "Decisive improvement of the steam engine — driving force of the Industrial Revolution."
+      },
+      {
+        "titre": "Volta's Battery",
+        "date": 1800,
+        "description": "Alessandro Volta invents the first source of direct electric current — makes electricity usable and paves the way for all modern electrical engineering."
+      },
+      {
+        "titre": "First Commercial Railway (Stockton-Darlington)",
+        "date": 1825,
+        "description": "Start of the railway age — transformation of trade and territory."
+      },
+      {
+        "titre": "Electromagnetic Induction (Faraday)",
+        "date": 1831,
+        "description": "Michael Faraday discovers that a changing magnetic field produces an electric current — founding principle of all generators and alternators."
+      },
+      {
+        "titre": "Electric Telegraph (Morse)",
+        "date": 1844,
+        "description": "Samuel Morse connects Baltimore to Washington — first long-distance electrical communication, forerunner of the telephone and the Internet."
+      },
+      {
+        "titre": "First Internal Combustion Engine (Lenoir)",
+        "date": 1860,
+        "description": "Jean-Joseph Étienne Lenoir designs the first gas combustion engine — precursor of the petrol engine."
+      },
+      {
+        "titre": "Opening of the Suez Canal",
+        "date": 1869,
+        "description": "Link between the Mediterranean and the Red Sea — revolution in world trade."
+      },
+      {
+        "titre": "Telephone (Alexander Graham Bell)",
+        "date": 1876,
+        "description": "Transmission of voice over distance — revolution in communications."
+      },
+      {
+        "titre": "Electric Light Bulb (Thomas Edison)",
+        "date": 1879,
+        "description": "Incandescent lighting — beginning of the electrification of cities."
+      },
+      {
+        "titre": "Automobile (Karl Benz)",
+        "date": 1886,
+        "description": "First car with an internal combustion engine — start of the automotive age."
+      },
+      {
+        "titre": "Radio (Guglielmo Marconi)",
+        "date": 1895,
+        "description": "Wireless transmission — birth of mass media."
+      },
+      {
+        "titre": "Powered Aircraft (Wright Brothers)",
+        "date": 1903,
+        "description": "First controlled flight — start of the aeronautical age."
+      },
+      {
+        "titre": "Ford Model T — Mass Production",
+        "date": 1908,
+        "description": "Democratisation of the automobile through the assembly line."
+      },
+      {
+        "titre": "Television (John Logie Baird)",
+        "date": 1926,
+        "description": "First televised images — future mass medium for information and culture."
+      },
+      {
+        "titre": "First Commercial Television Service (BBC)",
+        "date": 1936,
+        "description": "The BBC launches the world's first regular television service from Alexandra Palace."
+      },
+      {
+        "titre": "Transistor (Bell Labs)",
+        "date": 1947,
+        "description": "Building block of modern electronics and computing."
+      },
+      {
+        "titre": "ARPANET — Birth of the Internet",
+        "date": 1969,
+        "description": "First decentralised computer network — precursor to the Internet."
+      },
+      {
+        "titre": "Intel 4004 Microprocessor",
+        "date": 1971,
+        "description": "Computer on a chip — beginning of the personal computing age."
+      },
+      {
+        "titre": "Mobile Phone (Motorola DynaTAC)",
+        "date": 1973,
+        "description": "First mobile phone call — start of mobile telephony."
+      },
+      {
+        "titre": "Concorde Enters Service",
+        "date": 1976,
+        "description": "First supersonic transatlantic commercial flight between Paris and New York — symbol of Franco-British technological prestige."
+      },
+      {
+        "titre": "World Wide Web (Tim Berners-Lee)",
+        "date": 1990,
+        "description": "Birth of the web — revolution in access to information and global communications."
+      },
+      {
+        "titre": "iPhone (Apple)",
+        "date": 2007,
+        "description": "Revolution in mobile computing and digital usage."
+      },
+      {
+        "titre": "Rise of Generative AI",
+        "date": 2023,
+        "description": "ChatGPT, Gemini, Claude — artificial intelligence transforms work and creativity."
+      }
+    ],
+    "Politics & Diplomacy": [
+      {
+        "titre": "US Declaration of Independence",
+        "date": 1776,
+        "description": "First modern state founded on natural rights and popular sovereignty."
+      },
+      {
+        "titre": "French Revolution",
+        "date": 1789,
+        "description": "Overthrow of absolute monarchy, Declaration of the Rights of Man, birth of the Republic."
+      },
+      {
+        "titre": "Execution of Louis XVI",
+        "date": 1793,
+        "description": "King of France guillotined in Paris — symbolic break with the Ancien Régime."
+      },
+      {
+        "titre": "Coronation of Napoleon Bonaparte",
+        "date": 1804,
+        "description": "Napoleon crowns himself Emperor of the French at Notre-Dame de Paris."
+      },
+      {
+        "titre": "Haitian Independence",
+        "date": 1804,
+        "description": "First Black republic and first nation to abolish slavery, born of a revolution."
+      },
+      {
+        "titre": "Revolutions of 1830 in Europe",
+        "date": 1830,
+        "description": "Liberal insurrectionary wave in France, Belgium and Poland."
+      },
+      {
+        "titre": "Springtime of Nations and Communist Manifesto",
+        "date": 1848,
+        "description": "Liberal revolutions across Europe; publication of the Manifesto by Marx and Engels."
+      },
+      {
+        "titre": "German Unification and the Paris Commune",
+        "date": 1871,
+        "description": "Proclamation of the German Empire at Versailles; workers' uprising in Paris crushed."
+      },
+      {
+        "titre": "Berlin Conference — Partition of Africa",
+        "date": 1885,
+        "description": "Partition of Africa between European powers without consultation of its peoples."
+      },
+      {
+        "titre": "Russian Revolution of 1905",
+        "date": 1905,
+        "description": "Bloody Sunday in Saint Petersburg — first revolutionary tremor in Tsarist Russia."
+      },
+      {
+        "titre": "Bolshevik Revolution in Russia",
+        "date": 1917,
+        "description": "Lenin seizes power — birth of the USSR."
+      },
+      {
+        "titre": "Treaty of Versailles",
+        "date": 1919,
+        "description": "Redraws the map of Europe; conditions imposed on Germany, seeds of the next war."
+      },
+      {
+        "titre": "Hitler as Chancellor — Start of the Third Reich",
+        "date": 1933,
+        "description": "Nazis come to power in Germany."
+      },
+      {
+        "titre": "Founding of the United Nations",
+        "date": 1945,
+        "description": "United Nations — foundation of the post-war international order."
+      },
+      {
+        "titre": "Indian Independence",
+        "date": 1947,
+        "description": "End of British rule — largest decolonisation of the 20th century."
+      },
+      {
+        "titre": "Bandung Conference",
+        "date": 1955,
+        "description": "29 African and Asian countries assert their neutrality — birth of the Non-Aligned Movement."
+      },
+      {
+        "titre": "Assassination of John F. Kennedy",
+        "date": 1963,
+        "description": "US President assassinated in Dallas, 22 November 1963."
+      },
+      {
+        "titre": "Fall of the Berlin Wall",
+        "date": 1989,
+        "description": "End of Germany's division — collapse of the Eastern Bloc."
+      },
+      {
+        "titre": "Dissolution of the USSR",
+        "date": 1991,
+        "description": "End of the Soviet Union — end of the Cold War and global geopolitical reshaping."
+      },
+      {
+        "titre": "Rwandan Genocide",
+        "date": 1994,
+        "description": "800,000 Tutsis massacred in 100 days by Hutu militias — failure of the international community to intervene."
+      },
+      {
+        "titre": "Election of Nelson Mandela — End of Apartheid",
+        "date": 1994,
+        "description": "First Black President of South Africa — culmination of 40 years of struggle against institutionalised racial segregation."
+      },
+      {
+        "titre": "Handover of Hong Kong to China",
+        "date": 1997,
+        "description": "The United Kingdom returns Hong Kong to China on 1 July — end of 156 years of British colonial rule."
+      },
+      {
+        "titre": "Arab Spring",
+        "date": 2011,
+        "description": "Wave of popular revolutions across the Arab world (Tunisia, Egypt, Libya, Syria…)."
+      },
+      {
+        "titre": "Brexit",
+        "date": 2016,
+        "description": "The United Kingdom votes to leave the European Union."
+      }
+    ],
+    "Medicine & Health": [
+      {
+        "titre": "Smallpox Vaccine (Jenner)",
+        "date": 1796,
+        "description": "First successful vaccination — foundation of preventive medicine."
+      },
+      {
+        "titre": "Pasteur — Germ Theory of Disease",
+        "date": 1865,
+        "description": "Louis Pasteur demonstrates that infectious diseases are caused by micro-organisms — revolution that founds modern medicine and hygiene."
+      },
+      {
+        "titre": "Spanish Flu",
+        "date": 1918,
+        "description": "H1N1 flu pandemic; 50 to 100 million deaths worldwide — more deadly than World War I. Mainly affected 20–40 year-olds."
+      },
+      {
+        "titre": "Insulin (Banting & Best)",
+        "date": 1922,
+        "description": "First insulin injection in a diabetic patient — medicine's victory over a deadly disease."
+      },
+      {
+        "titre": "Penicillin (Alexander Fleming)",
+        "date": 1928,
+        "description": "Discovery of the first antibiotic — revolution in medicine."
+      },
+      {
+        "titre": "Contraceptive Pill",
+        "date": 1960,
+        "description": "First approval in the United States — social revolution and women's emancipation."
+      },
+      {
+        "titre": "First Heart Transplant (Christiaan Barnard)",
+        "date": 1967,
+        "description": "Prof. Barnard performs the first heart transplant in Cape Town — revolution in cardiac surgery."
+      },
+      {
+        "titre": "MRI (Raymond Damadian)",
+        "date": 1977,
+        "description": "First medical image by magnetic resonance — revolution in non-invasive diagnostic imaging."
+      },
+      {
+        "titre": "Eradication of Smallpox",
+        "date": 1980,
+        "description": "The WHO certifies the complete eradication of smallpox — first and only extinction of a human infectious disease in history, achieved through vaccination."
+      },
+      {
+        "titre": "Identification of HIV/AIDS",
+        "date": 1983,
+        "description": "Discovery of the human immunodeficiency virus — global pandemic."
+      },
+      {
+        "titre": "COVID-19 Pandemic",
+        "date": 2020,
+        "description": "Global SARS-CoV-2 pandemic — widespread lockdowns, over 7 million deaths."
+      }
+    ],
+    "Wars & Conflicts": [
+      {
+        "titre": "Battle of Waterloo",
+        "date": 1815,
+        "description": "Napoleon's final defeat; restoration of monarchical order in Europe."
+      },
+      {
+        "titre": "Start of the American Civil War",
+        "date": 1861,
+        "description": "Armed conflict in the United States over slavery and national unity."
+      },
+      {
+        "titre": "Armistice — End of World War I",
+        "date": 1918,
+        "description": "11 November 1918; approximately 20 million deaths."
+      },
+      {
+        "titre": "D-Day — Normandy Landings",
+        "date": 1944,
+        "description": "Operation Overlord, 6 June 1944 — decisive turning point of the war in Europe."
+      },
+      {
+        "titre": "Atomic Bombs on Hiroshima and Nagasaki",
+        "date": 1945,
+        "description": "First use of nuclear weapons in warfare; approximately 200,000 deaths."
+      },
+      {
+        "titre": "September 11 Attacks",
+        "date": 2001,
+        "description": "Terrorist attacks in the United States — start of the War on Terror."
+      },
+      {
+        "titre": "US Invasion of Iraq",
+        "date": 2003,
+        "description": "Anglo-American coalition overthrows Saddam Hussein — destabilisation of the Middle East."
+      },
+      {
+        "titre": "Russia's Invasion of Ukraine",
+        "date": 2022,
+        "description": "Largest war in Europe since 1945."
+      },
+      {
+        "titre": "War in Gaza",
+        "date": 2023,
+        "description": "Hamas attack on 7 October 2023 and Israeli offensive in Gaza — worst humanitarian crisis in the Middle East in decades."
+      }
+    ],
+    "Science & Exploration": [
+      {
+        "titre": "On the Origin of Species (Darwin)",
+        "date": 1859,
+        "description": "Theory of evolution by natural selection — scientific and philosophical revolution."
+      },
+      {
+        "titre": "X-Rays (Wilhelm Röntgen)",
+        "date": 1895,
+        "description": "Revolution in medical imaging."
+      },
+      {
+        "titre": "Special Relativity (Albert Einstein)",
+        "date": 1905,
+        "description": "Revolution in modern physics; E = mc²."
+      },
+      {
+        "titre": "First Nuclear Reactor (Enrico Fermi)",
+        "date": 1942,
+        "description": "First controlled chain reaction — foundation of nuclear energy and weaponry."
+      },
+      {
+        "titre": "DNA Structure (Watson & Crick)",
+        "date": 1953,
+        "description": "Discovery of the double helix — foundation of molecular biology and genetics."
+      },
+      {
+        "titre": "Sputnik — First Artificial Satellite",
+        "date": 1957,
+        "description": "USSR, 4 October 1957 — start of the Space Age."
+      },
+      {
+        "titre": "Yuri Gagarin — First Human in Space",
+        "date": 1961,
+        "description": "USSR, 12 April 1961 — first human being in orbit."
+      },
+      {
+        "titre": "First Man on the Moon (Apollo 11)",
+        "date": 1969,
+        "description": "Neil Armstrong steps onto the Moon, 21 July 1969."
+      },
+      {
+        "titre": "Hubble Space Telescope Launched",
+        "date": 1990,
+        "description": "Launched by NASA in April 1990 — revolution in observational astronomy."
+      },
+      {
+        "titre": "Discovery of the First Exoplanet (51 Pegasi b)",
+        "date": 1995,
+        "description": "Mayor & Queloz (Geneva) — first confirmed planet around a Sun-like star."
+      },
+      {
+        "titre": "Dolly the Sheep — First Cloned Mammal",
+        "date": 1996,
+        "description": "Roslin Institute (Scotland) — first cloning by somatic cell nuclear transfer, revolution in biology."
+      },
+      {
+        "titre": "Human Genome Sequencing",
+        "date": 2003,
+        "description": "Completion of the Human Genome Project — complete mapping of the ~3 billion base pairs of human DNA; revolution in medicine and biology."
+      },
+      {
+        "titre": "CRISPR",
+        "date": 2012,
+        "description": "Precise gene editing — revolution in biology and medicine."
+      },
+      {
+        "titre": "First Image of a Black Hole (EHT)",
+        "date": 2019,
+        "description": "Event Horizon Telescope captures the first direct image of a black hole (M87*) — feat of global radio astronomy."
+      }
+    ],
+    "Society & Rights": [
+      {
+        "titre": "Abolition of Slavery in the United States",
+        "date": 1865,
+        "description": "13th Amendment to the US Constitution."
+      },
+      {
+        "titre": "Women's Suffrage — New Zealand",
+        "date": 1893,
+        "description": "First country in the world to grant universal women's suffrage — start of a movement that spread across Europe and the Americas in the 20th century."
+      },
+      {
+        "titre": "Wall Street Crash",
+        "date": 1929,
+        "description": "Collapse of financial markets — start of the Great Depression."
+      },
+      {
+        "titre": "19th Amendment — Women's Suffrage in the United States",
+        "date": 1920,
+        "description": "American women gain the right to vote after decades of suffragist activism."
+      },
+      {
+        "titre": "Women's Right to Vote in France",
+        "date": 1944,
+        "description": "Ordinance of the French Committee of National Liberation — French women vote for the first time in April 1945."
+      },
+      {
+        "titre": "Universal Declaration of Human Rights",
+        "date": 1948,
+        "description": "Adopted by the UN; proclamation of the State of Israel in the same year."
+      },
+      {
+        "titre": "Civil Rights Act (United States)",
+        "date": 1964,
+        "description": "Prohibition of racial segregation — victory of the civil rights movement."
+      },
+      {
+        "titre": "Assassination of Martin Luther King",
+        "date": 1968,
+        "description": "Leader of the American civil rights movement assassinated in Memphis on 4 April 1968."
+      },
+      {
+        "titre": "May 1968",
+        "date": 1968,
+        "description": "General strike and student revolt in France; worldwide wave of protest against the established order."
+      },
+      {
+        "titre": "Oil Shock and End of the Thirty Glorious Years",
+        "date": 1973,
+        "description": "Arab oil embargo — global economic crisis, end of post-war growth."
+      },
+      {
+        "titre": "Global Financial Crisis",
+        "date": 2008,
+        "description": "Collapse of financial markets following the US subprime crisis."
+      }
+    ],
+    "Natural & Industrial Disasters": [
+      {
+        "titre": "Lisbon Earthquake",
+        "date": 1755,
+        "description": "Magnitude ~8.7; 30,000 to 60,000 deaths. Followed by a tsunami and fires destroying 85% of the city; shook Enlightenment optimism."
+      },
+      {
+        "titre": "Mount Tambora Eruption (Indonesia)",
+        "date": 1815,
+        "description": "Largest volcanic eruption in modern history (~71,000 deaths). Caused the 'Year Without a Summer' of 1816 and famines across several continents."
+      },
+      {
+        "titre": "Krakatoa Eruption (Indonesia)",
+        "date": 1883,
+        "description": "~36,000 deaths from the eruption and resulting tsunami. Global climate cooling and vivid red sunsets observed worldwide."
+      },
+      {
+        "titre": "Mount Pelée Eruption (Martinique)",
+        "date": 1902,
+        "description": "Pyroclastic flow destroyed Saint-Pierre in minutes; ~30,000 deaths. One of the worst volcanic disasters of the 20th century."
+      },
+      {
+        "titre": "Messina Earthquake (Sicily)",
+        "date": 1908,
+        "description": "Magnitude 7.1; 75,000 to 200,000 deaths. The city was razed in under 40 seconds, followed by a tsunami."
+      },
+      {
+        "titre": "Titanic Sinking",
+        "date": 1912,
+        "description": "Over 1,500 deaths in the North Atlantic — symbol of the limits of technological confidence in the Belle Époque."
+      },
+      {
+        "titre": "Great Kantō Earthquake (Japan)",
+        "date": 1923,
+        "description": "Magnitude 7.9; ~142,000 deaths in Tokyo and Yokohama, massive fires and tsunami."
+      },
+      {
+        "titre": "China Floods",
+        "date": 1931,
+        "description": "Flooding of the Yangtze and Huai rivers; between 1 and 4 million deaths. One of the greatest natural disasters in history."
+      },
+      {
+        "titre": "Bhola Cyclone (Bangladesh)",
+        "date": 1970,
+        "description": "~500,000 deaths in the Ganges–Brahmaputra delta — one of the deadliest cyclones ever recorded."
+      },
+      {
+        "titre": "Tangshan Earthquake (China)",
+        "date": 1976,
+        "description": "Magnitude 7.8; 240,000 to 655,000 deaths. Industrial city razed in 15 seconds; disaster concealed by Mao's regime."
+      },
+      {
+        "titre": "Bhopal Disaster (India)",
+        "date": 1984,
+        "description": "Methyl isocyanate leak from the Union Carbide plant; 3,500 to 15,000 immediate deaths, hundreds of thousands chronically affected. Worst industrial accident in history."
+      },
+      {
+        "titre": "Chernobyl Disaster (Ukraine)",
+        "date": 1986,
+        "description": "Explosion of reactor No. 4; radioactive contamination across Europe. Accelerated the collapse of the USSR and awareness of nuclear power risks."
+      },
+      {
+        "titre": "Indian Ocean Tsunami",
+        "date": 2004,
+        "description": "Magnitude 9.1 earthquake off Sumatra; ~230,000 deaths in 14 countries. Revealed the absence of a warning system in the Indian Ocean."
+      },
+      {
+        "titre": "Haiti Earthquake",
+        "date": 2010,
+        "description": "Magnitude 7.0; ~220,000 deaths, 1.5 million homeless. Major humanitarian catastrophe in the poorest country in the Americas."
+      },
+      {
+        "titre": "Deepwater Horizon Oil Spill (Gulf of Mexico)",
+        "date": 2010,
+        "description": "BP platform explosion; 11 deaths and ~5 million barrels spilled — largest accidental oil spill in history."
+      },
+      {
+        "titre": "Tōhoku Earthquake, Tsunami & Fukushima (Japan)",
+        "date": 2011,
+        "description": "Magnitude 9.1 off Tōhoku; ~20,000 deaths, partial meltdown of 3 Fukushima reactors. Triggered a global review of nuclear energy policy."
+      }
+    ]
+  }
 }

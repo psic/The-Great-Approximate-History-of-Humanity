@@ -1,95 +1,146 @@
 {
   "pas": 200000,
-  "tableaux": [
-    [
+  "tableaux": {
+    "Human Species & Prehistory": [
       {
         "debut": -3000000,
         "fin": -300000,
-        "titre": "Paléolithique inférieur",
-        "description": "Premiers outils."
+        "titre": "Lower Paleolithic",
+        "description": "First tools."
       },
       {
         "debut": -300000,
         "fin": -30000,
-        "titre": "Paléolithique moyen",
-        "description": "Neandertal, Homo sapiens."
+        "titre": "Middle Paleolithic",
+        "description": "Neanderthal, Homo sapiens."
       },
       {
         "debut": -30000,
         "fin": -10000,
-        "titre": "Paléolithique supérieur",
+        "titre": "Upper Paleolithic",
         "description": "Art, expansion."
       },
       {
         "debut": -10000,
         "fin": -3500,
-        "titre": "Néolithique",
-        "description": "Agriculture, sédentarisation."
+        "titre": "Neolithic",
+        "description": "Agriculture, settlement."
       },
       {
         "debut": -3500,
         "fin": 2025,
-        "titre": "Histoire écrite",
-        "description": "De l'écriture à aujourd'hui."
+        "titre": "Written History",
+        "description": "From writing to today."
       },
       {
         "debut": -4000000,
         "fin": -2000000,
-        "titre": "Australopithèques",
-        "description": "Australopithecus (ex. Lucy, -3,2 Ma) — bipédie, Afrique."
+        "titre": "Australopithecines",
+        "description": "Australopithecus (e.g. Lucy, -3.2 Ma) — bipedalism, Africa."
       },
       {
         "debut": -2400000,
         "fin": -1400000,
         "titre": "Homo habilis",
-        "description": "« Homme habile » — premiers outils en pierre taillée (Afrique)."
+        "description": "\"Handy Man\" — first stone tools (Africa)."
       },
       {
         "debut": -1900000,
         "fin": -100000,
         "titre": "Homo erectus",
-        "description": "Sortie d'Afrique, maîtrise du feu ; Asie, Europe."
+        "description": "Out of Africa, mastery of fire; Asia, Europe."
       },
       {
         "debut": -800000,
         "fin": -200000,
         "titre": "Homo heidelbergensis",
-        "description": "Ancêtre commun probable de Néandertal et Sapiens ; Europe, Afrique."
+        "description": "Likely common ancestor of Neanderthals and Sapiens; Europe, Africa."
       },
       {
         "debut": -430000,
         "fin": -40000,
-        "titre": "Néandertal (Homo neanderthalensis)",
-        "description": "Europe, Moyen-Orient ; outillage moustérien, sépultures."
+        "titre": "Neanderthal (Homo neanderthalensis)",
+        "description": "Europe, Middle East; Mousterian tools, burials."
       },
       {
         "debut": -300000,
         "fin": 2025,
         "titre": "Homo sapiens",
-        "description": "Notre espèce — apparition en Afrique, expansion mondiale, art, symboles."
+        "description": "Our species — appeared in Africa, worldwide expansion, art, symbols."
       }
     ]
-  ],
-  "evenements": [
-    {
-      "date": -3000000,
-      "titre": "Premiers outils",
-      "description": "Afrique."
-    },
-    {
-      "date": -3500,
-      "titre": "Invention de l'écriture",
-      "description": ""
-    },
-    {
-      "date": 0,
-      "titre": "Début de l'ère chrétienne",
-      "description": ""
-    },
-    {
-      "date": 2025,
-      "titre": "Aujourd'hui",
-      "description": ""
-    }
-  ]
+  },
+  "evenements": {
+    "Human Species": [
+      {
+        "titre": "Lucy (Australopithecus afarensis)",
+        "date": -3200000,
+        "description": "Emblematic fossil discovered in Ethiopia — biped, one of the best-documented ancestors of the human lineage."
+      },
+      {
+        "titre": "Homo erectus Leaves Africa",
+        "date": -1800000,
+        "description": "First migrations out of the African continent — progressive settlement of Asia then Europe."
+      },
+      {
+        "titre": "Appearance of Homo sapiens",
+        "date": -300000,
+        "description": "First anatomically modern humans, in North Africa (Morocco, Jebel Irhoud)."
+      },
+      {
+        "titre": "Out of Africa",
+        "date": -70000,
+        "description": "Migration of Homo sapiens out of Africa and gradual peopling of the entire world."
+      },
+      {
+        "titre": "Disappearance of Neanderthals",
+        "date": -40000,
+        "description": "Extinction of Neanderthal Man, probably through contact and competition with Homo sapiens."
+      }
+    ],
+    "Culture & Society": [
+      {
+        "titre": "First Knapped Tools (Oldowan)",
+        "date": -3000000,
+        "description": "Pebble tools fashioned in East Africa — birth of human material culture."
+      },
+      {
+        "titre": "Mastery of Fire",
+        "date": -800000,
+        "description": "Homo erectus controls fire — cooking food, warmth, protection, social bond."
+      },
+      {
+        "titre": "Cave Art and Symbolic Thinking",
+        "date": -40000,
+        "description": "Decorated caves (Chauvet, Lascaux) — creative explosion attesting to the abstract thought of Homo sapiens."
+      },
+      {
+        "titre": "Domestication of the Dog",
+        "date": -15000,
+        "description": "First domesticated animal — alliance between Homo sapiens and the grey wolf."
+      },
+      {
+        "titre": "Neolithic Revolution",
+        "date": -10000,
+        "description": "Agriculture and animal husbandry — settlement of populations, birth of permanent villages."
+      },
+      {
+        "titre": "First Cities and Invention of Writing",
+        "date": -3500,
+        "description": "Uruk (Mesopotamia) — first large cities, administration and cuneiform writing."
+      }
+    ],
+    "Time Markers": [
+      {
+        "titre": "Beginning of the Common Era",
+        "date": 0,
+        "description": "Reference point of the Gregorian calendar."
+      },
+      {
+        "titre": "Today",
+        "date": 2026,
+        "description": ""
+      }
+    ]
+  }
 }

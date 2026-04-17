@@ -1,69 +1,907 @@
 {
   "pas": 250,
-  "tableaux": [
-    [
+  "tableaux": {
+    "Major Periods": [
       {
+        "titre": "Bronze Age",
+        "description": "Widespread bronze metallurgy, first cities and states.",
+        "debut": -3300,
+        "fin": -1200
+      },
+      {
+        "titre": "Iron Age",
+        "description": "Widespread iron metallurgy, collapse of Bronze Age civilizations.",
+        "debut": -1200,
+        "fin": -550
+      },
+      {
+        "titre": "Antiquity",
+        "description": "From the invention of writing to the fall of Rome.",
         "debut": -3500,
-        "fin": 476,
-        "titre": "Antiquité",
-        "description": "De l'invention de l'écriture à la chute de Rome."
+        "fin": 476
       },
       {
+        "titre": "Hellenistic Period",
+        "description": "Spread of Greek culture from the Mediterranean to Central Asia after Alexander.",
+        "debut": -323,
+        "fin": -30
+      },
+      {
+        "titre": "Middle Ages",
+        "description": "From the fall of Rome to the discovery of America.",
         "debut": 476,
-        "fin": 1492,
-        "titre": "Moyen Âge",
-        "description": "De la chute de Rome à la découverte de l'Amérique."
+        "fin": 1492
       },
       {
+        "titre": "European Feudalism",
+        "description": "Dominant social and political organization of medieval Europe, based on bonds of vassalage.",
+        "debut": 900,
+        "fin": 1300
+      },
+      {
+        "titre": "Renaissance",
+        "description": "Cultural, artistic and intellectual renewal in Europe, from Italy across the continent.",
+        "debut": 1350,
+        "fin": 1600
+      },
+      {
+        "titre": "Early Modern Period",
+        "description": "From the Renaissance to the Enlightenment.",
         "debut": 1492,
-        "fin": 1789,
-        "titre": "Époque moderne",
-        "description": "Renaissance aux Lumières."
+        "fin": 1789
       },
       {
+        "titre": "Age of Enlightenment",
+        "description": "Voltaire, Rousseau, the Encyclopédie; challenge to religious and political dogmas.",
+        "debut": 1687,
+        "fin": 1789
+      },
+      {
+        "titre": "Modern Era",
+        "description": "From the French Revolution to today.",
         "debut": 1789,
-        "fin": 2025,
-        "titre": "Époque contemporaine",
-        "description": "De la Révolution française à aujourd'hui."
+        "fin": 2026
+      }
+    ],
+    "Europe & Mediterranean": [
+      {
+        "titre": "Minoan Civilization",
+        "description": "Advanced culture in Crete with maritime trade.",
+        "debut": -2700,
+        "fin": -1450
       },
       {
+        "titre": "Mycenaean Civilization",
+        "description": "Greek Bronze Age culture.",
+        "debut": -1600,
+        "fin": -1100
+      },
+      {
+        "titre": "Archaic Greece",
+        "description": "Formation of Greek city-states and first Olympic Games.",
+        "debut": -800,
+        "fin": -500
+      },
+      {
+        "titre": "Classical Greece",
+        "description": "Height of Greek culture, philosophy and science.",
+        "debut": -500,
+        "fin": -323
+      },
+      {
+        "titre": "Empire of Alexander the Great",
+        "description": "Rapid conquest of Mediterranean Asia as far as India.",
+        "debut": -336,
+        "fin": -323
+      },
+      {
+        "titre": "Roman Republic",
+        "description": "Rome expands across the Mediterranean before becoming an empire.",
+        "debut": -509,
+        "fin": -27
+      },
+      {
+        "titre": "Roman Empire",
+        "description": "Great Mediterranean power influential in culture, law and administration.",
+        "debut": -27,
+        "fin": 476
+      },
+      {
+        "titre": "The Huns",
+        "description": "Great migration and warrior empire in Eurasia.",
+        "debut": 370,
+        "fin": 469
+      },
+      {
+        "titre": "Visigothic Kingdom",
+        "description": "Germanic people settled in Spain and France.",
+        "debut": 418,
+        "fin": 711
+      },
+      {
+        "titre": "Vandal Kingdom",
+        "description": "Germanic people in North Africa after the fall of Rome.",
+        "debut": 429,
+        "fin": 534
+      },
+      {
+        "titre": "Byzantine Empire",
+        "description": "Continuation of the Roman Empire at Constantinople.",
+        "debut": 330,
+        "fin": 1453
+      },
+      {
+        "titre": "Carolingian Empire",
+        "description": "Charlemagne's empire in Western Europe.",
+        "debut": 800,
+        "fin": 888
+      },
+      {
+        "titre": "Vikings",
+        "description": "Nordic peoples, explorers and warriors.",
+        "debut": 793,
+        "fin": 1066
+      },
+      {
+        "titre": "Ottoman Empire",
+        "description": "Great multi-continental empire (Europe, Asia, Africa).",
+        "debut": 1299,
+        "fin": 1922
+      },
+      {
+        "titre": "Napoleonic Empire",
+        "description": "European expansion led by Napoleon Bonaparte.",
+        "debut": 1804,
+        "fin": 1815
+      },
+      {
+        "titre": "British Empire",
+        "description": "Largest empire in modern history, covering up to a quarter of the world's land area.",
+        "debut": 1600,
+        "fin": 1997
+      }
+    ],
+    "Africa": [
+      {
+        "titre": "Old Kingdom of Egypt",
+        "description": "Rise of the pharaonic state and construction of the great pyramids.",
+        "debut": -2686,
+        "fin": -2181
+      },
+      {
+        "titre": "Kingdom of Kush / Meroe",
+        "description": "Powerful Nubian kingdom south of Egypt, rival and occasional conqueror of the pharaohs.",
+        "debut": -1070,
+        "fin": 350
+      },
+      {
+        "titre": "Carthage",
+        "description": "Powerful trading state and rival of Rome in North Africa.",
+        "debut": -814,
+        "fin": -146
+      },
+      {
+        "titre": "Ghana Empire",
+        "description": "Prosperous African empire through trade in gold and salt.",
+        "debut": -300,
+        "fin": 1200
+      },
+      {
+        "titre": "Aksumite Empire",
+        "description": "Powerful Christian Ethiopian empire trading with Arabia.",
+        "debut": 100,
+        "fin": 940
+      },
+      {
+        "titre": "Mali Empire",
+        "description": "West African empire famous for Mansa Musa and Timbuktu.",
+        "debut": 1235,
+        "fin": 1600
+      },
+      {
+        "titre": "Zimbabwe Empire / Monomotapa",
+        "description": "Great kingdom of southern Africa.",
+        "debut": 1100,
+        "fin": 1450
+      },
+      {
+        "titre": "Songhai Empire",
+        "description": "Powerful West African empire.",
+        "debut": 1430,
+        "fin": 1591
+      }
+    ],
+    "Middle East & Asia": [
+      {
+        "titre": "Sumerian Civilization",
+        "description": "First city-states, organized agriculture and cuneiform writing.",
+        "debut": -3100,
+        "fin": -2000
+      },
+      {
+        "titre": "Indus Valley Civilization",
+        "description": "Advanced urban civilization (Mohenjo-daro, Harappa), one of the oldest in the world.",
+        "debut": -2600,
+        "fin": -1900
+      },
+      {
+        "titre": "Babylon and the Code of Hammurabi",
+        "description": "First great codification of laws.",
+        "debut": -1792,
+        "fin": -1750
+      },
+      {
+        "titre": "Hittite Empire",
+        "description": "Empire of Anatolia, known for its military influence.",
+        "debut": -1600,
+        "fin": -1178
+      },
+      {
+        "titre": "Shang Dynasty (China)",
+        "description": "First documented Chinese dynasty with writing.",
+        "debut": -1600,
+        "fin": -1046
+      },
+      {
+        "titre": "Assyrian Empire",
+        "description": "Powerful military empire dominating the ancient Near East.",
+        "debut": -900,
+        "fin": -612
+      },
+      {
+        "titre": "Neo-Babylonian Empire",
+        "description": "Nebuchadnezzar II, Hanging Gardens of Babylon, deportation of the Hebrews.",
+        "debut": -626,
+        "fin": -539
+      },
+      {
+        "titre": "Achaemenid Persian Empire",
+        "description": "Great empire stretching from India to the Mediterranean.",
+        "debut": -550,
+        "fin": -330
+      },
+      {
+        "titre": "Maurya Empire (India)",
+        "description": "First great Indian empire, height under Ashoka and spread of Buddhism.",
+        "debut": -322,
+        "fin": -185
+      },
+      {
+        "titre": "Han Dynasty (China)",
+        "description": "Chinese golden age, trade via the Silk Road.",
+        "debut": -202,
+        "fin": 220
+      },
+      {
+        "titre": "Sasanian Persian Empire",
+        "description": "Great rival of Rome then Byzantium, heir to Persian culture.",
+        "debut": 224,
+        "fin": 651
+      },
+      {
+        "titre": "Gupta Empire (India)",
+        "description": "Golden age of classical India.",
+        "debut": 320,
+        "fin": 550
+      },
+      {
+        "titre": "Islamic Expansion and Caliphates",
+        "description": "Rapid expansion of Islam across Africa, Asia and Europe.",
+        "debut": 622,
+        "fin": 1258
+      },
+      {
+        "titre": "Tang Dynasty (China)",
+        "description": "Golden age of medieval China, cultural and commercial openness.",
+        "debut": 618,
+        "fin": 907
+      },
+      {
+        "titre": "Song Dynasty (China)",
+        "description": "Period of great prosperity and technical innovations.",
+        "debut": 960,
+        "fin": 1279
+      },
+      {
+        "titre": "Mongol Empire",
+        "description": "Largest contiguous empire in history.",
+        "debut": 1206,
+        "fin": 1368
+      },
+      {
+        "titre": "Shogunates of Medieval Japan",
+        "description": "Military rule of the shoguns, era of the samurai and gradual isolation of Japan.",
+        "debut": 1185,
+        "fin": 1868
+      },
+      {
+        "titre": "Mughal Empire (India)",
+        "description": "Great Islamic empire of South Asia, height under Akbar and Shah Jahan (Taj Mahal).",
+        "debut": 1526,
+        "fin": 1857
+      }
+    ],
+    "Americas": [
+      {
+        "titre": "Olmec Civilization",
+        "description": "First great Mesoamerican civilization.",
+        "debut": -1500,
+        "fin": -400
+      },
+      {
+        "titre": "Maya Civilization",
+        "description": "Great Mesoamerican civilization with writing and astronomy.",
+        "debut": -200,
+        "fin": 900
+      },
+      {
+        "titre": "Teotihuacan Civilization",
+        "description": "Powerful city-state in Mesoamerica.",
+        "debut": 100,
+        "fin": 750
+      },
+      {
+        "titre": "Aztec Empire",
+        "description": "Great Mesoamerican civilization at its height before the Spanish conquest.",
+        "debut": 1300,
+        "fin": 1521
+      },
+      {
+        "titre": "Inca Civilization",
+        "description": "Great Andean empire of South America.",
+        "debut": 1438,
+        "fin": 1533
+      }
+    ],
+    "Conflicts & Conquests": [
+      {
+        "titre": "Crusades",
+        "description": "Christian military expeditions to the Holy Land and the Mediterranean.",
+        "debut": 1096,
+        "fin": 1291
+      },
+      {
+        "titre": "Reconquista",
+        "description": "Progressive Christian reconquest of the Iberian Peninsula from Muslim kingdoms.",
+        "debut": 718,
+        "fin": 1492
+      },
+      {
+        "titre": "European Colonization",
+        "description": "Explorations and conquests in America, Africa, Asia and Oceania.",
+        "debut": 1492,
+        "fin": 1914
+      },
+      {
+        "titre": "Transatlantic Slave Trade and Colonial Slavery",
+        "description": "Massive deportation of Africans to the Americas via the triangular trade; progressive abolition (UK 1833, France 1848, USA 1865, Brazil 1888).",
         "debut": 1444,
-        "fin": 1888,
-        "titre": "Traite atlantique et esclavage colonial",
-        "description": "Commerce triangulaire, esclavage dans les colonies ; abolition progressive (GB 1833, France 1848, États-Unis 1865, Brésil 1888)."
+        "fin": 1888
+      },
+      {
+        "titre": "Imperialism",
+        "description": "Division of the world among European powers, race for colonies in Africa and Asia.",
+        "debut": 1870,
+        "fin": 1914
+      },
+      {
+        "titre": "World War I",
+        "description": "World conflict involving multiple powers.",
+        "debut": 1914,
+        "fin": 1918
+      },
+      {
+        "titre": "World War II",
+        "description": "Major world conflict with redefinition of alliances.",
+        "debut": 1939,
+        "fin": 1945
+      },
+      {
+        "titre": "Decolonization",
+        "description": "Independence of colonized peoples in Africa, Asia and Oceania.",
+        "debut": 1945,
+        "fin": 1975
+      },
+      {
+        "titre": "Cold War",
+        "description": "Ideological confrontation between East and West blocs.",
+        "debut": 1947,
+        "fin": 1991
+      },
+      {
+        "titre": "Space Race",
+        "description": "Technological competition between the United States and the USSR, from Sputnik to Apollo and beyond.",
+        "debut": 1957,
+        "fin": 1991
+      }
+    ],
+    "Pandemics": [
+      {
+        "titre": "Plague of Justinian",
+        "description": "First major pandemic in recorded history.",
+        "debut": 541,
+        "fin": 542
+      },
+      {
+        "titre": "Black Death",
+        "description": "Medieval pandemic that killed a third of Europe.",
+        "debut": 1347,
+        "fin": 1353
+      },
+      {
+        "titre": "Smallpox Epidemic",
+        "description": "Global spread especially after European contact with the Americas.",
+        "debut": 1500,
+        "fin": 1900
+      },
+      {
+        "titre": "Major Cholera Epidemics",
+        "description": "Six successive global pandemics originating in South Asia, transforming public hygiene.",
+        "debut": 1817,
+        "fin": 1923
+      },
+      {
+        "titre": "Spanish Flu",
+        "description": "Global pandemic following World War I.",
+        "debut": 1918,
+        "fin": 1920
+      },
+      {
+        "titre": "COVID-19 Pandemic",
+        "description": "Global pandemic of the SARS-CoV-2 virus.",
+        "debut": 2019,
+        "fin": 2023
+      }
+    ],
+    "Culture, Ideas & Turning Points": [
+      {
+        "titre": "Invention of Writing",
+        "description": "Appearance of the first writing systems in Mesopotamia and Egypt.",
+        "debut": -3200,
+        "fin": -3000
+      },
+      {
+        "titre": "Silk Road",
+        "description": "Network of trade and cultural routes linking China to the Mediterranean.",
+        "debut": -130,
+        "fin": 1453
+      },
+      {
+        "titre": "Protestant Reformation",
+        "description": "Luther, Calvin and the fracture of the Catholic Church; wars of religion in Europe.",
+        "debut": 1517,
+        "fin": 1648
+      },
+      {
+        "titre": "Scientific Revolution",
+        "description": "From Copernicus to Newton, overturning the worldview and birth of modern sciences.",
+        "debut": 1543,
+        "fin": 1687
+      },
+      {
+        "titre": "American and French Revolutions",
+        "description": "Challenge to monarchical order, birth of modern democracies.",
+        "debut": 1776,
+        "fin": 1799
+      },
+      {
+        "titre": "Industrial Revolution",
+        "description": "Mechanization of production, massive urbanization and transformation of societies.",
+        "debut": 1760,
+        "fin": 1914
+      },
+      {
+        "titre": "European Integration",
+        "description": "From the ECSC to the Treaty of Rome and the European Union, progressive integration of European nations.",
+        "debut": 1951,
+        "fin": 2026
+      },
+      {
+        "titre": "Digital Revolution",
+        "description": "Rise of computing, the internet and digital technologies transforming societies and economies.",
+        "debut": 1970,
+        "fin": 2026
+      },
+      {
+        "titre": "Globalization",
+        "description": "Global integration of trade, technologies and cultures after the end of the Cold War.",
+        "debut": 1991,
+        "fin": 2026
+      }
+    ],
+    "Religions & Spiritualities": [
+      {
+        "titre": "Vedism and Hinduism",
+        "description": "Oldest living religious tradition — from the Vedas to the Upanishads and the Bhagavad Gita; over one billion followers today.",
+        "debut": -1500,
+        "fin": 2026
+      },
+      {
+        "titre": "Judaism",
+        "description": "Monotheism of the Hebrew people — Torah, prophets, Talmud; foundation of the Abrahamic religions.",
+        "debut": -1000,
+        "fin": 2026
+      },
+      {
+        "titre": "Zoroastrianism",
+        "description": "Dualistic religion of Persia (Ahura Mazda vs Angra Mainyu) — decisive influence on Judaism, Christianity and Islam.",
+        "debut": -600,
+        "fin": 2026
+      },
+      {
+        "titre": "Buddhism",
+        "description": "Founded by Siddhartha Gautama — the Four Noble Truths and the Eightfold Path; spread from India across Asia.",
+        "debut": -500,
+        "fin": 2026
+      },
+      {
+        "titre": "Confucianism and Taoism",
+        "description": "Founding philosophical and religious currents of Chinese civilization — social ethics (Confucius) and natural harmony (Laozi).",
+        "debut": -500,
+        "fin": 2026
+      },
+      {
+        "titre": "Christianity",
+        "description": "Founded on the life and teachings of Jesus of Nazareth — New Testament, Trinity, Church; the world's most widespread religion.",
+        "debut": 30,
+        "fin": 2026
+      },
+      {
+        "titre": "Islam",
+        "description": "Founded by the prophet Muhammad in Mecca — the Quran, the five pillars, rapid expansion from Arabia to Asia, Africa and Europe.",
+        "debut": 622,
+        "fin": 2026
+      },
+      {
+        "titre": "Sikhism",
+        "description": "Founded by Guru Nanak in Punjab (India) — egalitarian monotheism, rejection of the caste system, service to the community.",
+        "debut": 1469,
+        "fin": 2026
       }
     ]
-  ],
-  "evenements": [
-    {
-      "date": -3500,
-      "titre": "Invention de l'écriture",
-      "description": "Mésopotamie."
-    },
-    {
-      "date": -508,
-      "titre": "Démocratie athénienne",
-      "description": "Réformes de Clisthène."
-    },
-    {
-      "date": 476,
-      "titre": "Chute de l'Empire romain d'Occident",
-      "description": ""
-    },
-    {
-      "date": 1453,
-      "titre": "Chute de Constantinople",
-      "description": ""
-    },
-    {
-      "date": 1789,
-      "titre": "Révolution française",
-      "description": ""
-    },
-    {
-      "date": 1969,
-      "titre": "Premier pas sur la Lune",
-      "description": ""
-    }
-  ]
+  },
+  "evenements": {
+    "Science, Art & Culture": [
+      {
+        "titre": "Invention of Writing in Mesopotamia",
+        "date": -3200,
+        "description": "Beginning of cuneiform writing, allowing history to be recorded."
+      },
+      {
+        "titre": "Construction of the Great Pyramid of Khufu",
+        "date": -2560,
+        "description": "Completion of the pyramid at Giza, Egypt."
+      },
+      {
+        "titre": "Death of Socrates",
+        "date": -399,
+        "description": "Condemned to death by Athens, symbol of philosophical martyrdom."
+      },
+      {
+        "titre": "University of Bologna",
+        "date": 1088,
+        "description": "Founding of the first university in Europe."
+      },
+      {
+        "titre": "Birth of Leonardo da Vinci",
+        "date": 1440,
+        "description": "Universal Renaissance genius, artist and scientist."
+      },
+      {
+        "titre": "Gutenberg's Printing Press",
+        "date": 1450,
+        "description": "Beginning of the mass dissemination of knowledge."
+      },
+      {
+        "titre": "Publication of Copernicus's Heliocentric System",
+        "date": 1543,
+        "description": "Copernican revolution — the Earth revolves around the Sun."
+      },
+      {
+        "titre": "Publication of Newton's Principia",
+        "date": 1687,
+        "description": "Foundations of classical mechanics and the law of universal gravitation."
+      },
+      {
+        "titre": "Publication of Rousseau's Social Contract",
+        "date": 1762,
+        "description": "Founding work of modern political philosophy and democracies."
+      },
+      {
+        "titre": "James Watt's Steam Engine",
+        "date": 1769,
+        "description": "Improvement of the steam engine, driving force of industrialization."
+      },
+      {
+        "titre": "Publication of Darwin's On the Origin of Species",
+        "date": 1859,
+        "description": "Foundation of the theory of evolution by natural selection."
+      },
+      {
+        "titre": "First Man on the Moon (Apollo 11)",
+        "date": 1969,
+        "description": "Neil Armstrong walks on the Moon."
+      }
+    ],
+    "Politics & Empires": [
+      {
+        "titre": "Coronation of Hammurabi",
+        "date": -1792,
+        "description": "Hammurabi becomes king of Babylon and codifies his laws."
+      },
+      {
+        "titre": "Founding of Rome",
+        "date": -753,
+        "description": "According to tradition, Romulus founds Rome."
+      },
+      {
+        "titre": "Athenian Democracy",
+        "date": -508,
+        "description": "Cleisthenes' reforms establishing the foundations of democracy in Athens."
+      },
+      {
+        "titre": "Caesar Crosses the Rubicon",
+        "date": -49,
+        "description": "Beginning of the Roman civil war, Caesar marches on Rome."
+      },
+      {
+        "titre": "Assassination of Julius Caesar",
+        "date": -44,
+        "description": "Julius Caesar is assassinated by Roman senators."
+      },
+      {
+        "titre": "Fall of the Western Roman Empire",
+        "date": 476,
+        "description": "End of the Western Roman Empire, beginning of the Middle Ages."
+      },
+      {
+        "titre": "Coronation of Charlemagne",
+        "date": 800,
+        "description": "Charlemagne becomes emperor of the Holy Roman Empire."
+      },
+      {
+        "titre": "Genghis Khan Becomes Great Khan",
+        "date": 1206,
+        "description": "Unification of the Mongol tribes and beginning of the Mongol Empire."
+      },
+      {
+        "titre": "Magna Carta",
+        "date": 1215,
+        "description": "First charter of liberties signed in England, limiting royal power."
+      },
+      {
+        "titre": "Fall of Constantinople",
+        "date": 1453,
+        "description": "The Byzantine Empire falls to the Ottomans, end of the Middle Ages."
+      },
+      {
+        "titre": "Execution of Mary Queen of Scots",
+        "date": 1587,
+        "description": "Mary Queen of Scots is beheaded in England."
+      },
+      {
+        "titre": "Assassination of Henri IV",
+        "date": 1610,
+        "description": "King of France assassinated by François Ravaillac."
+      },
+      {
+        "titre": "Treaties of Westphalia",
+        "date": 1648,
+        "description": "End of the Thirty Years' War, birth of the modern nation-state system."
+      },
+      {
+        "titre": "Execution of Charles I",
+        "date": 1649,
+        "description": "King of England beheaded during the English Revolution."
+      },
+      {
+        "titre": "Glorious Revolution in England",
+        "date": 1688,
+        "description": "Establishment of constitutional monarchy, limits on royal power."
+      },
+      {
+        "titre": "United States Declaration of Independence",
+        "date": 1776,
+        "description": "Official proclamation of American independence."
+      },
+      {
+        "titre": "French Revolution",
+        "date": 1789,
+        "description": "Overthrow of the absolute monarchy, proclamation of human rights and birth of the French Republic."
+      },
+      {
+        "titre": "Bolshevik Revolution in Russia",
+        "date": 1917,
+        "description": "Seizure of power by Lenin and the Bolsheviks, birth of the USSR."
+      },
+      {
+        "titre": "Creation of the United Nations",
+        "date": 1945,
+        "description": "Founding of the United Nations to maintain world peace."
+      },
+      {
+        "titre": "Fall of the Berlin Wall",
+        "date": 1989,
+        "description": "End of the division of Germany and symbol of the end of the Cold War."
+      },
+      {
+        "titre": "Dissolution of the USSR",
+        "date": 1991,
+        "description": "End of the Soviet Union, collapse of the Eastern Bloc and end of the Cold War."
+      }
+    ],
+    "Wars & Battles": [
+      {
+        "titre": "Battle of Kadesh",
+        "date": -1274,
+        "description": "First peace treaty in history, signed between Ramesses II and the Hittites."
+      },
+      {
+        "titre": "Battle of Marathon",
+        "date": -490,
+        "description": "Greek victory against the Persians, symbol of democratic resistance."
+      },
+      {
+        "titre": "Conquests of Alexander the Great",
+        "date": -334,
+        "description": "Beginning of the expedition into Asia, construction of the greatest empire of Antiquity."
+      },
+      {
+        "titre": "Punic Wars",
+        "date": -264,
+        "description": "Conflicts between Rome and Carthage for dominance over the Mediterranean."
+      },
+      {
+        "titre": "Battle of Poitiers",
+        "date": 732,
+        "description": "Charles Martel halts the Muslim expansion into Western Europe."
+      },
+      {
+        "titre": "Battle of Hastings",
+        "date": 1066,
+        "description": "Norman conquest of England by William the Conqueror."
+      },
+      {
+        "titre": "Beginning of the First Crusade",
+        "date": 1096,
+        "description": "Christian expedition to the Holy Land."
+      },
+      {
+        "titre": "Beginning of the Hundred Years' War",
+        "date": 1337,
+        "description": "Long conflict between France and England for the French throne."
+      },
+      {
+        "titre": "Death of Joan of Arc",
+        "date": 1431,
+        "description": "Burned at the stake in Rouen, heroine of the Hundred Years' War."
+      },
+      {
+        "titre": "Beginning of the Thirty Years' War",
+        "date": 1618,
+        "description": "Devastating religious and political conflict in Central Europe."
+      },
+      {
+        "titre": "Beginning of the Seven Years' War",
+        "date": 1756,
+        "description": "First conflict of global scale involving the major European powers."
+      },
+      {
+        "titre": "End of World War I",
+        "date": 1918,
+        "description": "Armistice of 11 November 1918, end of the deadliest conflict in history to that date."
+      },
+      {
+        "titre": "Nuclear Bombings of Hiroshima and Nagasaki",
+        "date": 1945,
+        "description": "First use of nuclear weapons in warfare."
+      },
+      {
+        "titre": "September 11 Attacks",
+        "date": 2001,
+        "description": "Terrorist attacks in the United States, beginning of the War on Terror."
+      },
+      {
+        "titre": "Russian Invasion of Ukraine",
+        "date": 2022,
+        "description": "War in Europe, the largest military offensive since World War II."
+      }
+    ],
+    "Religion & Spirituality": [
+      {
+        "titre": "Writing of the Vedas",
+        "date": -1500,
+        "description": "Sacred founding texts of Hinduism, composed in Sanskrit in the Ganges plain — the oldest living religious tradition."
+      },
+      {
+        "titre": "Reign of David — United Monarchy of Israel",
+        "date": -1000,
+        "description": "Unification of the Hebrew tribes under David, founder of Jerusalem as capital; foundations of Judaism."
+      },
+      {
+        "titre": "Zoroaster and the Avesta",
+        "date": -600,
+        "description": "The prophet Zarathustra founds Zoroastrianism in Persia — the first great dualistic monotheism, spiritual ancestor of the Abrahamic religions."
+      },
+      {
+        "titre": "Birth of Buddha",
+        "date": -563,
+        "description": "Siddhartha Gautama, founder of Buddhism, born in India."
+      },
+      {
+        "titre": "Birth of Confucius",
+        "date": -551,
+        "description": "Chinese philosopher and founder of Confucianism — social ethics, filial piety, virtuous governance."
+      },
+      {
+        "titre": "Birth of Jesus Christ",
+        "date": 1,
+        "description": "Founding event of Christianity."
+      },
+      {
+        "titre": "Crucifixion of Jesus",
+        "date": 33,
+        "description": "Death and resurrection of Jesus of Nazareth — theological foundation of Christianity."
+      },
+      {
+        "titre": "Edict of Milan — Legalization of Christianity",
+        "date": 313,
+        "description": "Constantine and Licinius grant freedom of worship in the Roman Empire; major turning point for Christianity."
+      },
+      {
+        "titre": "Edict of Thessalonica — Christianity as State Religion",
+        "date": 380,
+        "description": "Theodosius I makes Nicene Christianity the official religion of the Roman Empire."
+      },
+      {
+        "titre": "Birth of Muhammad",
+        "date": 570,
+        "description": "Founder of Islam, born in Mecca."
+      },
+      {
+        "titre": "Hijra of Muhammad",
+        "date": 622,
+        "description": "Migration of Muhammad from Mecca to Medina, beginning of the Islamic calendar."
+      },
+      {
+        "titre": "Great Schism",
+        "date": 1054,
+        "description": "Final separation between the Roman Catholic Church and the Eastern Orthodox Church."
+      },
+      {
+        "titre": "Birth of Guru Nanak — Founding of Sikhism",
+        "date": 1469,
+        "description": "Guru Nanak born in Punjab; his teachings found Sikhism, an egalitarian monotheism rejecting the caste system."
+      },
+      {
+        "titre": "Protestant Reformation by Martin Luther",
+        "date": 1517,
+        "description": "Posting of the 95 Theses at Wittenberg."
+      }
+    ],
+    "Pandemics & Crises": [
+      {
+        "titre": "Beginning of the Black Death in Europe",
+        "date": 1347,
+        "description": "Bubonic plague pandemic that killed a third of the European population."
+      }
+    ],
+    "Explorations & Conquests": [
+      {
+        "titre": "Columbus Reaches America",
+        "date": 1492,
+        "description": "Arrival in Central America."
+      },
+      {
+        "titre": "Conquest of the Inca Empire by Pizarro",
+        "date": 1533,
+        "description": "End of the Inca empire."
+      },
+      {
+        "titre": "First Permanent English Colony in America",
+        "date": 1607,
+        "description": "Founding of Jamestown in Virginia, beginning of British colonization."
+      }
+    ]
+  }
 }

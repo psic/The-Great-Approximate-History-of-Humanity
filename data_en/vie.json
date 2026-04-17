@@ -1,7 +1,7 @@
 {
   "pas": 50000000,
-  "tableaux": [
-    [
+  "tableaux": {
+    "Geological Periods": [
       {
         "titre": "Ediacaran",
         "description": "First complex multicellular organisms.",
@@ -81,7 +81,7 @@
         "fin": 2026
       }
     ],
-    [
+    "Quaternary": [
       {
         "titre": "Quaternary",
         "description": "Ice ages and the emergence of modern humans.",
@@ -89,7 +89,7 @@
         "fin": 2026
       }
     ],
-    [
+    "Biological Groups": [
       {
         "titre": "Mammals",
         "description": "Diversification after the extinction of the dinosaurs.",
@@ -97,38 +97,139 @@
         "fin": 2026
       },
       {
-        "titre": "Hominids and early humans",
+        "titre": "Hominids and Early Humans",
         "description": "Emergence of humans and evolution of the genus Homo.",
         "debut": -1000000,
         "fin": 2026
       }
     ]
-  ],
-  "evenements": [
-    {
-      "date": -300000,
-      "titre": "Appearance of Homo sapiens",
-      "description": "First anatomically modern humans, in Africa."
-    },
-    {
-      "date": -70000,
-      "titre": "Out of Africa",
-      "description": "Migration of Homo sapiens out of Africa and gradual peopling of the world."
-    },
-    {
-      "date": -12000,
-      "titre": "Beginning of agriculture / Neolithic",
-      "description": "Domestication of plants and animals, settlement of populations."
-    },
-    {
-      "date": -11700,
-      "titre": "Beginning of the Holocene",
-      "description": "End of the last glaciation, current geological epoch."
-    },
-    {
-      "date": -10000,
-      "titre": "Pleistocene megafauna extinction",
-      "description": "Disappearance of large mammals such as the woolly mammoth."
-    }
-  ]
+  },
+  "evenements": {
+    "Biological Innovations": [
+      {
+        "titre": "Cambrian Explosion — Eyes, Teeth, Limbs",
+        "date": -541000000,
+        "description": "Explosive diversification over a few million years: appearance of complex eyes, primitive jaws, exoskeletons and nervous systems."
+      },
+      {
+        "titre": "First Vertebrates",
+        "date": -525000000,
+        "description": "Haikouichthys and Myllokunmingia (China) — first animals with a notochord and a rudimentary skull."
+      },
+      {
+        "titre": "First Land Plants",
+        "date": -470000000,
+        "description": "Colonization of the continents by vegetation (bryophytes, then vascular plants) — radical transformation of landscapes."
+      },
+      {
+        "titre": "First Teeth and Jaws (Gnathostomes)",
+        "date": -450000000,
+        "description": "Appearance of jawed vertebrates — a feeding and predatory revolution opening new ecological niches."
+      },
+      {
+        "titre": "First Tetrapods — Out of the Water",
+        "date": -370000000,
+        "description": "Tiktaalik, Acanthostega — aquatic-terrestrial transition, first limbs with digits, beginnings of aerial respiration."
+      },
+      {
+        "titre": "First Flight — Winged Insects",
+        "date": -350000000,
+        "description": "Appearance of the first insects capable of flight during the Carboniferous — an unprecedented innovation in the history of life."
+      },
+      {
+        "titre": "First Amniotic Egg",
+        "date": -312000000,
+        "description": "Key innovation allowing reproduction out of water — amniotic membrane protecting the embryo, freeing reptiles from the aquatic environment."
+      },
+      {
+        "titre": "First Dinosaurs",
+        "date": -230000000,
+        "description": "Appearance in the Late Triassic — they will dominate terrestrial life for 165 million years."
+      },
+      {
+        "titre": "First Vertebrate Flight — Pterosaurs",
+        "date": -228000000,
+        "description": "Pterosaurs are the first vertebrates to develop active flapping flight, long before birds."
+      },
+      {
+        "titre": "First Mammals and Appearance of Hair",
+        "date": -225000000,
+        "description": "Small nocturnal mammals descended from therapsids — thermoregulation through hair, nursing of young."
+      },
+      {
+        "titre": "First Feathers — Archaeopteryx",
+        "date": -150000000,
+        "description": "Archaeopteryx (Late Jurassic) — evolutionary link between theropod dinosaurs and modern birds; first true feathers."
+      },
+      {
+        "titre": "First Flowering Plants (Angiosperms)",
+        "date": -130000000,
+        "description": "Explosive radiation of angiosperms — co-evolution with pollinating insects, transformation of terrestrial ecosystems."
+      },
+      {
+        "titre": "First Primates",
+        "date": -55000000,
+        "description": "Appearance of the ancestors of monkeys, great apes and hominids."
+      }
+    ],
+    "Extinctions": [
+      {
+        "titre": "Ordovician-Silurian Extinction",
+        "date": -444000000,
+        "description": "First major mass extinction — disappearance of approximately 85% of marine species."
+      },
+      {
+        "titre": "Devonian Extinction",
+        "date": -359000000,
+        "description": "Major biological crisis affecting marine ecosystems and fish."
+      },
+      {
+        "titre": "Great Permian-Triassic Extinction",
+        "date": -252000000,
+        "description": "The greatest extinction in history: ~90% of marine species and ~70% of terrestrial species disappear."
+      },
+      {
+        "titre": "Cretaceous-Paleogene Extinction — End of the Dinosaurs",
+        "date": -66000000,
+        "description": "Impact of the Chicxulub asteroid — disappearance of non-avian dinosaurs, ecological niches freed for mammals."
+      },
+      {
+        "titre": "Pleistocene Megafauna Extinction",
+        "date": -10000,
+        "description": "Disappearance of large mammals such as the mammoth."
+      }
+    ],
+    "Hominids": [
+      {
+        "titre": "Human / Chimpanzee Divergence",
+        "date": -7000000,
+        "description": "Last common ancestor between the human lineage and that of chimpanzees."
+      },
+      {
+        "titre": "Bipedalism of Hominids (Australopithecines)",
+        "date": -4000000,
+        "description": "Permanent upright walking — frees the hands for tool use, adaptation to African savannas."
+      },
+      {
+        "titre": "Appearance of Homo sapiens",
+        "date": -300000,
+        "description": "First anatomically modern humans, in Africa."
+      },
+      {
+        "titre": "Out of Africa",
+        "date": -70000,
+        "description": "Migration of Homo sapiens out of Africa and gradual peopling of the world."
+      },
+      {
+        "titre": "Beginning of Agriculture / Neolithic",
+        "date": -12000,
+        "description": "Domestication of plants and animals, settlement of populations."
+      },
+      {
+        "titre": "Beginning of the Holocene",
+        "date": -11700,
+        "description": "End of the last glaciation, current epoch."
+      }
+    ]
+  }
 }

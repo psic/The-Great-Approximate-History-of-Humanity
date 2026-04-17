@@ -1,131 +1,351 @@
 {
-  "pas": 250000000,
-  "tableaux": [
-    [
+  "pas": 500000000,
+  "tableaux": {
+    "Geological Eras": [
       {
+        "titre": "Hadean",
+        "description": "Formation of the Earth's crust, primitive oceans and intense bombardment.",
+        "debut": -4500000000,
+        "fin": -4000000000
+      },
+      {
+        "titre": "Archean",
+        "description": "First life forms (prokaryotes) and first continents.",
         "debut": -4000000000,
-        "fin": -2500000000,
-        "titre": "Archéen",
-        "description": "Apparition de la vie."
+        "fin": -2500000000
       },
       {
+        "titre": "Proterozoic",
+        "description": "Oxygenation of the atmosphere and appearance of complex cells.",
         "debut": -2500000000,
-        "fin": -540000000,
-        "titre": "Protérozoïque",
-        "description": "Vie primitive."
+        "fin": -541000000
       },
       {
+        "titre": "Paleozoic",
+        "description": "Cambrian explosion, first vertebrates.",
         "debut": -540000000,
-        "fin": -250000000,
-        "titre": "Paléozoïque",
-        "description": "Explosion cambrienne, premiers vertébrés."
+        "fin": -250000000
       },
       {
+        "titre": "Mesozoic",
+        "description": "Age of the dinosaurs.",
         "debut": -250000000,
-        "fin": -66000000,
-        "titre": "Mésozoïque",
-        "description": "Ère des dinosaures."
+        "fin": -66000000
       },
       {
+        "titre": "Cenozoic",
+        "description": "Age of mammals and hominids.",
         "debut": -66000000,
-        "fin": 0,
-        "titre": "Cénozoïque",
-        "description": "Mammifères, apparition des hominidés."
+        "fin": 0
+      }
+    ],
+    "Tectonics & Geology": [
+      {
+        "titre": "Formation of the Earth",
+        "description": "Accretion of matter forming the primitive Earth.",
+        "debut": -4500000000,
+        "fin": -4000000000
       },
       {
+        "titre": "Formation of the Moon",
+        "description": "Impact with a protoplanet (Theia) forming the Moon.",
+        "debut": -4500000000,
+        "fin": -4400000000
+      },
+      {
+        "titre": "Great Oxidation Event",
+        "description": "Major increase of oxygen in the atmosphere.",
+        "debut": -2400000000,
+        "fin": -2000000000
+      },
+      {
+        "titre": "Snowball Earth",
+        "description": "Global glaciations covering almost the entire planet.",
+        "debut": -720000000,
+        "fin": -635000000
+      },
+      {
+        "titre": "Formation of Pangaea",
+        "description": "All continents united into a single supercontinent.",
+        "debut": -335000000,
+        "fin": -250000000
+      },
+      {
+        "titre": "Breakup of Pangaea",
+        "description": "Separation into Laurasia and Gondwana.",
+        "debut": -200000000,
+        "fin": -150000000
+      },
+      {
+        "titre": "Formation of Major Mountain Ranges",
+        "description": "Formation of the Alps and the Himalayas.",
+        "debut": -50000000,
+        "fin": 0
+      }
+    ],
+    "Evolution of Life": [
+      {
+        "titre": "Unicellular Life",
+        "description": "Bacteria, archaea — first life forms (oceans).",
         "debut": -3800000000,
-        "fin": -2000000000,
-        "titre": "Vie unicellulaire",
-        "description": "Bactéries, archées — premières formes de vie (océans)."
+        "fin": -2000000000
       },
       {
+        "titre": "Eukaryotes",
+        "description": "Cells with a nucleus; then multicellularity.",
         "debut": -1800000000,
-        "fin": 0,
-        "titre": "Eucaryotes",
-        "description": "Cellules à noyau ; puis pluricellularité."
+        "fin": 0
       },
       {
+        "titre": "Multicellular Life",
+        "description": "Algae, then animals.",
         "debut": -1200000000,
-        "fin": 0,
-        "titre": "Vie pluricellulaire",
-        "description": "Algues, puis animaux (Édiacarien, Cambrien)."
+        "fin": 0
       },
       {
+        "titre": "Conquest of Land",
+        "description": "Plants, arthropods and vertebrates colonize the continents.",
         "debut": -470000000,
-        "fin": -350000000,
-        "titre": "Conquête des terres",
-        "description": "Premières plantes terrestres, puis arthropodes et vertébrés (tétrapodes)."
+        "fin": -350000000
       },
       {
+        "titre": "Dinosaurs",
+        "description": "Domination of dinosaurs over the continents.",
         "debut": -233000000,
-        "fin": -66000000,
-        "titre": "Dinosaures",
-        "description": "Ère des dinosaures — Trias, Jurassique, Crétacé ; domination des continents."
+        "fin": -66000000
       },
       {
+        "titre": "Mammals",
+        "description": "Diversification after the extinction of the dinosaurs.",
         "debut": -220000000,
-        "fin": 0,
-        "titre": "Mammifères",
-        "description": "Premiers mammifères (Trias) ; diversification après extinction des dinosaures."
+        "fin": 0
       },
       {
+        "titre": "Hominids and Early Humans",
+        "description": "Appearance of humans and evolution of the genus Homo.",
         "debut": -7000000,
-        "fin": 0,
-        "titre": "Hominidés et premiers hommes",
-        "description": "Grands singes bipèdes ; genre Homo, outils, expansion."
+        "fin": 0
       }
     ]
-  ],
-  "evenements": [
-    {
-      "date": -4000000000,
-      "titre": "Apparition de la vie",
-      "description": "Formes unicellulaires (océans)."
-    },
-    {
-      "date": -540000000,
-      "titre": "Explosion cambrienne",
-      "description": "Diversification des animaux complexes."
-    },
-    {
-      "date": -450000000,
-      "titre": "Apparition des dents",
-      "description": "Premiers vertébrés à mâchoires et dents (gnathostomes)."
-    },
-    {
-      "date": -470000000,
-      "titre": "Premières plantes terrestres",
-      "description": "Sortie des eaux (mousses, puis vascularisation)."
-    },
-    {
-      "date": -370000000,
-      "titre": "Premiers tétrapodes sur terre",
-      "description": "Vertébrés à quatre pattes hors de l'eau."
-    },
-    {
-      "date": -233000000,
-      "titre": "Apparition des dinosaures",
-      "description": "Premiers dinosaures (Trias) ; diversification au Jurassique et Crétacé."
-    },
-    {
-      "date": -220000000,
-      "titre": "Premiers mammifères",
-      "description": "Apparition dans le Trias (petits, nocturnes)."
-    },
-    {
-      "date": -66000000,
-      "titre": "Extinction des dinosaures",
-      "description": "Météorite (Chicxulub) ; libération de niches pour les mammifères."
-    },
-    {
-      "date": -55000000,
-      "titre": "Premiers primates",
-      "description": "Ancêtres des singes et hominidés."
-    },
-    {
-      "date": -3000000,
-      "titre": "Apparition du genre Homo",
-      "description": "Outils, bipédie avancée."
-    }
-  ]
+  },
+  "evenements": {
+    "Geology & Tectonics": [
+      {
+        "titre": "Formation of the Solar System",
+        "date": -4600000000,
+        "description": "Birth of the Sun and the planets around 4.6 billion years ago."
+      },
+      {
+        "titre": "Formation of the Earth",
+        "date": -4500000000,
+        "description": "Accretion of the planet Earth from the protoplanetary disk."
+      },
+      {
+        "titre": "Formation of the Moon",
+        "date": -4400000000,
+        "description": "Likely the result of a collision with a Mars-sized body (Theia)."
+      },
+      {
+        "titre": "Formation of Oceans and First Continental Crust",
+        "date": -4000000000,
+        "description": "Accumulation of liquid water on the surface and beginnings of primitive continents."
+      },
+      {
+        "titre": "Late Heavy Bombardment",
+        "date": -3900000000,
+        "description": "Intense meteorite rain on the primitive Earth and Moon."
+      },
+      {
+        "titre": "Great Oxidation Event",
+        "date": -2400000000,
+        "description": "First significant accumulation of oxygen in the atmosphere."
+      },
+      {
+        "titre": "First Major Glaciation (Cryogenian)",
+        "date": -720000000,
+        "description": "Glaciers extending over a large part of the planet (Snowball Earth)."
+      },
+      {
+        "titre": "Formation of Pangaea",
+        "date": -335000000,
+        "description": "Single supercontinent uniting almost all of the landmasses."
+      },
+      {
+        "titre": "Formation of the Appalachians and Other Major Ranges",
+        "date": -300000000,
+        "description": "Major orogenies in geological history."
+      },
+      {
+        "titre": "Breakup of Pangaea",
+        "date": -175000000,
+        "description": "Beginning of continental drift toward their current positions (Laurasia and Gondwana)."
+      },
+      {
+        "titre": "Formation of the Himalayas",
+        "date": -50000000,
+        "description": "Collision of India with Asia."
+      },
+      {
+        "titre": "Quaternary Glaciation",
+        "date": -2500000,
+        "description": "Recent glacial and interglacial cycles."
+      }
+    ],
+    "Evolution of Life": [
+      {
+        "titre": "Appearance of Life (prokaryotes)",
+        "date": -3800000000,
+        "description": "First unicellular life forms in the oceans."
+      },
+      {
+        "titre": "Appearance of Stromatolites",
+        "date": -3500000000,
+        "description": "First visible fossil traces of life, produced by cyanobacteria."
+      },
+      {
+        "titre": "Appearance of First Eukaryotes",
+        "date": -2000000000,
+        "description": "Cells with a nucleus appear."
+      },
+      {
+        "titre": "Appearance of Multicellular Life",
+        "date": -1000000000,
+        "description": "First multicellular organisms (algae, then animals)."
+      },
+      {
+        "titre": "First Animals (Ediacarans)",
+        "date": -600000000,
+        "description": "First complex multicellular animal organisms, before the Cambrian explosion."
+      },
+      {
+        "titre": "Cambrian Explosion",
+        "date": -541000000,
+        "description": "Rapid diversification of complex marine life."
+      },
+      {
+        "titre": "First Land Plants",
+        "date": -470000000,
+        "description": "Colonization of the continents by vegetation (mosses, then vascularization)."
+      },
+      {
+        "titre": "Appearance of Teeth",
+        "date": -450000000,
+        "description": "First jawed vertebrates with teeth (gnathostomes)."
+      },
+      {
+        "titre": "Appearance of First Land Animals",
+        "date": -420000000,
+        "description": "Colonization of land by arthropods."
+      },
+      {
+        "titre": "Appearance of Amphibians / First Tetrapods",
+        "date": -370000000,
+        "description": "Four-limbed vertebrates out of water, aquatic-terrestrial transition."
+      },
+      {
+        "titre": "Appearance of First Winged Insects",
+        "date": -350000000,
+        "description": "First insects capable of flight, during the Carboniferous."
+      },
+      {
+        "titre": "Appearance of First Reptiles",
+        "date": -310000000,
+        "description": "Complete adaptation to life on land."
+      },
+      {
+        "titre": "Appearance of Dinosaurs",
+        "date": -233000000,
+        "description": "First dinosaurs (Triassic); diversification in the Jurassic and Cretaceous."
+      },
+      {
+        "titre": "Appearance of First Crocodilians",
+        "date": -225000000,
+        "description": "Ancestors of modern crocodiles, appeared in the Triassic."
+      },
+      {
+        "titre": "First Mammals",
+        "date": -220000000,
+        "description": "Appearance in the Triassic (small, nocturnal)."
+      },
+      {
+        "titre": "Appearance of First Birds",
+        "date": -150000000,
+        "description": "Archaeopteryx, evolutionary link between dinosaurs and modern birds."
+      },
+      {
+        "titre": "Appearance of Flowering Plants",
+        "date": -130000000,
+        "description": "Radiation of angiosperms, transforming terrestrial ecosystems."
+      },
+      {
+        "titre": "Diversification of Modern Mammals",
+        "date": -65000000,
+        "description": "Rapid evolutionary radiation after the disappearance of the dinosaurs."
+      },
+      {
+        "titre": "First Primates",
+        "date": -55000000,
+        "description": "Ancestors of monkeys and hominids."
+      }
+    ],
+    "Extinctions": [
+      {
+        "titre": "Ordovician-Silurian Extinction",
+        "date": -444000000,
+        "description": "First major mass extinction."
+      },
+      {
+        "titre": "Devonian Extinction",
+        "date": -359000000,
+        "description": "Biological crisis affecting marine ecosystems."
+      },
+      {
+        "titre": "Permian-Triassic Extinction",
+        "date": -252000000,
+        "description": "Greatest mass extinction in history, disappearance of ~90% of marine species."
+      },
+      {
+        "titre": "Cretaceous-Paleogene Extinction",
+        "date": -66000000,
+        "description": "Disappearance of the dinosaurs (Chicxulub meteorite); niches freed for mammals."
+      }
+    ],
+    "Hominids & Prehistory": [
+      {
+        "titre": "Human / Chimpanzee Divergence",
+        "date": -7000000,
+        "description": "Last common ancestor between the human lineage and that of chimpanzees."
+      },
+      {
+        "titre": "Appearance of First Hominids",
+        "date": -3000000,
+        "description": "First members of the genus Homo in Africa, tools, advanced bipedalism."
+      },
+      {
+        "titre": "Appearance of Homo sapiens",
+        "date": -300000,
+        "description": "First anatomically modern humans, in Africa."
+      },
+      {
+        "titre": "Out of Africa",
+        "date": -70000,
+        "description": "Migration of Homo sapiens out of Africa and gradual peopling of the world."
+      },
+      {
+        "titre": "Beginning of Agriculture / Neolithic",
+        "date": -12000,
+        "description": "Domestication of plants and animals, settlement of populations."
+      },
+      {
+        "titre": "Beginning of the Holocene",
+        "date": -11700,
+        "description": "End of the last glaciation, current epoch."
+      },
+      {
+        "titre": "Pleistocene Megafauna Extinction",
+        "date": -10000,
+        "description": "Disappearance of large mammals such as the mammoth."
+      }
+    ]
+  }
 }

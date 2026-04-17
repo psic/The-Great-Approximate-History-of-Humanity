@@ -5,75 +5,75 @@
       {
         "debut": -3500,
         "fin": -300,
-        "titre": "Antiquité orientale et classique",
-        "description": "Mésopotamie, Égypte, Grèce, Rome jusqu'à la fin de la République."
+        "titre": "Ancient and Classical Antiquity",
+        "description": "Mesopotamia, Egypt, Greece, Rome until the end of the Republic."
       },
       {
         "debut": -27,
         "fin": 476,
-        "titre": "Empire romain",
-        "description": "De Auguste à la chute de l'Empire romain d'Occident."
+        "titre": "Roman Empire",
+        "description": "From Augustus to the fall of the Western Roman Empire."
       },
       {
         "debut": 476,
         "fin": 1492,
-        "titre": "Moyen Âge",
-        "description": "De la chute de Rome à la découverte de l'Amérique."
+        "titre": "Middle Ages",
+        "description": "From the fall of Rome to the discovery of America."
       }
     ],
     [
       {
         "debut": -500,
         "fin": 100,
-        "titre": "Grèce classique et hellénistique",
-        "description": "Apogée d'Athènes, conquêtes d'Alexandre."
+        "titre": "Classical and Hellenistic Greece",
+        "description": "Height of Athens, conquests of Alexander."
       },
       {
         "debut": -200,
         "fin": 400,
-        "titre": "Rome impériale (chevauchement test)",
-        "description": "Période qui chevauche la précédente pour tester les lanes."
+        "titre": "Imperial Rome (overlap test)",
+        "description": "Period overlapping the previous one to test lanes."
       }
     ],
     [
       {
         "debut": 1789,
         "fin": 1799,
-        "titre": "Révolution française",
-        "description": "De la prise de la Bastille au Consulat."
+        "titre": "French Revolution",
+        "description": "From the storming of the Bastille to the Consulate."
       }
     ]
   ],
   "evenements": [
     {
       "date": -3500,
-      "titre": "Invention de l'écriture",
-      "description": "Apparition de l'écriture cunéiforme en Mésopotamie."
+      "titre": "Invention of Writing",
+      "description": "Appearance of cuneiform writing in Mesopotamia."
     },
     {
       "date": -44,
-      "titre": "Assassinat de César",
-      "description": "Jules César est assassiné aux ides de mars."
+      "titre": "Assassination of Caesar",
+      "description": "Julius Caesar is assassinated on the Ides of March."
     },
     {
       "date": 476,
-      "titre": "Chute de l'Empire romain d'Occident",
-      "description": "Déposition de Romulus Augustule par Odoacre."
+      "titre": "Fall of the Western Roman Empire",
+      "description": "Deposition of Romulus Augustulus by Odoacer."
     },
     {
       "date": 1453,
-      "titre": "Chute de Constantinople",
-      "description": "Prise de Constantinople par les Ottomans."
+      "titre": "Fall of Constantinople",
+      "description": "Constantinople captured by the Ottomans."
     },
     {
       "date": 1789,
-      "titre": "Prise de la Bastille",
-      "description": "14 juillet 1789, symbole de la Révolution française."
+      "titre": "Storming of the Bastille",
+      "description": "14 July 1789, symbol of the French Revolution."
     },
     {
       "date": 1969,
-      "titre": "Premier pas sur la Lune",
-      "description": "Neil Armstrong et Buzz Aldrin marchent sur la Lune."
+      "titre": "First Steps on the Moon",
+      "description": "Neil Armstrong and Buzz Aldrin walk on the Moon."
     }
   ]
 }
