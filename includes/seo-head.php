@@ -4,6 +4,7 @@
 // Optional: $breadcrumbs — array of ['name' => ..., 'url' => ...]
 $_ogImage = SITE_URL . '/img/og-preview.png';
 ?>
+    <meta name="google-site-verification" content="ldNT_L6QBqFh3HORqLH8Vr2GlRefB-JooDIodkYrPew">
     <meta name="description" content="<?php echo htmlspecialchars($metaDesc); ?>">
     <link rel="canonical" href="<?php echo htmlspecialchars($canonicalUrl); ?>">
     <link rel="alternate" hreflang="fr" href="<?php echo htmlspecialchars($frCanonical); ?>">
