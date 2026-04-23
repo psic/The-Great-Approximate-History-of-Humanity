@@ -54,6 +54,10 @@ $breadcrumbs  = [
         .btn-download:hover { background: rgba(122,162,247,.1); }
         .preview-empty { color: var(--text-muted); font-size: .9rem; padding: 2rem 0; }
         #preview-scale-desc { color: var(--text-muted); font-size: .9rem; margin: .5rem 0 0; min-height: 1.2em; }
+        .group-block { border: 1px solid var(--line); border-radius: 6px; padding: .6rem .6rem .5rem; margin-bottom: .5rem; }
+        .group-header { display: flex; gap: .4rem; align-items: center; margin-bottom: .4rem; }
+        .group-name-input { flex: 1; font-weight: 600; }
+        .btn-add-group { width: 100%; }
     </style>
 </head>
 <body>
@@ -67,12 +71,8 @@ $breadcrumbs  = [
         <a href="<?php echo $altUrl; ?>" class="lang-switch" title="<?php echo $altLabel; ?>" aria-label="<?php echo $altLabel; ?>"><?php echo $altFlag; ?></a>
     </header>
 
-    <main class="main">
-<p class="description" style="margin-bottom:2rem"><?php echo htmlspecialchars($t['creer_frise_intro']); ?></p>
-
-        <!-- Aperçu pleine largeur -->
+    <main class="main" style="padding-top:0">
         <div class="preview-section">
-            <p class="panel-title"><?php echo $lang === 'fr' ? 'Aperçu' : 'Preview'; ?></p>
             <p id="preview-scale-desc"></p>
             <div class="timeline-scroll-wrapper">
                 <div class="timeline" id="timeline">
@@ -97,12 +97,8 @@ $breadcrumbs  = [
                     <input type="file" id="json-upload" accept=".json">
                 </div>
                 <div class="field-row">
-                    <label for="frise-name"><?php echo htmlspecialchars($t['creer_name_label']); ?></label>
-                    <input type="text" id="frise-name">
-                </div>
-                <div class="field-row">
                     <label for="frise-pas"><?php echo htmlspecialchars($t['creer_step_label']); ?></label>
-                    <input type="number" id="frise-pas" value="100" min="1" style="max-width:100px">
+                    <input type="number" id="frise-pas" value="10" min="1" style="max-width:100px">
                 </div>
             </div>
 
@@ -110,14 +106,14 @@ $breadcrumbs  = [
             <div class="editor-col">
                 <h3 class="col-title"><?php echo htmlspecialchars($t['creer_periods_title']); ?></h3>
                 <div id="periods-list"></div>
-                <button type="button" class="btn btn-add" id="add-period"><?php echo htmlspecialchars($t['creer_add_period']); ?></button>
+                <button type="button" class="btn btn-add btn-add-group" id="add-period-group"><?php echo htmlspecialchars($t['creer_add_period_group']); ?></button>
             </div>
 
             <!-- Colonne 3 : événements -->
             <div class="editor-col">
                 <h3 class="col-title"><?php echo htmlspecialchars($t['creer_events_title']); ?></h3>
                 <div id="events-list"></div>
-                <button type="button" class="btn btn-add" id="add-event"><?php echo htmlspecialchars($t['creer_add_event']); ?></button>
+                <button type="button" class="btn btn-add btn-add-group" id="add-event-group"><?php echo htmlspecialchars($t['creer_add_event_group']); ?></button>
             </div>
         </div>
     </main>
@@ -141,43 +137,82 @@ $breadcrumbs  = [
     <script>
     (function () {
         var labels = {
-            name:  <?php echo json_encode($t['creer_period_name']); ?>,
-            start: <?php echo json_encode($t['creer_period_start']); ?>,
-            end:   <?php echo json_encode($t['creer_period_end']); ?>,
-            desc:  <?php echo json_encode($t['creer_period_desc']); ?>,
-            eName: <?php echo json_encode($t['creer_event_name']); ?>,
-            date:  <?php echo json_encode($t['creer_event_date']); ?>,
-            eDesc: <?php echo json_encode($t['creer_event_desc']); ?>
+            name:       <?php echo json_encode($t['creer_period_name']); ?>,
+            start:      <?php echo json_encode($t['creer_period_start']); ?>,
+            end:        <?php echo json_encode($t['creer_period_end']); ?>,
+            desc:       <?php echo json_encode($t['creer_period_desc']); ?>,
+            eName:      <?php echo json_encode($t['creer_event_name']); ?>,
+            date:       <?php echo json_encode($t['creer_event_date']); ?>,
+            eDesc:      <?php echo json_encode($t['creer_event_desc']); ?>,
+            groupName:     <?php echo json_encode($t['creer_group_name']); ?>,
+            addPeriod:     <?php echo json_encode($t['creer_add_period']); ?>,
+            addEvent:      <?php echo json_encode($t['creer_add_event']); ?>,
+            confirmDelete: <?php echo json_encode($t['creer_group_confirm_delete']); ?>
         };
+
+        // Normalise n'importe quel format de tableaux vers [{titre, periodes}]
+        function parseTableaux(raw, fallback) {
+            if (!raw && fallback) return [{ titre: null, periodes: fallback }];
+            if (!raw) return [];
+            if (!Array.isArray(raw)) {
+                return Object.keys(raw).map(function (k) { return { titre: k, periodes: raw[k] || [] }; });
+            }
+            return raw.map(function (tab) {
+                if (tab && !Array.isArray(tab) && tab.periodes !== undefined) {
+                    return { titre: tab.titre || null, periodes: tab.periodes };
+                }
+                return { titre: null, periodes: Array.isArray(tab) ? tab : [] };
+            });
+        }
 
         function buildData() {
             var pas = parseInt(document.getElementById('frise-pas').value, 10) || 100;
-            var periods = [];
-            document.querySelectorAll('#periods-list .entry-row').forEach(function (row) {
-                var inputs = row.querySelectorAll('input');
-                var titre = inputs[0].value.trim();
-                var debut = parseInt(inputs[1].value, 10);
-                var fin   = parseInt(inputs[2].value, 10);
-                var desc  = inputs[3] ? inputs[3].value.trim() : '';
-                if (titre && !isNaN(debut) && !isNaN(fin)) {
-                    var p = { titre: titre, debut: debut, fin: fin };
-                    if (desc) p.description = desc;
-                    periods.push(p);
-                }
+
+            function uniqueKey(obj, base) {
+                if (!(base in obj)) return base;
+                var n = 2;
+                while ((base + ' (' + n + ')') in obj) n++;
+                return base + ' (' + n + ')';
+            }
+
+            var tableaux = {};
+            document.querySelectorAll('#periods-list .group-block').forEach(function (group) {
+                var titre = group.querySelector('.group-name-input').value.trim();
+                var periodes = [];
+                group.querySelectorAll('.entry-row').forEach(function (row) {
+                    var inputs = row.querySelectorAll('input');
+                    var nom   = inputs[0].value.trim();
+                    var debut = parseInt(inputs[1].value, 10);
+                    var fin   = parseInt(inputs[2].value, 10);
+                    var desc  = inputs[3] ? inputs[3].value.trim() : '';
+                    if (nom && !isNaN(debut) && !isNaN(fin)) {
+                        var p = { titre: nom, debut: debut, fin: fin };
+                        if (desc) p.description = desc;
+                        periodes.push(p);
+                    }
+                });
+                if (periodes.length > 0) tableaux[uniqueKey(tableaux, titre)] = periodes;
             });
-            var events = [];
-            document.querySelectorAll('#events-list .entry-row').forEach(function (row) {
-                var inputs = row.querySelectorAll('input');
-                var titre = inputs[0].value.trim();
-                var date  = parseInt(inputs[1].value, 10);
-                var desc  = inputs[2] ? inputs[2].value.trim() : '';
-                if (titre && !isNaN(date)) {
-                    var e = { titre: titre, date: date };
-                    if (desc) e.description = desc;
-                    events.push(e);
-                }
+
+            var evenements = {};
+            document.querySelectorAll('#events-list .group-block').forEach(function (group) {
+                var titre = group.querySelector('.group-name-input').value.trim();
+                var evts  = [];
+                group.querySelectorAll('.entry-row').forEach(function (row) {
+                    var inputs = row.querySelectorAll('input');
+                    var nom  = inputs[0].value.trim();
+                    var date = parseInt(inputs[1].value, 10);
+                    var desc = inputs[2] ? inputs[2].value.trim() : '';
+                    if (nom && !isNaN(date)) {
+                        var e = { titre: nom, date: date };
+                        if (desc) e.description = desc;
+                        evts.push(e);
+                    }
+                });
+                if (evts.length > 0) evenements[uniqueKey(evenements, titre)] = evts;
             });
-            return { pas: pas, tableaux: [periods], evenements: events };
+
+            return { pas: pas, tableaux: tableaux, evenements: evenements };
         }
 
         var exportBtns = ['download-json', 'download-image', 'download-pdf'].map(function (id) {
@@ -187,33 +222,27 @@ $breadcrumbs  = [
         function setExportEnabled(enabled) {
             exportBtns.forEach(function (btn) { btn.disabled = !enabled; });
         }
-
         setExportEnabled(false);
 
         function updatePreview() {
             var data = buildData();
-            var hasContent = (data.tableaux[0] && data.tableaux[0].length > 0) || data.evenements.length > 0;
+            var hasPeriods = Object.keys(data.tableaux).length > 0;
+            var hasEvents  = Object.keys(data.evenements).length > 0;
+            var hasContent = hasPeriods || hasEvents;
             setExportEnabled(hasContent);
-            // Met à jour le label d'échelle manuellement (l'élément id diffère de la page principale)
             var descEl = document.getElementById('preview-scale-desc');
-            var i18n = window.TIMELINE_I18N;
-            if (descEl && data.pas) {
-                descEl.textContent = hasContent ? i18n.scaleLabel.replace('%s', data.pas) : '';
-            }
-            // Redirige renderTimeline vers #timeline (déjà l'id correct)
+            if (descEl) descEl.textContent = hasContent ? window.TIMELINE_I18N.scaleLabel.replace('%s', data.pas) : '';
             if (window.renderTimeline) window.renderTimeline(data);
         }
 
-        function addPeriodRow(titre, debut, fin, desc) {
+        function addPeriodRow(container, titre, debut, fin, desc) {
             var row = document.createElement('div');
             row.className = 'entry-row';
             var line1 = document.createElement('div');
             line1.className = 'entry-line';
             [[labels.name, 'text', titre || ''], [labels.start, 'number', debut != null ? debut : ''], [labels.end, 'number', fin != null ? fin : '']].forEach(function (f) {
                 var input = document.createElement('input');
-                input.type = f[1];
-                input.placeholder = f[0];
-                input.value = f[2];
+                input.type = f[1]; input.placeholder = f[0]; input.value = f[2];
                 input.addEventListener('input', updatePreview);
                 line1.appendChild(input);
             });
@@ -222,26 +251,22 @@ $breadcrumbs  = [
             btn.onclick = function () { row.remove(); updatePreview(); };
             line1.appendChild(btn);
             var descInput = document.createElement('input');
-            descInput.type = 'text';
-            descInput.placeholder = labels.desc;
-            descInput.value = desc || '';
+            descInput.type = 'text'; descInput.placeholder = labels.desc; descInput.value = desc || '';
             descInput.className = 'entry-desc';
             descInput.addEventListener('input', updatePreview);
             row.appendChild(line1);
             row.appendChild(descInput);
-            document.getElementById('periods-list').appendChild(row);
+            container.appendChild(row);
         }
 
-        function addEventRow(titre, date, desc) {
+        function addEventRow(container, titre, date, desc) {
             var row = document.createElement('div');
             row.className = 'entry-row';
             var line1 = document.createElement('div');
             line1.className = 'entry-line';
             [[labels.eName, 'text', titre || ''], [labels.date, 'number', date != null ? date : '']].forEach(function (f) {
                 var input = document.createElement('input');
-                input.type = f[1];
-                input.placeholder = f[0];
-                input.value = f[2];
+                input.type = f[1]; input.placeholder = f[0]; input.value = f[2];
                 input.addEventListener('input', updatePreview);
                 line1.appendChild(input);
             });
@@ -250,18 +275,100 @@ $breadcrumbs  = [
             btn.onclick = function () { row.remove(); updatePreview(); };
             line1.appendChild(btn);
             var descInput = document.createElement('input');
-            descInput.type = 'text';
-            descInput.placeholder = labels.eDesc;
-            descInput.value = desc || '';
+            descInput.type = 'text'; descInput.placeholder = labels.eDesc; descInput.value = desc || '';
             descInput.className = 'entry-desc';
             descInput.addEventListener('input', updatePreview);
             row.appendChild(line1);
             row.appendChild(descInput);
-            document.getElementById('events-list').appendChild(row);
+            container.appendChild(row);
         }
 
-        document.getElementById('add-period').onclick = function () { addPeriodRow(); };
-        document.getElementById('add-event').onclick  = function () { addEventRow(); };
+        function addPeriodGroup(titre, periodes) {
+            var group = document.createElement('div');
+            group.className = 'group-block';
+            var header = document.createElement('div');
+            header.className = 'group-header';
+            var nameInput = document.createElement('input');
+            nameInput.type = 'text'; nameInput.placeholder = labels.groupName;
+            nameInput.className = 'group-name-input'; nameInput.value = titre || '';
+            nameInput.addEventListener('input', updatePreview);
+            header.appendChild(nameInput);
+            var removeBtn = document.createElement('button');
+            removeBtn.type = 'button'; removeBtn.className = 'btn btn-remove'; removeBtn.textContent = '×';
+            removeBtn.onclick = function () {
+                if (group.querySelectorAll('.entry-row').length > 0 && !confirm(labels.confirmDelete)) return;
+                group.remove(); updatePreview();
+            };
+            header.appendChild(removeBtn);
+            group.appendChild(header);
+            var items = document.createElement('div');
+            items.className = 'group-items';
+            group.appendChild(items);
+            var addBtn = document.createElement('button');
+            addBtn.type = 'button'; addBtn.className = 'btn btn-add'; addBtn.textContent = labels.addPeriod;
+            addBtn.onclick = function () { addPeriodRow(items); };
+            group.appendChild(addBtn);
+            document.getElementById('periods-list').appendChild(group);
+            (periodes || []).forEach(function (p) { addPeriodRow(items, p.titre, p.debut, p.fin, p.description); });
+        }
+
+        function addEventGroup(titre, evts) {
+            var group = document.createElement('div');
+            group.className = 'group-block';
+            var header = document.createElement('div');
+            header.className = 'group-header';
+            var nameInput = document.createElement('input');
+            nameInput.type = 'text'; nameInput.placeholder = labels.groupName;
+            nameInput.className = 'group-name-input'; nameInput.value = titre || '';
+            nameInput.addEventListener('input', updatePreview);
+            header.appendChild(nameInput);
+            var removeBtn = document.createElement('button');
+            removeBtn.type = 'button'; removeBtn.className = 'btn btn-remove'; removeBtn.textContent = '×';
+            removeBtn.onclick = function () {
+                if (group.querySelectorAll('.entry-row').length > 0 && !confirm(labels.confirmDelete)) return;
+                group.remove(); updatePreview();
+            };
+            header.appendChild(removeBtn);
+            group.appendChild(header);
+            var items = document.createElement('div');
+            items.className = 'group-items';
+            group.appendChild(items);
+            var addBtn = document.createElement('button');
+            addBtn.type = 'button'; addBtn.className = 'btn btn-add'; addBtn.textContent = labels.addEvent;
+            addBtn.onclick = function () { addEventRow(items); };
+            group.appendChild(addBtn);
+            document.getElementById('events-list').appendChild(group);
+            (evts || []).forEach(function (e) { addEventRow(items, e.titre, e.date, e.description); });
+        }
+
+        // Exemples au démarrage
+        <?php if ($lang === 'fr'): ?>
+        addPeriodGroup('Expériences professionnelles', [
+            { titre: 'Développeur — Acme Corp', debut: 2005, fin: 2013, description: 'Développement d\'applications web, PHP et JavaScript.' },
+            { titre: 'Lead Developer — Tech Innov', debut: 2013, fin: 2026, description: 'Pilotage d\'une équipe de 5 développeurs, architecture cloud.' }
+        ]);
+        addPeriodGroup('Formations');
+        addEventGroup('Diplômes & Certifications', [
+            { titre: 'Master Informatique', date: 2005 },
+            { titre: 'Certification Cloud (AWS)', date: 2019 }
+        ]);
+        addEventGroup('Projets personnels');
+        <?php else: ?>
+        addPeriodGroup('Work Experience', [
+            { titre: 'Developer — Acme Corp', debut: 2005, fin: 2013, description: 'Web application development, PHP and JavaScript.' },
+            { titre: 'Lead Developer — Tech Innov', debut: 2013, fin: 2026, description: 'Managing a team of 5 developers, cloud architecture.' }
+        ]);
+        addPeriodGroup('Education');
+        addEventGroup('Degrees & Certifications', [
+            { titre: 'MSc Computer Science', date: 2005 },
+            { titre: 'Cloud Certification (AWS)', date: 2019 }
+        ]);
+        addEventGroup('Personal Projects');
+        <?php endif; ?>
+        updatePreview();
+
+        document.getElementById('add-period-group').onclick = function () { addPeriodGroup(); };
+        document.getElementById('add-event-group').onclick  = function () { addEventGroup(); };
 
         document.getElementById('frise-pas').addEventListener('input', updatePreview);
 
@@ -273,16 +380,21 @@ $breadcrumbs  = [
             reader.onload = function (ev) {
                 try {
                     var data = JSON.parse(ev.target.result);
-                    // Remplir le formulaire
-                    document.getElementById('frise-name').value = file.name.replace(/\.json$/, '');
                     if (data.pas) document.getElementById('frise-pas').value = data.pas;
+
                     document.getElementById('periods-list').innerHTML = '';
+                    var tabs = parseTableaux(data.tableaux, data.periodes);
+                    if (tabs.length === 0) tabs = [{ titre: null, periodes: [] }];
+                    tabs.forEach(function (tab) { addPeriodGroup(tab.titre, tab.periodes); });
+
                     document.getElementById('events-list').innerHTML = '';
-                    var tableaux = data.tableaux || (data.periodes ? [data.periodes] : []);
-                    tableaux.forEach(function (tab) {
-                        (tab || []).forEach(function (p) { addPeriodRow(p.titre, p.debut, p.fin, p.description); });
-                    });
-                    (data.evenements || []).forEach(function (e) { addEventRow(e.titre, e.date, e.description); });
+                    var rawEvts = data.evenements;
+                    if (rawEvts && !Array.isArray(rawEvts)) {
+                        Object.keys(rawEvts).forEach(function (cat) { addEventGroup(cat, rawEvts[cat]); });
+                    } else {
+                        addEventGroup(null, rawEvts || []);
+                    }
+
                     updatePreview();
                 } catch (err) {
                     console.error('JSON invalide', err);
@@ -291,20 +403,19 @@ $breadcrumbs  = [
             reader.readAsText(file);
         });
 
-        // Téléchargement
+        // Téléchargement JSON
         document.getElementById('download-json').onclick = function () {
             var data = buildData();
-            var name = document.getElementById('frise-name').value.trim() || 'ma-frise';
             var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
             var a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
-            a.download = name + '.json';
+            a.download = 'ma-frise.json';
             a.click();
         };
-        // Téléchargement image PNG (dessin canvas depuis le DOM rendu)
+
+        // Téléchargement image PNG
         document.getElementById('download-image').onclick = function () {
             var el = document.getElementById('timeline');
-            var name = document.getElementById('frise-name').value.trim() || 'frise';
             var W = el.scrollWidth, H = el.scrollHeight;
             var canvas = document.createElement('canvas');
             canvas.width = W; canvas.height = H;
@@ -312,19 +423,13 @@ $breadcrumbs  = [
             var base = el.getBoundingClientRect();
             function rx(r) { return r.left - base.left; }
             function ry(r) { return r.top - base.top; }
-
-            // Fond
             ctx.fillStyle = '#000000';
             ctx.fillRect(0, 0, W, H);
-
-            // Lignes de grille verticales
             el.querySelectorAll('.timeline-vline').forEach(function (line) {
                 var r = line.getBoundingClientRect();
                 ctx.strokeStyle = '#222222'; ctx.lineWidth = 1;
                 ctx.beginPath(); ctx.moveTo(rx(r), 0); ctx.lineTo(rx(r), H); ctx.stroke();
             });
-
-            // Titres de section
             el.querySelectorAll('.timeline-section-title').forEach(function (t) {
                 var r = t.getBoundingClientRect();
                 ctx.fillStyle = '#888888';
@@ -332,8 +437,6 @@ $breadcrumbs  = [
                 ctx.textAlign = 'left';
                 ctx.fillText(t.textContent, rx(r), ry(r) + 14);
             });
-
-            // Barres de périodes
             el.querySelectorAll('.periode').forEach(function (p) {
                 var r = p.getBoundingClientRect();
                 var x = rx(r), y = ry(r), pw = r.width, ph = r.height;
@@ -352,23 +455,17 @@ $breadcrumbs  = [
                     ctx.restore();
                 }
             });
-
-            // Ligne d'axe horizontale
             el.querySelectorAll('.timeline-line-h').forEach(function (line) {
                 var r = line.getBoundingClientRect();
                 var y = ry(r) + r.height / 2;
                 ctx.strokeStyle = '#666666'; ctx.lineWidth = 1;
                 ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
             });
-
-            // Tirets d'axe
             el.querySelectorAll('.axis-tick').forEach(function (tick) {
                 var r = tick.getBoundingClientRect();
                 ctx.strokeStyle = '#666666'; ctx.lineWidth = 1;
                 ctx.beginPath(); ctx.moveTo(rx(r), ry(r)); ctx.lineTo(rx(r), ry(r) + r.height); ctx.stroke();
             });
-
-            // Labels d'axe
             el.querySelectorAll('.axis-label-h').forEach(function (label) {
                 var r = label.getBoundingClientRect();
                 ctx.fillStyle = '#b0b0b0';
@@ -376,8 +473,6 @@ $breadcrumbs  = [
                 ctx.textAlign = 'center';
                 ctx.fillText(label.textContent, rx(r), ry(r) + 12);
             });
-
-            // Marqueurs d'événements
             el.querySelectorAll('.event-marker').forEach(function (marker) {
                 var r = marker.getBoundingClientRect();
                 var x = rx(r), y = ry(r);
@@ -394,9 +489,8 @@ $breadcrumbs  = [
                     ctx.fillText(titleEl.textContent, rx(tr), ry(tr) + 11);
                 }
             });
-
             var a = document.createElement('a');
-            a.download = name + '.png';
+            a.download = 'ma-frise.png';
             a.href = canvas.toDataURL('image/png');
             a.click();
         };
@@ -405,9 +499,8 @@ $breadcrumbs  = [
         document.getElementById('download-pdf').onclick = async function () {
             var el = document.getElementById('timeline');
             var css = await fetch('/css/style.css').then(function (r) { return r.text(); });
-            var name = document.getElementById('frise-name').value.trim() || 'frise';
             var win = window.open('', '_blank');
-            win.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' + name + '</title>'
+            win.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>ma-frise</title>'
                 + '<style>' + css + '@media print { body { margin:0; } .timeline { min-width: unset !important; } }</style>'
                 + '</head><body style="background:#000;padding:1rem">'
                 + el.outerHTML
