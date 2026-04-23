@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /data_fr/
+Disallow: /data_en/
+Disallow: /includes/
+Disallow: /lang/
+
+Sitemap: https://taghoh.web-en-royans.fr/sitemap.xml

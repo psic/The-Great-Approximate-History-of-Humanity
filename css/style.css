@@ -205,6 +205,12 @@ body {
   transform: translateX(-100%);
 }
 
+@media (max-width: 768px) {
+  .axis-label-h {
+    font-size: 0.65rem;
+  }
+}
+
 /* Un bloc par tableau = une ligne de la frise */
 .timeline-tableaux {
   display: flex;

@@ -11,7 +11,10 @@
   var i18n = {
     periods:    _i18nBase.periods    || 'Périodes',
     events:     _i18nBase.events     || 'Événements',
-    scaleLabel: _i18nBase.scaleLabel || 'Échelle : %s ans par graduation'
+    scaleLabel: _i18nBase.scaleLabel || 'Échelle : %s ans par graduation',
+    spanLabel:  _i18nBase.spanLabel  || 'Durée totale : %s ans',
+    footerTpl:  _i18nBase.footerTpl  || null,
+    lang:       _i18nBase.lang       || pageLang
   };
 
   function escapeHtml(text) {
@@ -111,10 +114,10 @@
     evenements.forEach(function (e) {
       if (e.date != null) allYears.push(parseInt(e.date, 10));
     });
-    var scaleMin = 0, scaleMax = 0, range = 1;
+    var scaleMin = 0, scaleMax = 0, range = 1, minYear = 0, maxYear = 0;
     if (allYears.length) {
-      var minYear = Math.min.apply(null, allYears);
-      var maxYear = Math.max.apply(null, allYears);
+      minYear = Math.min.apply(null, allYears);
+      maxYear = Math.max.apply(null, allYears);
       scaleMin = Math.floor(minYear / pas) * pas;
       scaleMax = Math.ceil(maxYear / pas) * pas;
       if (scaleMax <= scaleMin) scaleMax = scaleMin + pas;
@@ -122,7 +125,7 @@
     }
     var scaleYears = [];
     for (var y = scaleMin; y <= scaleMax; y += pas) scaleYears.push(y);
-    return { scaleMin: scaleMin, scaleMax: scaleMax, range: range, scaleYears: scaleYears };
+    return { scaleMin: scaleMin, scaleMax: scaleMax, range: range, scaleYears: scaleYears, minYear: minYear, maxYear: maxYear };
   }
 
   function renderVerticalGrid(scaleYears, scaleMin, range) {
@@ -137,10 +140,15 @@
   function renderScaleH(scaleYears, scaleMin, range) {
     var ticksHtml = '';
     var labelsHtml = '';
-    scaleYears.forEach(function (y) {
+    var n = scaleYears.length;
+    var skipFactor = n > 40 ? 4 : (n > 20 ? 2 : 1);
+    var lastIdx = n - 1;
+    scaleYears.forEach(function (y, idx) {
       var leftPct = range > 0 ? ((y - scaleMin) / range) * 100 : 0;
       ticksHtml += '<span class="axis-tick" style="left: ' + leftPct.toFixed(2) + '%"></span>';
-      labelsHtml += '<span class="axis-label-h" style="left: ' + leftPct.toFixed(2) + '%">' + formatNumber(y) + '</span>';
+      if (idx === 0 || idx === lastIdx || idx % skipFactor === 0) {
+        labelsHtml += '<span class="axis-label-h" style="left: ' + leftPct.toFixed(2) + '%">' + formatNumber(y) + '</span>';
+      }
     });
     return '<div class="timeline-axis-bottom"><div class="timeline-ticks">' + ticksHtml + '</div><div class="timeline-line-h"></div></div><div class="timeline-scale-h">' + labelsHtml + '</div>';
   }
@@ -275,10 +283,14 @@
     var container = document.getElementById('timeline');
     if (!container || !data) return;
 
-    var descEl = document.getElementById('timeline-scale-desc');
-    if (descEl && data.pas) descEl.textContent = i18n.scaleLabel.replace('%s', formatNumber(data.pas));
-
     var scale = computeScale(data);
+
+    var descEl = document.getElementById('timeline-scale-desc');
+    if (descEl && data.pas) {
+      var span = scale.maxYear - scale.minYear;
+      descEl.textContent = i18n.scaleLabel.replace('%s', formatNumber(data.pas))
+        + ' \u2014 ' + i18n.spanLabel.replace('%s', formatNumber(span));
+    }
     var tableaux = normaliserTableaux(data.tableaux, data.periodes);
     var totalPeriodes = 0;
     tableaux.forEach(function (t) { totalPeriodes += (t.periodes || []).length; });
@@ -323,6 +335,11 @@
         tabs.forEach(function (btn) {
           btn.classList.toggle('active', btn.getAttribute('data-vue') === vue);
         });
+        var filename = vue + '.json';
+        var dlLink = document.getElementById('footer-json-download');
+        if (dlLink) dlLink.href = '/data_' + i18n.lang + '/' + filename;
+        var srcSpan = document.getElementById('footer-json-source');
+        if (srcSpan && i18n.footerTpl) srcSpan.textContent = i18n.footerTpl.replace('%s', filename);
       } catch (err) {
         console.error('Erreur AJAX timeline:', err);
       }

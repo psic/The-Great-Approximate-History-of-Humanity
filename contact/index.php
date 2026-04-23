@@ -4,6 +4,19 @@ $t    = require __DIR__ . '/../lang/' . $lang . '.php';
 if (!is_array($t)) { $t = require __DIR__ . '/../lang/fr.php'; }
 $home = $lang === 'en' ? '/en/' : '/';
 $base = $lang === 'en' ? '/en' : '';
+require __DIR__ . '/../config.php';
+$langPrefix   = $lang === 'en' ? '/en' : '';
+$canonicalUrl = SITE_URL . $langPrefix . '/contact/';
+$frCanonical  = SITE_URL . '/contact/';
+$enCanonical  = SITE_URL . '/en/contact/';
+$ogLocale     = $lang === 'fr' ? 'fr_FR' : 'en_GB';
+$ogLocaleAlt  = $lang === 'fr' ? 'en_GB' : 'fr_FR';
+$metaDesc     = $t['meta_desc_contact'];
+$pageTitle    = $t['contact_title'] . ' — ' . $t['title'];
+$breadcrumbs  = [
+    ['name' => $t['home'],          'url' => SITE_URL . $langPrefix . '/'],
+    ['name' => $t['contact_title'], 'url' => $canonicalUrl],
+];
 
 session_start();
 
@@ -70,7 +83,8 @@ $captcha_label = sprintf($t['contact_captcha_label'], $captcha_a, $captcha_b);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($t['contact_title']); ?> — <?php echo htmlspecialchars($t['title']); ?></title>
+    <title><?php echo htmlspecialchars($pageTitle); ?></title>
+    <?php require __DIR__ . '/../includes/seo-head.php'; ?>
     <link rel="stylesheet" href="/css/style.css">
     <style>
         .contact-form {

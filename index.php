@@ -4,6 +4,8 @@
  * Chaque vue charge un JSON (pas, tableaux, evenements).
  */
 
+require __DIR__ . '/config.php';
+
 // Langue — peut être pré-définie par un fichier inclus (ex. en/index.php)
 if (!isset($lang)) {
     $lang = 'fr';
@@ -23,6 +25,38 @@ $vues = [
 ];
 $vue = isset($_GET['vue']) && isset($vues[$_GET['vue']]) ? $_GET['vue'] : 'moderne';
 $jsonPath = __DIR__ . '/data_' . $lang . '/' . $vues[$vue];
+
+// SEO
+$langPrefix   = $lang === 'en' ? '/en' : '';
+$vueParam     = $vue !== 'moderne' ? '?vue=' . $vue : '';
+$canonicalUrl = SITE_URL . $langPrefix . '/' . $vueParam;
+$frCanonical  = SITE_URL . '/' . $vueParam;
+$enCanonical  = SITE_URL . '/en/' . $vueParam;
+$ogLocale     = $lang === 'fr' ? 'fr_FR' : 'en_GB';
+$ogLocaleAlt  = $lang === 'fr' ? 'en_GB' : 'fr_FR';
+$vueDescKeys  = [
+    'moderne'  => 'meta_desc_moderne',
+    'histoire' => 'meta_desc_histoire',
+    'humanite' => 'meta_desc_humanite',
+    'terre'    => 'meta_desc_terre',
+    'univers'  => 'meta_desc_univers',
+    'vie'      => 'meta_desc_vie',
+];
+$metaDesc  = $t[$vueDescKeys[$vue]] ?? $t['meta_desc_moderne'];
+$vueTitles = [
+    'histoire' => $t['tab_histoire'],
+    'humanite' => $t['tab_humanite'],
+    'terre'    => $t['tab_terre'],
+    'univers'  => $t['tab_univers'],
+    'vie'      => $t['tab_vie'],
+];
+$pageTitle = isset($vueTitles[$vue])
+    ? $vueTitles[$vue] . ' — ' . $t['title']
+    : $t['title'];
+$breadcrumbs = [['name' => $t['home'], 'url' => SITE_URL . $langPrefix . '/']];
+if (isset($vueTitles[$vue])) {
+    $breadcrumbs[] = ['name' => $vueTitles[$vue], 'url' => $canonicalUrl];
+}
 
 /**
  * Formate un nombre avec un espace comme séparateur de milliers (ex. 1 000 000, -3 500).
@@ -186,6 +220,9 @@ if (!is_readable($jsonPath)) {
         for ($y = $scaleMin; $y <= $scaleMax; $y += $pas) {
             $scaleYears[] = $y;
         }
+        $nbLabels   = count($scaleYears);
+        $labelSkip  = $nbLabels > 40 ? 4 : ($nbLabels > 20 ? 2 : 1);
+        $labelLast  = $nbLabels - 1;
 
         $palette = palette_harmonieuse(max(20, count($toutesPeriodes)));
         $paletteSize = count($palette);
@@ -239,7 +276,8 @@ if (!is_readable($jsonPath)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($t['title']); ?></title>
+    <title><?php echo htmlspecialchars($pageTitle); ?></title>
+    <?php require __DIR__ . '/includes/seo-head.php'; ?>
     <link rel="stylesheet" href="<?php echo $lang === 'en' ? '../' : ''; ?>css/style.css">
 </head>
 <body>
@@ -265,7 +303,12 @@ if (!is_readable($jsonPath)) {
                 <button type="button" class="tab-btn <?php echo $vue === 'vie' ? 'active' : ''; ?>" role="tab" data-vue="vie"><?php echo htmlspecialchars($t['tab_vie']); ?></button>
                 <button type="button" class="tab-btn <?php echo $vue === 'univers' ? 'active' : ''; ?>" role="tab" data-vue="univers"><?php echo htmlspecialchars($t['tab_univers']); ?></button>
             </nav>
-            <p class="description" id="timeline-scale-desc"><?php echo isset($pas) ? sprintf($t['scale_label'], format_nombre($pas)) : ''; ?></p>
+            <p class="description" id="timeline-scale-desc">
+                <?php echo isset($pas) ? sprintf($t['scale_label'], format_nombre($pas)) : ''; ?>
+                <?php if (!empty($allYears)) : ?>
+                    &nbsp;— <?php echo sprintf($t['span_label'], format_nombre($maxYear - $minYear)); ?>
+                <?php endif; ?>
+            </p>
 <div class="timeline-scroll-wrapper">
 <div class="timeline" id="timeline" data-vue="<?php echo htmlspecialchars($vue); ?>" data-min="<?php echo (int) $scaleMin; ?>" data-max="<?php echo (int) $scaleMax; ?>" data-range="<?php echo (int) $range; ?>">
                 <!-- Lignes verticales pointillées (échelle) sur toute la frise -->
@@ -287,9 +330,11 @@ if (!is_readable($jsonPath)) {
                         <div class="timeline-line-h"></div>
                     </div>
                     <div class="timeline-scale-h">
-                        <?php foreach ($scaleYears as $y) : ?>
+                        <?php foreach ($scaleYears as $idx => $y) : ?>
+                            <?php if ($idx === 0 || $idx === $labelLast || $idx % $labelSkip === 0) : ?>
                             <?php $leftPct = $range > 0 ? (($y - $scaleMin) / $range) * 100 : 0; ?>
                             <span class="axis-label-h" style="left: <?php echo number_format($leftPct, 2, '.', ''); ?>%"><?php echo format_nombre($y); ?></span>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </div>
                 </div>
@@ -346,9 +391,11 @@ if (!is_readable($jsonPath)) {
                         <div class="timeline-line-h"></div>
                     </div>
                     <div class="timeline-scale-h">
-                        <?php foreach ($scaleYears as $y) : ?>
+                        <?php foreach ($scaleYears as $idx => $y) : ?>
+                            <?php if ($idx === 0 || $idx === $labelLast || $idx % $labelSkip === 0) : ?>
                             <?php $leftPct = $range > 0 ? (($y - $scaleMin) / $range) * 100 : 0; ?>
                             <span class="axis-label-h" style="left: <?php echo number_format($leftPct, 2, '.', ''); ?>%"><?php echo format_nombre($y); ?></span>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </div>
                 </div>
@@ -394,9 +441,11 @@ if (!is_readable($jsonPath)) {
                         <div class="timeline-line-h"></div>
                     </div>
                     <div class="timeline-scale-h">
-                        <?php foreach ($scaleYears as $y) : ?>
+                        <?php foreach ($scaleYears as $idx => $y) : ?>
+                            <?php if ($idx === 0 || $idx === $labelLast || $idx % $labelSkip === 0) : ?>
                             <?php $leftPct = $range > 0 ? (($y - $scaleMin) / $range) * 100 : 0; ?>
                             <span class="axis-label-h" style="left: <?php echo number_format($leftPct, 2, '.', ''); ?>%"><?php echo format_nombre($y); ?></span>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </div>
                 </section>
@@ -423,14 +472,20 @@ if (!is_readable($jsonPath)) {
             <a href="<?php echo $base; ?>/creer-ta-frise/"><?php echo htmlspecialchars($t['nav_creer_frise']); ?></a>
             <a href="<?php echo $base; ?>/contact/"><?php echo htmlspecialchars($t['nav_contact']); ?></a>
         </nav>
-        <p><?php echo $t['footer']; ?></p>
+        <p>
+            <span id="footer-json-source"><?php echo sprintf($t['footer'], $vues[$vue]); ?></span>
+            — <a id="footer-json-download" href="/data_<?php echo $lang; ?>/<?php echo $vues[$vue]; ?>" download><?php echo htmlspecialchars($t['footer_download']); ?></a>
+        </p>
     </footer>
 
     <script>
     window.TIMELINE_I18N = {
         periods:    <?php echo json_encode($t['periods']); ?>,
         events:     <?php echo json_encode($t['events']); ?>,
-        scaleLabel: <?php echo json_encode($t['scale_label']); ?>
+        scaleLabel: <?php echo json_encode($t['scale_label']); ?>,
+        spanLabel:  <?php echo json_encode($t['span_label']); ?>,
+        footerTpl:  <?php echo json_encode($t['footer']); ?>,
+        lang:       <?php echo json_encode($lang); ?>
     };
     </script>
     <script src="<?php echo $lang === 'en' ? '../' : ''; ?>js/ajax.js"></script>

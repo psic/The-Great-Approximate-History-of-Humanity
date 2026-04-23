@@ -4,13 +4,27 @@ $t = require __DIR__ . '/../lang/' . $lang . '.php';
 if (!is_array($t)) { $t = require __DIR__ . '/../lang/fr.php'; }
 $home = $lang === 'en' ? '/en/' : '/';
 $base = $lang === 'en' ? '/en' : '';
+require __DIR__ . '/../config.php';
+$langPrefix   = $lang === 'en' ? '/en' : '';
+$canonicalUrl = SITE_URL . $langPrefix . '/creer-ta-frise/';
+$frCanonical  = SITE_URL . '/creer-ta-frise/';
+$enCanonical  = SITE_URL . '/en/creer-ta-frise/';
+$ogLocale     = $lang === 'fr' ? 'fr_FR' : 'en_GB';
+$ogLocaleAlt  = $lang === 'fr' ? 'en_GB' : 'fr_FR';
+$metaDesc     = $t['meta_desc_creer'];
+$pageTitle    = $t['nav_creer_frise'] . ' — ' . $t['title'];
+$breadcrumbs  = [
+    ['name' => $t['home'],             'url' => SITE_URL . $langPrefix . '/'],
+    ['name' => $t['nav_creer_frise'],  'url' => $canonicalUrl],
+];
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $t['html_lang']; ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($t['nav_creer_frise']); ?> — <?php echo htmlspecialchars($t['title']); ?></title>
+    <title><?php echo htmlspecialchars($pageTitle); ?></title>
+    <?php require __DIR__ . '/../includes/seo-head.php'; ?>
     <link rel="stylesheet" href="/css/style.css">
     <style>
         .editor-layout { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; align-items: flex-start; }

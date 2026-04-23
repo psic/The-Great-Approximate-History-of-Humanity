@@ -5,6 +5,7 @@
  */
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-cache');
+header('X-Robots-Tag: noindex, nofollow');
 
 $vues = [
     'moderne'  => 'moderne.json',
