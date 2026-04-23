@@ -311,6 +311,27 @@ if (!is_readable($jsonPath)) {
                     <?php endif; ?>
                 </p>
                 <div class="timeline-filters" id="timeline-filters"></div>
+                <div class="timeline-axis-sticky" id="timeline-axis-sticky">
+                    <div class="timeline-axis-sticky-inner" id="timeline-axis-sticky-inner">
+                        <div class="timeline-axis-bottom">
+                            <div class="timeline-ticks">
+                                <?php foreach ($scaleYears as $y) : ?>
+                                    <?php $leftPct = $range > 0 ? (($y - $scaleMin) / $range) * 100 : 0; ?>
+                                    <span class="axis-tick" style="left: <?php echo number_format($leftPct, 2, '.', ''); ?>%"></span>
+                                <?php endforeach; ?>
+                            </div>
+                            <div class="timeline-line-h"></div>
+                        </div>
+                        <div class="timeline-scale-h">
+                            <?php foreach ($scaleYears as $idx => $y) : ?>
+                                <?php if ($idx === 0 || $idx === $labelLast || $idx % $labelSkip === 0) : ?>
+                                <?php $leftPct = $range > 0 ? (($y - $scaleMin) / $range) * 100 : 0; ?>
+                                <span class="axis-label-h" style="left: <?php echo number_format($leftPct, 2, '.', ''); ?>%"><?php echo format_nombre($y); ?></span>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
             </div>
 <div class="timeline-scroll-wrapper">
 <div class="timeline" id="timeline" data-vue="<?php echo htmlspecialchars($vue); ?>" data-min="<?php echo (int) $scaleMin; ?>" data-max="<?php echo (int) $scaleMax; ?>" data-range="<?php echo (int) $range; ?>">
@@ -320,26 +341,6 @@ if (!is_readable($jsonPath)) {
                         <?php $leftPct = $range > 0 ? (($y - $scaleMin) / $range) * 100 : 0; ?>
                         <span class="timeline-vline" style="left: <?php echo number_format($leftPct, 2, '.', ''); ?>%"></span>
                     <?php endforeach; ?>
-                </div>
-                <!-- Ligne d'années en haut -->
-                <div class="timeline-top-scale">
-                    <div class="timeline-axis-bottom">
-                        <div class="timeline-ticks">
-                            <?php foreach ($scaleYears as $y) : ?>
-                                <?php $leftPct = $range > 0 ? (($y - $scaleMin) / $range) * 100 : 0; ?>
-                                <span class="axis-tick" style="left: <?php echo number_format($leftPct, 2, '.', ''); ?>%"></span>
-                            <?php endforeach; ?>
-                        </div>
-                        <div class="timeline-line-h"></div>
-                    </div>
-                    <div class="timeline-scale-h">
-                        <?php foreach ($scaleYears as $idx => $y) : ?>
-                            <?php if ($idx === 0 || $idx === $labelLast || $idx % $labelSkip === 0) : ?>
-                            <?php $leftPct = $range > 0 ? (($y - $scaleMin) / $range) * 100 : 0; ?>
-                            <span class="axis-label-h" style="left: <?php echo number_format($leftPct, 2, '.', ''); ?>%"><?php echo format_nombre($y); ?></span>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </div>
                 </div>
                 <!-- Section Périodes -->
                 <section class="timeline-section timeline-section-periodes">

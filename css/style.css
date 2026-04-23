@@ -306,9 +306,14 @@ body {
 }
 
 /* Séparation entre les deux frises = échelle des périodes (la ligne de l’échelle = ligne de séparation) */
-.timeline-top-scale {
-  padding-bottom: 0.5rem;
-  margin-bottom: 0.25rem;
+.timeline-axis-sticky {
+  overflow: hidden;
+  margin-top: 0.4rem;
+}
+
+.timeline-axis-sticky-inner {
+  position: relative;
+  min-width: 900px;
 }
 
 .timeline-separator {

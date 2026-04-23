@@ -301,9 +301,15 @@
     container.setAttribute('data-range', scale.range);
 
     var scaleBlock = renderScaleH(scale.scaleYears, scale.scaleMin, scale.range);
+    var axisInner = document.getElementById('timeline-axis-sticky-inner');
+    if (axisInner) {
+      axisInner.innerHTML = scaleBlock;
+      axisInner.style.width = '';
+      axisInner.style.width = container.offsetWidth + 'px';
+    }
+
     container.innerHTML =
       renderVerticalGrid(scale.scaleYears, scale.scaleMin, scale.range) +
-      '<div class="timeline-top-scale">' + scaleBlock + '</div>' +
       '<section class="timeline-section timeline-section-periodes">' +
         '<h2 class="timeline-section-title">' + escapeHtml(i18n.periods) + '</h2>' +
         renderTableaux(tableaux, scale.scaleMin, scale.range, palette) +
@@ -430,6 +436,24 @@
   updateStickyOffset();
   window.addEventListener('resize', updateStickyOffset);
   buildFilters();
+
+  // Sync sticky axis width + horizontal scroll
+  (function () {
+    var wrapper = document.querySelector('.timeline-scroll-wrapper');
+    var axisInner = document.getElementById('timeline-axis-sticky-inner');
+    var timeline = document.getElementById('timeline');
+
+    function syncWidth() {
+      if (axisInner && timeline) axisInner.style.width = timeline.offsetWidth + 'px';
+    }
+    function syncScroll() {
+      if (axisInner && wrapper) axisInner.style.transform = 'translateX(-' + wrapper.scrollLeft + 'px)';
+    }
+
+    syncWidth();
+    if (wrapper) wrapper.addEventListener('scroll', syncScroll);
+    window.addEventListener('resize', syncWidth);
+  }());
 
   // --- Popup au clic ---
   (function () {
