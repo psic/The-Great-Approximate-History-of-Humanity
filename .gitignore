@@ -1,0 +1,5 @@
+data/
+data_sav/
+data/*.bak
+data/*.bak2
+data/*.bak3
