@@ -366,6 +366,16 @@
 
   window.renderTimeline = renderTimeline;
 
+  // --- Sticky header : calcule la hauteur et l'expose en CSS var ---
+  function updateStickyOffset() {
+    var header = document.getElementById('timeline-sticky-header');
+    if (header) {
+      document.documentElement.style.setProperty('--sticky-header-h', header.offsetHeight + 'px');
+    }
+  }
+  updateStickyOffset();
+  window.addEventListener('resize', updateStickyOffset);
+
   // --- Popup au clic ---
   (function () {
     var popup = document.createElement('div');

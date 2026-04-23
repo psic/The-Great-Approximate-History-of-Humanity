@@ -295,20 +295,23 @@ if (!is_readable($jsonPath)) {
         <?php if ($error) : ?>
             <p class="error"><?php echo htmlspecialchars($error); ?></p>
         <?php elseif (!empty($scaleYears)) : ?>
-            <nav class="timeline-tabs" role="tablist" aria-label="<?php echo htmlspecialchars($t['aria_tabs']); ?>">
-                <button type="button" class="tab-btn <?php echo $vue === 'moderne' ? 'active' : ''; ?>" role="tab" data-vue="moderne"><?php echo htmlspecialchars($t['tab_moderne']); ?></button>
-                <button type="button" class="tab-btn <?php echo $vue === 'histoire' ? 'active' : ''; ?>" role="tab" data-vue="histoire"><?php echo htmlspecialchars($t['tab_histoire']); ?></button>
-                <button type="button" class="tab-btn <?php echo $vue === 'humanite' ? 'active' : ''; ?>" role="tab" data-vue="humanite"><?php echo htmlspecialchars($t['tab_humanite']); ?></button>
-                <button type="button" class="tab-btn <?php echo $vue === 'terre' ? 'active' : ''; ?>" role="tab" data-vue="terre"><?php echo htmlspecialchars($t['tab_terre']); ?></button>
-                <button type="button" class="tab-btn <?php echo $vue === 'vie' ? 'active' : ''; ?>" role="tab" data-vue="vie"><?php echo htmlspecialchars($t['tab_vie']); ?></button>
-                <button type="button" class="tab-btn <?php echo $vue === 'univers' ? 'active' : ''; ?>" role="tab" data-vue="univers"><?php echo htmlspecialchars($t['tab_univers']); ?></button>
-            </nav>
-            <p class="description" id="timeline-scale-desc">
-                <?php echo isset($pas) ? sprintf($t['scale_label'], format_nombre($pas)) : ''; ?>
-                <?php if (!empty($allYears)) : ?>
-                    &nbsp;— <?php echo sprintf($t['span_label'], format_nombre($maxYear - $minYear)); ?>
-                <?php endif; ?>
-            </p>
+            <div class="timeline-sticky-header" id="timeline-sticky-header">
+                <nav class="timeline-tabs" role="tablist" aria-label="<?php echo htmlspecialchars($t['aria_tabs']); ?>">
+                    <button type="button" class="tab-btn <?php echo $vue === 'moderne' ? 'active' : ''; ?>" role="tab" data-vue="moderne"><?php echo htmlspecialchars($t['tab_moderne']); ?></button>
+                    <button type="button" class="tab-btn <?php echo $vue === 'histoire' ? 'active' : ''; ?>" role="tab" data-vue="histoire"><?php echo htmlspecialchars($t['tab_histoire']); ?></button>
+                    <button type="button" class="tab-btn <?php echo $vue === 'humanite' ? 'active' : ''; ?>" role="tab" data-vue="humanite"><?php echo htmlspecialchars($t['tab_humanite']); ?></button>
+                    <button type="button" class="tab-btn <?php echo $vue === 'terre' ? 'active' : ''; ?>" role="tab" data-vue="terre"><?php echo htmlspecialchars($t['tab_terre']); ?></button>
+                    <button type="button" class="tab-btn <?php echo $vue === 'vie' ? 'active' : ''; ?>" role="tab" data-vue="vie"><?php echo htmlspecialchars($t['tab_vie']); ?></button>
+                    <button type="button" class="tab-btn <?php echo $vue === 'univers' ? 'active' : ''; ?>" role="tab" data-vue="univers"><?php echo htmlspecialchars($t['tab_univers']); ?></button>
+                </nav>
+                <p class="description" id="timeline-scale-desc">
+                    <?php echo isset($pas) ? sprintf($t['scale_label'], format_nombre($pas)) : ''; ?>
+                    <?php if (!empty($allYears)) : ?>
+                        &nbsp;— <?php echo sprintf($t['span_label'], format_nombre($maxYear - $minYear)); ?>
+                    <?php endif; ?>
+                </p>
+                <div class="timeline-filters" id="timeline-filters"></div>
+            </div>
 <div class="timeline-scroll-wrapper">
 <div class="timeline" id="timeline" data-vue="<?php echo htmlspecialchars($vue); ?>" data-min="<?php echo (int) $scaleMin; ?>" data-max="<?php echo (int) $scaleMax; ?>" data-range="<?php echo (int) $range; ?>">
                 <!-- Lignes verticales pointillées (échelle) sur toute la frise -->

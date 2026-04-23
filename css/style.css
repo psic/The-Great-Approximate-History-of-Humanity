@@ -88,11 +88,31 @@ body {
   border-radius: 8px;
 }
 
+/* --- En-tête sticky (onglets + échelle + filtres) --- */
+.timeline-sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--bg);
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 0.5rem;
+}
+
+.timeline-filters {
+  min-height: 2.25rem;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed var(--line);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 /* --- Frise chronologique --- */
 .timeline-scroll-wrapper {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  margin-top: 1rem;
 }
 
 .timeline {
@@ -247,10 +267,12 @@ body {
 
 /* Séparation entre les deux frises = échelle des périodes (la ligne de l’échelle = ligne de séparation) */
 .timeline-top-scale {
+  position: sticky;
+  top: var(--sticky-header-h, 0px);
+  z-index: 15;
+  background: var(--bg);
   padding-bottom: 1rem;
   margin-bottom: 0.25rem;
-  position: relative;
-  z-index: 1;
 }
 
 .timeline-separator {
@@ -390,7 +412,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
-  margin-top: 0.75rem;
+  margin-top: 0;
   margin-bottom: 0.5rem;
   justify-content: flex-start;
 }
