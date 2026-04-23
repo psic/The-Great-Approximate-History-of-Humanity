@@ -307,11 +307,7 @@ body {
 
 /* Séparation entre les deux frises = échelle des périodes (la ligne de l’échelle = ligne de séparation) */
 .timeline-top-scale {
-  position: sticky;
-  top: var(--sticky-header-h, 0px);
-  z-index: 15;
-  background: var(--bg);
-  padding-bottom: 1rem;
+  padding-bottom: 0.5rem;
   margin-bottom: 0.25rem;
 }
 
