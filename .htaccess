@@ -1,11 +1,6 @@
 Options -Indexes
 RewriteEngine On
 
-# HTTPS obligatoire (production uniquement)
-RewriteCond %{HTTPS} off
-RewriteCond %{HTTP_HOST} taghoh\.web-en-royans\.fr
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
-
 # /fr et /fr/ → / (redirection permanente)
 RewriteRule ^fr/?$ / [R=301,L,QSA]
 
