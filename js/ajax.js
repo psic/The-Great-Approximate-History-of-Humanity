@@ -316,6 +316,59 @@
       '</section>';
   }
 
+  function buildFilters() {
+    var filtersEl = document.getElementById('timeline-filters');
+    if (!filtersEl) return;
+    filtersEl.innerHTML = '';
+
+    function makeSection(sectionLabel, groups) {
+      if (!groups || groups.length === 0) return;
+      if (groups.length === 1 && !groups[0].querySelector('.tableau-group-label')) return;
+
+      var section = document.createElement('div');
+      section.className = 'filter-section';
+
+      var heading = document.createElement('span');
+      heading.className = 'filter-section-label';
+      heading.textContent = sectionLabel + ' :';
+      section.appendChild(heading);
+
+      groups.forEach(function (group, idx) {
+        var labelEl = group.querySelector('.tableau-group-label');
+        var name = labelEl ? labelEl.textContent.trim() : String(idx + 1);
+        var id = 'filter-cb-' + sectionLabel.replace(/\W/g, '-') + '-' + idx;
+
+        var cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.id = id;
+        cb.className = 'filter-check';
+        cb.checked = true;
+        cb.addEventListener('change', function () {
+          group.style.display = this.checked ? '' : 'none';
+          updateStickyOffset();
+        });
+
+        var lbl = document.createElement('label');
+        lbl.htmlFor = id;
+        lbl.className = 'filter-label';
+        lbl.textContent = name;
+
+        section.appendChild(cb);
+        section.appendChild(lbl);
+      });
+
+      filtersEl.appendChild(section);
+    }
+
+    var periodeGroups = Array.prototype.slice.call(document.querySelectorAll('.timeline-tableau-group'));
+    var eventGroups   = Array.prototype.slice.call(document.querySelectorAll('.timeline-evenements-groupe'));
+
+    makeSection(i18n.periods, periodeGroups);
+    makeSection(i18n.events, eventGroups);
+
+    updateStickyOffset();
+  }
+
   function loadVue(vue) {
     var container = document.getElementById('timeline');
     if (!container) return;
@@ -331,6 +384,7 @@
         data = JSON.parse(req.responseText);
         container.setAttribute('data-vue', vue);
         renderTimeline(data);
+        buildFilters();
         var tabs = document.querySelectorAll('.tab-btn');
         tabs.forEach(function (btn) {
           btn.classList.toggle('active', btn.getAttribute('data-vue') === vue);
@@ -375,6 +429,7 @@
   }
   updateStickyOffset();
   window.addEventListener('resize', updateStickyOffset);
+  buildFilters();
 
   // --- Popup au clic ---
   (function () {

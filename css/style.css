@@ -109,6 +109,46 @@ body {
   gap: 0.75rem;
 }
 
+/* --- Filtres --- */
+.filter-section {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.5rem;
+}
+
+.filter-section + .filter-section {
+  padding-left: 0.75rem;
+  border-left: 1px solid var(--line);
+}
+
+.filter-section-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  white-space: nowrap;
+}
+
+.filter-check {
+  accent-color: var(--accent);
+  cursor: pointer;
+  margin: 0;
+}
+
+.filter-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  margin-right: 0.25rem;
+}
+
+.filter-label:hover {
+  color: var(--text);
+}
+
 /* --- Frise chronologique --- */
 .timeline-scroll-wrapper {
   overflow-x: auto;
