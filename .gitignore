@@ -3,3 +3,5 @@ data_sav/
 data/*.bak
 data/*.bak2
 data/*.bak3
+data_user/*.json
+data_user/*.png
