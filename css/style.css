@@ -149,6 +149,109 @@ body {
   color: var(--text);
 }
 
+/* --- Zoom slider --- */
+.timeline-zoom {
+  margin-top: 0.4rem;
+  padding-top: 0.4rem;
+  border-top: 1px dashed var(--line);
+}
+
+.zoom-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.zoom-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  white-space: nowrap;
+}
+
+.zoom-slider-wrap {
+  position: relative;
+  flex: 1;
+  max-width: 360px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.zoom-track {
+  position: absolute;
+  left: 7px;
+  right: 7px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--line);
+  pointer-events: none;
+}
+
+.zoom-range {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  outline: none;
+  pointer-events: none;
+  margin: 0;
+}
+
+.zoom-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.zoom-range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: none;
+}
+
+.zoom-range::-webkit-slider-runnable-track,
+.zoom-range::-moz-range-track {
+  background: transparent;
+}
+
+.zoom-display {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  min-width: 9rem;
+  text-align: center;
+}
+
+.zoom-reset {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0.1rem 0.3rem;
+  font-family: inherit;
+}
+
+.zoom-reset:hover {
+  color: var(--text);
+}
+
 /* --- Frise chronologique --- */
 .timeline-scroll-wrapper {
   overflow-x: auto;

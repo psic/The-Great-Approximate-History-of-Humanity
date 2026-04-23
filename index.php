@@ -311,6 +311,7 @@ if (!is_readable($jsonPath)) {
                     <?php endif; ?>
                 </p>
                 <div class="timeline-filters" id="timeline-filters"></div>
+                <div class="timeline-zoom" id="timeline-zoom"></div>
                 <div class="timeline-axis-sticky" id="timeline-axis-sticky">
                     <div class="timeline-axis-sticky-inner" id="timeline-axis-sticky-inner">
                         <div class="timeline-axis-bottom">
@@ -334,7 +335,7 @@ if (!is_readable($jsonPath)) {
                 </div>
             </div>
 <div class="timeline-scroll-wrapper">
-<div class="timeline" id="timeline" data-vue="<?php echo htmlspecialchars($vue); ?>" data-min="<?php echo (int) $scaleMin; ?>" data-max="<?php echo (int) $scaleMax; ?>" data-range="<?php echo (int) $range; ?>">
+<div class="timeline" id="timeline" data-vue="<?php echo htmlspecialchars($vue); ?>" data-min="<?php echo (int) $scaleMin; ?>" data-max="<?php echo (int) $scaleMax; ?>" data-range="<?php echo (int) $range; ?>" data-pas="<?php echo (int) $pas; ?>">
                 <!-- Lignes verticales pointillées (échelle) sur toute la frise -->
                 <div class="timeline-vertical-grid" aria-hidden="true">
                     <?php foreach ($scaleYears as $y) : ?>

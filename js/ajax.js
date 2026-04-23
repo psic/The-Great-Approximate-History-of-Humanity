@@ -278,6 +278,7 @@
   }
 
   var data = null;
+  var applyCurrentZoom = null;
 
   function renderTimeline(data) {
     var container = document.getElementById('timeline');
@@ -299,6 +300,7 @@
     container.setAttribute('data-min', scale.scaleMin);
     container.setAttribute('data-max', scale.scaleMax);
     container.setAttribute('data-range', scale.range);
+    container.setAttribute('data-pas', data.pas || 100);
 
     var scaleBlock = renderScaleH(scale.scaleYears, scale.scaleMin, scale.range);
     var axisInner = document.getElementById('timeline-axis-sticky-inner');
@@ -348,8 +350,11 @@
         cb.id = id;
         cb.className = 'filter-check';
         cb.checked = true;
+        group.dataset.filterChecked = '1';
         cb.addEventListener('change', function () {
+          group.dataset.filterChecked = this.checked ? '1' : '0';
           group.style.display = this.checked ? '' : 'none';
+          if (typeof applyCurrentZoom === 'function') applyCurrentZoom();
           updateStickyOffset();
         });
 
@@ -374,6 +379,132 @@
     updateStickyOffset();
   }
 
+  function buildZoomSlider() {
+    var zoomEl = document.getElementById('timeline-zoom');
+    if (!zoomEl) return;
+    zoomEl.innerHTML = '';
+    applyCurrentZoom = null;
+
+    var timeline = document.getElementById('timeline');
+    if (!timeline) return;
+    var scaleMin = parseInt(timeline.getAttribute('data-min'), 10);
+    var scaleMax = parseInt(timeline.getAttribute('data-max'), 10);
+    var pas = Math.max(1, parseInt(timeline.getAttribute('data-pas'), 10) || 1);
+    if (!isFinite(scaleMin) || !isFinite(scaleMax) || scaleMin >= scaleMax) return;
+
+    var loVal = scaleMin;
+    var hiVal = scaleMax;
+
+    function applyZoom() {
+      var isDefault = (loVal === scaleMin && hiVal === scaleMax);
+      document.querySelectorAll('.timeline-tableau-group').forEach(function (group) {
+        if (group.dataset.filterChecked === '0') { group.style.display = 'none'; return; }
+        if (isDefault) {
+          group.style.display = '';
+          group.querySelectorAll('.periode').forEach(function (p) { p.style.display = ''; });
+          return;
+        }
+        var any = false;
+        group.querySelectorAll('.periode').forEach(function (p) {
+          var ok = parseInt(p.dataset.fin, 10) >= loVal && parseInt(p.dataset.debut, 10) <= hiVal;
+          p.style.display = ok ? '' : 'none';
+          if (ok) any = true;
+        });
+        group.style.display = any ? '' : 'none';
+      });
+      document.querySelectorAll('.timeline-evenements-groupe').forEach(function (group) {
+        if (group.dataset.filterChecked === '0') { group.style.display = 'none'; return; }
+        if (isDefault) {
+          group.style.display = '';
+          group.querySelectorAll('.event-marker').forEach(function (m) { m.style.display = ''; });
+          return;
+        }
+        var any = false;
+        group.querySelectorAll('.event-marker').forEach(function (m) {
+          var d = parseInt(m.dataset.date, 10);
+          var ok = d >= loVal && d <= hiVal;
+          m.style.display = ok ? '' : 'none';
+          if (ok) any = true;
+        });
+        group.style.display = any ? '' : 'none';
+      });
+      updateStickyOffset();
+    }
+
+    applyCurrentZoom = applyZoom;
+
+    var row = document.createElement('div');
+    row.className = 'zoom-row';
+
+    var labelEl = document.createElement('span');
+    labelEl.className = 'zoom-label';
+    labelEl.textContent = 'Zoom :';
+    row.appendChild(labelEl);
+
+    var display = document.createElement('span');
+    display.className = 'zoom-display';
+
+    var wrap = document.createElement('div');
+    wrap.className = 'zoom-slider-wrap';
+
+    var track = document.createElement('div');
+    track.className = 'zoom-track';
+    wrap.appendChild(track);
+
+    var inputLo = document.createElement('input');
+    inputLo.type = 'range';
+    inputLo.className = 'zoom-range zoom-range-lo';
+    inputLo.min = scaleMin; inputLo.max = scaleMax; inputLo.step = pas; inputLo.value = scaleMin;
+
+    var inputHi = document.createElement('input');
+    inputHi.type = 'range';
+    inputHi.className = 'zoom-range zoom-range-hi';
+    inputHi.min = scaleMin; inputHi.max = scaleMax; inputHi.step = pas; inputHi.value = scaleMax;
+
+    function refreshTrack() {
+      var span = scaleMax - scaleMin;
+      var pLo = span > 0 ? ((loVal - scaleMin) / span) * 100 : 0;
+      var pHi = span > 0 ? ((hiVal - scaleMin) / span) * 100 : 100;
+      track.style.background = 'linear-gradient(to right,var(--line) ' + pLo.toFixed(1) + '%,var(--accent) ' + pLo.toFixed(1) + '%,var(--accent) ' + pHi.toFixed(1) + '%,var(--line) ' + pHi.toFixed(1) + '%)';
+      display.textContent = formatNumber(loVal) + ' – ' + formatNumber(hiVal);
+    }
+
+    inputLo.addEventListener('input', function () {
+      loVal = Math.min(parseInt(this.value, 10), hiVal - pas);
+      this.value = loVal;
+      refreshTrack();
+      applyZoom();
+    });
+
+    inputHi.addEventListener('input', function () {
+      hiVal = Math.max(parseInt(this.value, 10), loVal + pas);
+      this.value = hiVal;
+      refreshTrack();
+      applyZoom();
+    });
+
+    wrap.appendChild(inputLo);
+    wrap.appendChild(inputHi);
+    row.appendChild(wrap);
+    row.appendChild(display);
+
+    var resetBtn = document.createElement('button');
+    resetBtn.type = 'button';
+    resetBtn.className = 'zoom-reset';
+    resetBtn.title = pageLang === 'en' ? 'Reset zoom' : 'Réinitialiser le zoom';
+    resetBtn.textContent = '×';
+    resetBtn.addEventListener('click', function () {
+      loVal = scaleMin; hiVal = scaleMax;
+      inputLo.value = scaleMin; inputHi.value = scaleMax;
+      refreshTrack(); applyZoom();
+    });
+    row.appendChild(resetBtn);
+
+    zoomEl.appendChild(row);
+    refreshTrack();
+    updateStickyOffset();
+  }
+
   function loadVue(vue) {
     var container = document.getElementById('timeline');
     if (!container) return;
@@ -390,6 +521,7 @@
         container.setAttribute('data-vue', vue);
         renderTimeline(data);
         buildFilters();
+        buildZoomSlider();
         var tabs = document.querySelectorAll('.tab-btn');
         tabs.forEach(function (btn) {
           btn.classList.toggle('active', btn.getAttribute('data-vue') === vue);
@@ -435,6 +567,7 @@
   updateStickyOffset();
   window.addEventListener('resize', updateStickyOffset);
   buildFilters();
+  buildZoomSlider();
 
   // Sync sticky axis width + horizontal scroll
   (function () {
