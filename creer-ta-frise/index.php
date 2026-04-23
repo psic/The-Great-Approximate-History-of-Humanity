@@ -56,9 +56,10 @@ $breadcrumbs  = [
         #preview-scale-desc { color: var(--text-muted); font-size: .9rem; margin: .5rem 0 0; min-height: 1.2em; }
         .btn-share { color: #9ece6a; background: transparent; border-color: #9ece6a; padding: .5rem 1.2rem; font-size: .95rem; margin-top: .5rem; }
         .btn-share:hover { background: rgba(158,206,106,.1); }
-        #share-panel { position: relative; margin: .75rem 0; padding: .75rem 1rem; border: 1px solid var(--line); border-radius: 8px; }
-        #share-close { position: absolute; top: .4rem; right: .6rem; background: none; border: none; color: var(--text-muted); font-size: 1.1rem; cursor: pointer; line-height: 1; }
-        #share-close:hover { color: var(--text); }
+        #share-panel { margin: .75rem 0; padding: .75rem 1rem; border: 1px solid var(--line); border-radius: 8px; }
+        .share-panel-header { display: flex; justify-content: flex-end; margin-bottom: .3rem; }
+        #share-close { background: none; border: none; color: #f7768e; font-size: 1.1rem; cursor: pointer; line-height: 1; padding: 0; }
+        #share-close:hover { color: #ff99aa; }
         .share-url-row { display: flex; gap: .5rem; align-items: center; margin-bottom: .6rem; }
         .share-url-row label { color: var(--text-muted); font-size: .85rem; white-space: nowrap; }
         .share-url-row input { flex: 1; font-size: .85rem; }
@@ -100,7 +101,9 @@ $breadcrumbs  = [
             <button type="button" class="btn btn-share" id="share-btn"><?php echo htmlspecialchars($t['creer_share_btn']); ?></button>
         </div>
         <div id="share-panel" style="display:none">
-            <button type="button" id="share-close" aria-label="Fermer">✕</button>
+            <div class="share-panel-header">
+                <button type="button" id="share-close" aria-label="Fermer">✕</button>
+            </div>
             <div class="share-url-row">
                 <label><?php echo htmlspecialchars($t['creer_share_link_label']); ?></label>
                 <input type="text" id="share-url-input" readonly>
