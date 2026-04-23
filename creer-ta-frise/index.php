@@ -54,6 +54,17 @@ $breadcrumbs  = [
         .btn-download:hover { background: rgba(122,162,247,.1); }
         .preview-empty { color: var(--text-muted); font-size: .9rem; padding: 2rem 0; }
         #preview-scale-desc { color: var(--text-muted); font-size: .9rem; margin: .5rem 0 0; min-height: 1.2em; }
+        .btn-share { color: #9ece6a; background: transparent; border-color: #9ece6a; padding: .5rem 1.2rem; font-size: .95rem; margin-top: .5rem; }
+        .btn-share:hover { background: rgba(158,206,106,.1); }
+        #share-panel { position: relative; margin: .75rem 0; padding: .75rem 1rem; border: 1px solid var(--line); border-radius: 8px; }
+        #share-close { position: absolute; top: .4rem; right: .6rem; background: none; border: none; color: var(--text-muted); font-size: 1.1rem; cursor: pointer; line-height: 1; }
+        #share-close:hover { color: var(--text); }
+        .share-url-row { display: flex; gap: .5rem; align-items: center; margin-bottom: .6rem; }
+        .share-url-row label { color: var(--text-muted); font-size: .85rem; white-space: nowrap; }
+        .share-url-row input { flex: 1; font-size: .85rem; }
+        .share-social { display: flex; gap: .5rem; flex-wrap: wrap; }
+        .btn-social { color: var(--text-muted); background: transparent; border-color: var(--line); padding: .3rem .7rem; font-size: .85rem; text-decoration: none; border-radius: 6px; border: 1px solid; cursor: pointer; }
+        .btn-social:hover { color: var(--text); border-color: var(--text-muted); }
         .group-block { border: 1px solid var(--line); border-radius: 6px; padding: .6rem .6rem .5rem; margin-bottom: .5rem; }
         .group-header { display: flex; gap: .4rem; align-items: center; margin-bottom: .4rem; }
         .group-name-input { flex: 1; font-weight: 600; }
@@ -86,6 +97,24 @@ $breadcrumbs  = [
             <button type="button" class="btn btn-download" id="download-json"><?php echo htmlspecialchars($t['creer_download']); ?></button>
             <button type="button" class="btn btn-download" id="download-image"><?php echo $lang === 'fr' ? 'Télécharger comme image' : 'Download as image'; ?></button>
             <button type="button" class="btn btn-download" id="download-pdf"><?php echo $lang === 'fr' ? 'Télécharger comme PDF' : 'Download as PDF'; ?></button>
+            <button type="button" class="btn btn-share" id="share-btn"><?php echo htmlspecialchars($t['creer_share_btn']); ?></button>
+        </div>
+        <div id="share-panel" style="display:none">
+            <button type="button" id="share-close" aria-label="Fermer">✕</button>
+            <div class="share-url-row">
+                <label><?php echo htmlspecialchars($t['creer_share_link_label']); ?></label>
+                <input type="text" id="share-url-input" readonly>
+                <button type="button" class="btn btn-social" id="share-copy-btn"><?php echo htmlspecialchars($t['creer_share_copy']); ?></button>
+            </div>
+            <div class="share-social">
+                <a id="share-twitter"   class="btn-social" target="_blank" rel="noopener">X / Twitter</a>
+                <a id="share-linkedin"  class="btn-social" target="_blank" rel="noopener">LinkedIn</a>
+                <a id="share-facebook"  class="btn-social" target="_blank" rel="noopener">Facebook</a>
+                <a id="share-whatsapp"  class="btn-social" target="_blank" rel="noopener">WhatsApp</a>
+                <a id="share-telegram"  class="btn-social" target="_blank" rel="noopener">Telegram</a>
+                <a id="share-email"     class="btn-social">Email</a>
+                <a id="share-pinterest" class="btn-social" target="_blank" rel="noopener">Pinterest</a>
+            </div>
         </div>
 
         <div class="editor-layout">
@@ -147,7 +176,12 @@ $breadcrumbs  = [
             groupName:     <?php echo json_encode($t['creer_group_name']); ?>,
             addPeriod:     <?php echo json_encode($t['creer_add_period']); ?>,
             addEvent:      <?php echo json_encode($t['creer_add_event']); ?>,
-            confirmDelete: <?php echo json_encode($t['creer_group_confirm_delete']); ?>
+            confirmDelete: <?php echo json_encode($t['creer_group_confirm_delete']); ?>,
+            shareBtn:      <?php echo json_encode($t['creer_share_btn']); ?>,
+            shareLoading:  <?php echo json_encode($t['creer_share_loading']); ?>,
+            shareError:    <?php echo json_encode($t['creer_share_error']); ?>,
+            shareCopy:     <?php echo json_encode($t['creer_share_copy']); ?>,
+            shareCopied:   <?php echo json_encode($t['creer_share_copied']); ?>
         };
 
         // Normalise n'importe quel format de tableaux vers [{titre, periodes}]
@@ -493,6 +527,131 @@ $breadcrumbs  = [
             a.download = 'ma-frise.png';
             a.href = canvas.toDataURL('image/png');
             a.click();
+        };
+
+        // Fermer le panel de partage
+        document.getElementById('share-close').onclick = function () {
+            document.getElementById('share-panel').style.display = 'none';
+        };
+
+        // Partager
+        var lastShareTime = 0;
+        var SHARE_COOLDOWN_MS = 5 * 60 * 1000; // 5 minutes
+        document.getElementById('share-btn').onclick = async function () {
+            var data = buildData();
+            if (!Object.keys(data.tableaux).length && !Object.keys(data.evenements).length) return;
+
+            var now = Date.now();
+            if (now - lastShareTime < SHARE_COOLDOWN_MS) {
+                var wait = Math.ceil((SHARE_COOLDOWN_MS - (now - lastShareTime)) / 1000);
+                alert(labels.lang === 'en'
+                    ? 'Please wait ' + wait + 's before sharing again.'
+                    : 'Attendez encore ' + wait + 's avant de partager à nouveau.');
+                return;
+            }
+
+            var btn = this;
+            btn.disabled = true;
+            btn.textContent = labels.shareLoading;
+
+            try {
+                // Générer le PNG depuis le canvas
+                var el = document.getElementById('timeline');
+                var W = el.scrollWidth, H = el.scrollHeight;
+                var canvas = document.createElement('canvas');
+                canvas.width = W; canvas.height = H;
+                var ctx = canvas.getContext('2d');
+                var base = el.getBoundingClientRect();
+                function rx(r) { return r.left - base.left; }
+                function ry(r) { return r.top  - base.top;  }
+                ctx.fillStyle = '#000000'; ctx.fillRect(0, 0, W, H);
+                el.querySelectorAll('.timeline-vline').forEach(function (line) {
+                    var r = line.getBoundingClientRect();
+                    ctx.strokeStyle = '#222'; ctx.lineWidth = 1;
+                    ctx.beginPath(); ctx.moveTo(rx(r), 0); ctx.lineTo(rx(r), H); ctx.stroke();
+                });
+                el.querySelectorAll('.periode').forEach(function (p) {
+                    var r = p.getBoundingClientRect();
+                    var x = rx(r), y = ry(r), pw = r.width, ph = r.height;
+                    ctx.fillStyle = p.style.background || '#4a6fa5';
+                    ctx.beginPath();
+                    if (ctx.roundRect) { ctx.roundRect(x, y, pw, ph, 4); } else { ctx.rect(x, y, pw, ph); }
+                    ctx.fill();
+                    var titleEl = p.querySelector('.periode-titre');
+                    if (titleEl && pw > 20) {
+                        ctx.save(); ctx.beginPath(); ctx.rect(x + 2, y, pw - 4, ph); ctx.clip();
+                        ctx.fillStyle = '#fff'; ctx.font = '11px system-ui,sans-serif'; ctx.textAlign = 'left';
+                        ctx.fillText(titleEl.textContent, x + 5, y + ph / 2 + 4); ctx.restore();
+                    }
+                });
+                el.querySelectorAll('.timeline-line-h').forEach(function (line) {
+                    var r = line.getBoundingClientRect();
+                    ctx.strokeStyle = '#666'; ctx.lineWidth = 1;
+                    ctx.beginPath(); ctx.moveTo(0, ry(r) + r.height / 2); ctx.lineTo(W, ry(r) + r.height / 2); ctx.stroke();
+                });
+                el.querySelectorAll('.axis-label-h').forEach(function (label) {
+                    var r = label.getBoundingClientRect();
+                    ctx.fillStyle = '#b0b0b0'; ctx.font = '11px system-ui,sans-serif'; ctx.textAlign = 'center';
+                    ctx.fillText(label.textContent, rx(r), ry(r) + 12);
+                });
+                el.querySelectorAll('.event-marker').forEach(function (marker) {
+                    var r = marker.getBoundingClientRect();
+                    ctx.fillStyle = '#bb9af7';
+                    ctx.beginPath(); ctx.arc(rx(r), ry(r) + 6, 6, 0, Math.PI * 2); ctx.fill();
+                    var titleEl = marker.querySelector('.event-marker-title');
+                    if (titleEl) {
+                        var tr = titleEl.getBoundingClientRect();
+                        ctx.fillStyle = '#b0b0b0'; ctx.font = '11px system-ui,sans-serif'; ctx.textAlign = 'left';
+                        ctx.fillText(titleEl.textContent, rx(tr), ry(tr) + 11);
+                    }
+                });
+                var pngDataUrl = canvas.toDataURL('image/png');
+
+                // POST
+                var form = new FormData();
+                form.append('data',  JSON.stringify(data));
+                form.append('image', pngDataUrl);
+                var resp = await fetch('/api/share.php', { method: 'POST', body: form });
+                var result;
+                try {
+                    result = await resp.json();
+                } catch (_) {
+                    throw new Error('HTTP ' + resp.status + ' — réponse non-JSON');
+                }
+                if (!result.url) throw new Error(result.error || 'HTTP ' + resp.status);
+                lastShareTime = Date.now();
+
+                // Afficher le panel
+                var url = result.url;
+                var imgUrl = encodeURIComponent(window.location.origin + '/data_user/' + result.id + '.png');
+                document.getElementById('share-url-input').value = url;
+                var shareText = encodeURIComponent(url);
+                var shareTitle = encodeURIComponent(labels.lang === 'en' ? 'My timeline' : 'Ma frise chronologique');
+                document.getElementById('share-twitter').href   = 'https://twitter.com/intent/tweet?url=' + shareText;
+                document.getElementById('share-linkedin').href  = 'https://www.linkedin.com/sharing/share-offsite/?url=' + shareText;
+                document.getElementById('share-facebook').href  = 'https://www.facebook.com/sharer/sharer.php?u=' + shareText;
+                document.getElementById('share-whatsapp').href  = 'https://wa.me/?text=' + shareTitle + '%20' + shareText;
+                document.getElementById('share-telegram').href  = 'https://t.me/share/url?url=' + shareText + '&text=' + shareTitle;
+                document.getElementById('share-email').href     = 'mailto:?subject=' + shareTitle + '&body=' + shareText;
+                document.getElementById('share-pinterest').href = 'https://pinterest.com/pin/create/button/?url=' + shareText + '&media=' + imgUrl + '&description=' + shareTitle;
+                document.getElementById('share-panel').style.display = '';
+                document.getElementById('share-url-input').select();
+            } catch (e) {
+                console.error('Share error:', e);
+                alert(labels.shareError + '\n' + e.message);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = labels.shareBtn;
+            }
+        };
+
+        document.getElementById('share-copy-btn').onclick = function () {
+            var input = document.getElementById('share-url-input');
+            input.select();
+            document.execCommand('copy');
+            var btn = this;
+            btn.textContent = labels.shareCopied;
+            setTimeout(function () { btn.textContent = labels.shareCopy; }, 2000);
         };
 
         // Téléchargement PDF via fenêtre d'impression

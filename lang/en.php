@@ -44,6 +44,15 @@ return [
     'creer_group_name'       => 'Group name',
     'creer_group_confirm_delete' => 'This group contains entries. Delete it anyway?',
     'creer_download'         => 'Download JSON',
+    'creer_share_btn'        => 'Share',
+    'creer_share_loading'    => 'Saving…',
+    'creer_share_error'      => 'Error while sharing.',
+    'creer_share_link_label' => 'Your timeline link:',
+    'creer_share_copy'       => 'Copy',
+    'creer_share_copied'     => 'Copied!',
+
+    'nav_user_frise'         => 'Shared timeline',
+    'meta_desc_user'         => 'Custom timeline shared on The Approximate Great History.',
 
     'nav_contact'           => 'Contact',
     'contact_title'         => 'Contact',

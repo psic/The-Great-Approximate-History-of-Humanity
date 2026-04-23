@@ -44,6 +44,15 @@ return [
     'creer_group_name'       => 'Nom du groupe',
     'creer_group_confirm_delete' => 'Ce groupe contient des entrées. Le supprimer quand même ?',
     'creer_download'         => 'Télécharger le JSON',
+    'creer_share_btn'        => 'Partager',
+    'creer_share_loading'    => 'Enregistrement…',
+    'creer_share_error'      => 'Erreur lors du partage.',
+    'creer_share_link_label' => 'Lien de ta frise :',
+    'creer_share_copy'       => 'Copier',
+    'creer_share_copied'     => 'Copié !',
+
+    'nav_user_frise'         => 'Frise partagée',
+    'meta_desc_user'         => 'Frise chronologique personnalisée partagée sur La Grande Histoire Approximative.',
 
     'nav_contact'           => 'Contact',
     'contact_title'         => 'Contact',
