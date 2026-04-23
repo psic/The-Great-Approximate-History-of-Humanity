@@ -314,6 +314,7 @@ body {
 .timeline-axis-sticky-inner {
   position: relative;
   min-width: 900px;
+  padding-right: 10rem;
 }
 
 .timeline-separator {

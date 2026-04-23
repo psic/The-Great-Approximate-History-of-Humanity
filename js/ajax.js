@@ -304,7 +304,6 @@
     var axisInner = document.getElementById('timeline-axis-sticky-inner');
     if (axisInner) {
       axisInner.innerHTML = scaleBlock;
-      axisInner.style.width = '';
       axisInner.style.width = container.offsetWidth + 'px';
     }
 
