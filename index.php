@@ -492,6 +492,7 @@ if (!is_readable($jsonPath)) {
         footerTpl:  <?php echo json_encode($t['footer']); ?>,
         lang:       <?php echo json_encode($lang); ?>
     };
+    window.TIMELINE_INITIAL_DATA = <?php echo $data ? json_encode($data) : 'null'; ?>;
     </script>
     <script src="<?php echo $lang === 'en' ? '../' : ''; ?>js/ajax.js"></script>
 </body>

@@ -100,7 +100,7 @@
     });
   }
 
-  function computeScale(data) {
+  function computeScale(data, zoomMin, zoomMax) {
     var pas = Math.max(1, parseInt(data.pas, 10) || 100);
     var tableaux = normaliserTableaux(data.tableaux, data.periodes);
     var evenements = normaliserEvenements(data.evenements);
@@ -123,6 +123,10 @@
       if (scaleMax <= scaleMin) scaleMax = scaleMin + pas;
       range = scaleMax - scaleMin;
     }
+    if (zoomMin != null && isFinite(zoomMin)) scaleMin = zoomMin;
+    if (zoomMax != null && isFinite(zoomMax)) scaleMax = zoomMax;
+    if (scaleMax <= scaleMin) scaleMax = scaleMin + pas;
+    range = scaleMax - scaleMin;
     var scaleYears = [];
     for (var y = scaleMin; y <= scaleMax; y += pas) scaleYears.push(y);
     return { scaleMin: scaleMin, scaleMax: scaleMax, range: range, scaleYears: scaleYears, minYear: minYear, maxYear: maxYear };
@@ -153,7 +157,7 @@
     return '<div class="timeline-axis-bottom"><div class="timeline-ticks">' + ticksHtml + '</div><div class="timeline-line-h"></div></div><div class="timeline-scale-h">' + labelsHtml + '</div>';
   }
 
-  function renderTableaux(tableaux, scaleMin, range, palette) {
+  function renderTableaux(tableaux, scaleMin, scaleMax, range, palette) {
     var idx = 0;
     var paletteSize = palette.length;
     var html = '<div class="timeline-tableaux">';
@@ -192,21 +196,26 @@
         html += '<div class="tableau-group-label">' + escapeHtml(tabTitre) + '</div>';
       }
       Object.keys(byLane).map(Number).sort(function (a, b) { return a - b; }).forEach(function (laneIdx) {
-        html += '<div class="timeline-tableau" data-lanes="1" style="height: ' + LANE_HEIGHT + 'px;">';
-        html += '<div class="timeline-tableau-lanes">';
+        var laneHtml = '';
         byLane[laneIdx].forEach(function (p) {
           var debut = parseInt(p.debut, 10) || 0;
           var fin = parseInt(p.fin, 10) || debut;
-          var leftPct = range > 0 ? ((debut - scaleMin) / range) * 100 : 0;
-          var widthPct = range > 0 ? (Math.max(0.5, fin - debut) / range) * 100 : 1;
+          if (fin < scaleMin || debut > scaleMax) return;
+          var visDebut = Math.max(debut, scaleMin);
+          var visFin = Math.min(fin, scaleMax);
+          var leftPct = range > 0 ? ((visDebut - scaleMin) / range) * 100 : 0;
+          var widthPct = range > 0 ? (Math.max(0.5, visFin - visDebut) / range) * 100 : 1;
           var couleur = p.couleur || 'hsl(210, 50%, 50%)';
           var titre = escapeHtml(p.titre || '');
           var titreEsc = escapeHtml(p.titre || '').replace(/"/g, '&quot;');
           var descEsc = escapeHtml(p.description || '').replace(/"/g, '&quot;');
-          html += '<div class="periode" style="left: ' + leftPct.toFixed(2) + '%; width: ' + widthPct.toFixed(2) + '%; top: 2px; background: ' + couleur + '; border-color: ' + couleur + ';" data-debut="' + debut + '" data-fin="' + fin + '" data-titre="' + titreEsc + '" data-desc="' + descEsc + '">';
-          html += '<span class="periode-titre">' + titre + '</span></div>';
+          laneHtml += '<div class="periode" style="left: ' + leftPct.toFixed(2) + '%; width: ' + widthPct.toFixed(2) + '%; top: 2px; background: ' + couleur + '; border-color: ' + couleur + ';" data-debut="' + debut + '" data-fin="' + fin + '" data-titre="' + titreEsc + '" data-desc="' + descEsc + '">';
+          laneHtml += '<span class="periode-titre">' + titre + '</span></div>';
         });
-        html += '</div></div>';
+        if (laneHtml) {
+          html += '<div class="timeline-tableau" data-lanes="1" style="height: ' + LANE_HEIGHT + 'px;">';
+          html += '<div class="timeline-tableau-lanes">' + laneHtml + '</div></div>';
+        }
       });
       html += '</div>';
     });
@@ -235,8 +244,12 @@
     return list;
   }
 
-  function renderFriseGroupe(evenements, scaleMin, range) {
-    var withLanes = assignerLanesEvents(evenements, scaleMin, range);
+  function renderFriseGroupe(evenements, scaleMin, scaleMax, range) {
+    var filtered = (evenements || []).filter(function (e) {
+      var d = parseInt(e.date, 10);
+      return d >= scaleMin && d <= scaleMax;
+    });
+    var withLanes = assignerLanesEvents(filtered, scaleMin, range);
     var nbLanes = 0;
     withLanes.forEach(function (e) { nbLanes = Math.max(nbLanes, (e.lane || 0) + 1); });
     var minHeightRem = nbLanes > 0 ? nbLanes * EVENT_ROW_HEIGHT_REM + 0.5 : 2.5;
@@ -255,7 +268,7 @@
     return '<div class="timeline-evenements-frise" style="min-height: ' + minHeightRem + 'rem;">' + html + '</div>';
   }
 
-  function renderEvenementsFrise(rawEvenements, scaleMin, range) {
+  function renderEvenementsFrise(rawEvenements, scaleMin, scaleMax, range) {
     // Normaliser en groupes [{categorie, evenements}]
     var groupes;
     if (rawEvenements && !Array.isArray(rawEvenements)) {
@@ -271,20 +284,21 @@
       if (g.categorie) {
         html += '<div class="tableau-group-label">' + escapeHtml(g.categorie) + '</div>';
       }
-      html += renderFriseGroupe(g.evenements, scaleMin, range);
+      html += renderFriseGroupe(g.evenements, scaleMin, scaleMax, range);
       html += '</div>';
     });
     return html;
   }
 
-  var data = null;
+  var data = window.TIMELINE_INITIAL_DATA || null;
   var applyCurrentZoom = null;
 
-  function renderTimeline(data) {
+  function renderTimeline(data, opts) {
     var container = document.getElementById('timeline');
     if (!container || !data) return;
+    opts = opts || {};
 
-    var scale = computeScale(data);
+    var scale = computeScale(data, opts.zoomMin, opts.zoomMax);
 
     var descEl = document.getElementById('timeline-scale-desc');
     if (descEl && data.pas) {
@@ -313,12 +327,12 @@
       renderVerticalGrid(scale.scaleYears, scale.scaleMin, scale.range) +
       '<section class="timeline-section timeline-section-periodes">' +
         '<h2 class="timeline-section-title">' + escapeHtml(i18n.periods) + '</h2>' +
-        renderTableaux(tableaux, scale.scaleMin, scale.range, palette) +
+        renderTableaux(tableaux, scale.scaleMin, scale.scaleMax, scale.range, palette) +
       '</section>' +
       '<div class="timeline-separator">' + scaleBlock + '</div>' +
       '<section class="timeline-section timeline-section-evenements">' +
         '<h2 class="timeline-section-title">' + escapeHtml(i18n.events) + '</h2>' +
-        renderEvenementsFrise(data.evenements, scale.scaleMin, scale.range) +
+        renderEvenementsFrise(data.evenements, scale.scaleMin, scale.scaleMax, scale.range) +
         scaleBlock +
       '</section>';
   }
@@ -396,38 +410,29 @@
     var hiVal = scaleMax;
 
     function applyZoom() {
+      var hiddenLabels = {};
+      document.querySelectorAll('.filter-check').forEach(function (cb) {
+        if (!cb.checked) {
+          var lbl = document.querySelector('label[for="' + cb.id + '"]');
+          if (lbl) hiddenLabels[lbl.textContent.trim()] = true;
+        }
+      });
+
       var isDefault = (loVal === scaleMin && hiVal === scaleMax);
-      document.querySelectorAll('.timeline-tableau-group').forEach(function (group) {
-        if (group.dataset.filterChecked === '0') { group.style.display = 'none'; return; }
-        if (isDefault) {
-          group.style.display = '';
-          group.querySelectorAll('.periode').forEach(function (p) { p.style.display = ''; });
-          return;
+      renderTimeline(data, isDefault ? {} : { zoomMin: loVal, zoomMax: hiVal });
+      buildFilters();
+
+      var savedZoom = applyCurrentZoom;
+      applyCurrentZoom = null;
+      document.querySelectorAll('.filter-check').forEach(function (cb) {
+        var lbl = document.querySelector('label[for="' + cb.id + '"]');
+        if (lbl && hiddenLabels[lbl.textContent.trim()]) {
+          cb.checked = false;
+          cb.dispatchEvent(new Event('change'));
         }
-        var any = false;
-        group.querySelectorAll('.periode').forEach(function (p) {
-          var ok = parseInt(p.dataset.fin, 10) >= loVal && parseInt(p.dataset.debut, 10) <= hiVal;
-          p.style.display = ok ? '' : 'none';
-          if (ok) any = true;
-        });
-        group.style.display = any ? '' : 'none';
       });
-      document.querySelectorAll('.timeline-evenements-groupe').forEach(function (group) {
-        if (group.dataset.filterChecked === '0') { group.style.display = 'none'; return; }
-        if (isDefault) {
-          group.style.display = '';
-          group.querySelectorAll('.event-marker').forEach(function (m) { m.style.display = ''; });
-          return;
-        }
-        var any = false;
-        group.querySelectorAll('.event-marker').forEach(function (m) {
-          var d = parseInt(m.dataset.date, 10);
-          var ok = d >= loVal && d <= hiVal;
-          m.style.display = ok ? '' : 'none';
-          if (ok) any = true;
-        });
-        group.style.display = any ? '' : 'none';
-      });
+      applyCurrentZoom = savedZoom;
+
       updateStickyOffset();
     }
 
