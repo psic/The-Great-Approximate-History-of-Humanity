@@ -1,7 +1,7 @@
 {
-  "pas": 3,
+  "pas": 2,
   "tableaux": {
-    "Places of Residence": [
+    "Housing" :[
       {
         "titre": "Ballancourt",
         "debut": 1979,
@@ -35,146 +35,207 @@
     ],
     "Education": [
       {
-        "titre": "Nursery School",
+        "titre": "Nursery school",
         "debut": 1982,
         "fin": 1985
       },
       {
-        "titre": "Primary School",
+        "titre": "Primary school",
         "debut": 1985,
-        "fin": 1989
+        "fin": 1990,
+        "description": "École Jules Ferry"
       },
       {
-        "titre": "Middle School",
-        "debut": 1989,
-        "fin": 1993
+        "titre": "Middle school",
+        "debut": 1990,
+        "fin": 1994,
+        "description": "Collège Le Saussay"
       },
       {
-        "titre": "High School",
-        "debut": 1993,
-        "fin": 1997
+        "titre": "High school",
+        "debut": 1994,
+        "fin": 1997,
+        "description": "Lycée Marie Laurencin"
       },
       {
-        "titre": "DUT Computer Science",
+        "titre": "IUT",
         "debut": 1997,
-        "fin": 1999
+        "fin": 1999,
+        "description": "2-year CS degree, Paris V"
       },
       {
-        "titre": "Bachelor / Master MIAGE",
+        "titre": "MIAGE",
         "debut": 1999,
-        "fin": 2002
+        "fin": 2002,
+        "description": "BSc & MSc in IT for Business Management, work-study programme, Paris XI (Orsay)"
       },
       {
-        "titre": "Research Master (DEA)",
+        "titre": "DEA",
         "debut": 2002,
-        "fin": 2003
+        "fin": 2003,
+        "description": "Research Master in Intelligent Systems, Paris IX (Dauphine)"
       },
       {
         "titre": "PhD",
-        "debut": 2003,
-        "fin": 2006
+        "debut": 2004,
+        "fin": 2009,
+        "description": "Thesis on a context information management infrastructure for ambient intelligence. Université Joseph Fourier / Orange Labs."
       }
     ],
-    "Higher Education": [
+
+    "Apprenticeship / PhD / Freelance": [
       {
-        "titre": "Lycée Marie Laurencin",
-        "description": "Baccalauréat (French high school diploma).",
-        "debut": 1995,
-        "fin": 1997
-      },
-      {
-        "titre": "IUT Computer Science",
-        "description": "Computer science training at Université Joseph Fourier, Grenoble.",
-        "debut": 1997,
-        "fin": 1999
-      },
-      {
-        "titre": "Master MIAGE",
-        "description": "Computer Methods Applied to Business Management, Université Joseph Fourier.",
+        "titre": "Apprenticeship",
+        "description": "Work-study programme",
         "debut": 1999,
         "fin": 2002
       },
       {
-        "titre": "Research Master — Computer Science & Intelligent Systems",
-        "description": "DEA at Université Joseph Fourier, Grenoble.",
-        "debut": 2002,
-        "fin": 2003
-      },
-      {
-        "titre": "PhD in Computer Science",
-        "description": "Thesis on a context information management infrastructure for ambient intelligence. Université Joseph Fourier / Orange Labs.",
+        "titre": "PhD",
+        "description": ".",
         "debut": 2004,
         "fin": 2009
+      },
+      {
+        "titre": "Freelance",
+        "description": ".",
+        "debut": 2011,
+        "fin": 2023
       }
     ],
-    "Professional Career": [
+    "": [
       {
-        "titre": "Apprentice — TF1 Entreprises",
-        "description": "Work-study apprenticeship.",
+        "titre": "TF1 Entreprises",
+        "description": "Work-study placement.",
         "debut": 1999,
         "fin": 2001
       },
       {
-        "titre": "PhD Student — Orange Labs",
-        "description": "Thesis on context management for ambient intelligence. Semantic web (OWL, RDF, SPARQL), Java, multi-agent systems (JADE).",
+        "titre": "MMA",
+        "description": "Work-study placement.",
+        "debut": 2001,
+        "fin": 2002
+      },
+      {
+        "titre": "Orange Labs",
+        "description": "PhD thesis on context management for ambient intelligence. Semantic web (OWL, RDF, SPARQL), Java, multi-agent systems (JADE).",
         "debut": 2004,
         "fin": 2007
-      },
+      }
+    ],
+    "Freelance": [
       {
-        "titre": "R&D / Telecom Engineer — IVèS",
-        "description": "Development and maintenance of a SIP/RTP client embedded in a web browser (C++). Administration of Asterisk and OpenSer servers. Web site maintenance (PHP).",
-        "debut": 2008,
-        "fin": 2010
-      },
-      {
-        "titre": "Development, Consulting & Training — Freelance",
-        "description": "VBA training at IAE for M1 students. Development of a PHP/Zend intranet site. Development of YouTube connectors for Hadoop (Java).",
+        "titre": "IAE Grenoble",
+        "description": "VBA training for MSc students. Development of a PHP/Zend intranet. YouTube connectors for Hadoop (Java).",
         "debut": 2011,
+        "fin": 2011
+      },
+      {
+        "titre": "Hurence",
+        "description": "Development of a YouTube connector for a Big Data E.T.L (Java)",
+        "debut": 2012,
         "fin": 2012
       },
       {
-        "titre": "R&D / Big Data Engineer — Hurence",
-        "description": "Design, development and maintenance of software for the Big Data / Hadoop ecosystem.",
-        "debut": 2012,
-        "fin": 2013
-      },
-      {
-        "titre": "Founder — Le Bar à Jus",
-        "description": "Creation and management of a fresh juice bar and salad restaurant in Pont-en-Royans.",
+        "titre": "Le Bar à Jus",
+        "description": "Creation and management of a fresh juice and salad bar in Pont-en-Royans.",
         "debut": 2014,
         "fin": 2017
       },
       {
-        "titre": "BackEnd Dev, Architect, DevOps — The Next One",
-        "description": "Development of a mobile sports management game application. Data modelling, architecture, REST API backend (Symfony), Java batches, deployment.",
+        "titre": "The Next One",
+        "description": "Development of a sports management game mobile app. Data modelling, architecture, REST API backend (Symfony), Java batch jobs, deployment.",
         "debut": 2014,
         "fin": 2023
       },
       {
-        "titre": "Trainer Simplon.co — Develo'Pont",
-        "description": "Training job-seekers in web development. Creation of educational content: HTML, CSS, PHP/Symfony, MySQL, WordPress.",
+        "titre": "Develo'Pont",
+        "description": "Web development training for job seekers. HTML, CSS, PHP/Symfony, MySQL, WordPress.",
         "debut": 2017,
         "fin": 2021
       },
       {
-        "titre": "FullStack PHP / WordPress Developer — KRDS",
-        "description": "WordPress/PHP application maintenance. Management of 20 multilingual sites. Third-party authentication, ACF templates, cron jobs.",
+        "titre": "KRDS",
+        "description": "WordPress/PHP maintenance. Management of 20 multilingual websites. Third-party auth, ACF templates, cron jobs.",
         "debut": 2019,
         "fin": 2023
+      }
+    ],
+    "Companies": [
+      {
+        "titre": "IVèS",
+        "description": "R&D / Telecom Engineer: SIP/RTP client embedded in a web browser (C++). Asterisk and OpenSer server administration. Web maintenance (PHP).",
+        "debut": 2008,
+        "fin": 2011
       },
       {
-        "titre": "Web Developer — Prospectiva / Groupe Sarastro",
-        "description": "Development and maintenance of a legacy Symfony application. N2 support, SCRUM facilitation, JIRA backlog management, functional and technical writing, client relations.",
+        "titre": "Hurence",
+        "description": "R&D / Big Data Engineer: Design, development and maintenance of Big Data / Hadoop software.",
+        "debut": 2012,
+        "fin": 2013
+      },
+      {
+        "titre": "Prospectiva",
+        "description": "Development and maintenance of a legacy Symfony app. N2 support, SCRUM facilitation, JIRA backlog, client relations.",
         "debut": 2023,
+        "fin": 2026
+      }
+    ],
+    "Sport": [
+      {
+        "titre": "Football",
+        "description": "Football Club de Ballancourt",
+        "debut": 1986,
+        "fin": 1994
+      },
+      {
+        "titre": "Basketball",
+        "debut": 1994,
+        "fin": 1996
+      },
+      {
+        "titre": "Football",
+        "description": "ASIEG — Coach",
+        "debut": 2007,
+        "fin": 2012
+      },
+      {
+        "titre": "Football",
+        "description": "Veterans",
+        "debut": 2024,
         "fin": 2026
       }
     ]
   },
   "evenements": {
-    "Personal Life": [
+    "Life": [
       {
         "titre": "Birth",
         "date": 1979
+      },
+      {
+        "titre": "Merlin",
+        "date": 2017
+      }
+    ],
+    "Degrees": [
+      {
+        "titre": "Baccalauréat",
+        "date": 1997
+      },
+      {
+        "titre": "PhD",
+        "date": 2009
+      }
+    ],
+    "Health": [
+      {
+        "titre": "Torn ligaments",
+        "date": 1996
+      },
+      {
+        "titre": "Ligament surgery",
+        "date": 2001
       }
     ]
   }

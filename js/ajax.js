@@ -339,7 +339,7 @@
         var dlLink = document.getElementById('footer-json-download');
         if (dlLink) dlLink.href = '/data_' + i18n.lang + '/' + filename;
         var srcSpan = document.getElementById('footer-json-source');
-        if (srcSpan && i18n.footerTpl) srcSpan.textContent = i18n.footerTpl.replace('%s', filename);
+        if (srcSpan && i18n.footerTpl) srcSpan.innerHTML = i18n.footerTpl.replace('%s', filename);
       } catch (err) {
         console.error('Erreur AJAX timeline:', err);
       }

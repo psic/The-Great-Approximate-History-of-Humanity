@@ -528,3 +528,12 @@ body {
   border-radius: 4px;
   font-size: 0.9em;
 }
+
+.footer a {
+  color: var(--text-muted);
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: var(--accent);
+}

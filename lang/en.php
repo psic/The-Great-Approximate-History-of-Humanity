@@ -22,7 +22,7 @@ return [
     'nav_creer_frise'   => 'Create your timeline',
     'home'              => 'Home',
 
-    'ma_frise_title'    => 'My Approximate Great History',
+    'ma_frise_title'    => 'My Not So Great Approximate History',
     'ma_frise_intro'    => 'Visualize your own timeline from a JSON file.',
 
     'creer_frise_title'  => 'Create Your Approximate Great History',

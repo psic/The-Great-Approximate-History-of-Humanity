@@ -257,7 +257,6 @@ $captcha_label = sprintf($t['contact_captcha_label'], $captcha_a, $captcha_b);
             <a href="<?php echo $base; ?>/ma-frise/"><?php echo htmlspecialchars($t['nav_ma_frise']); ?></a>
             <a href="<?php echo $base; ?>/creer-ta-frise/"><?php echo htmlspecialchars($t['nav_creer_frise']); ?></a>
         </nav>
-        <p><?php echo $t['footer']; ?></p>
         <p class="footer-meta">
             <a href="https://github.com/psic/The-Great-Approximate-History-of-Humanity"
                target="_blank" rel="noopener noreferrer"><?php echo htmlspecialchars($t['footer_github']); ?></a>

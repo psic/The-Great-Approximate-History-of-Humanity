@@ -22,7 +22,7 @@ return [
     'nav_creer_frise'   => 'Créer ta frise',
     'home'              => 'Accueil',
 
-    'ma_frise_title'    => 'Ma Grande Histoire Approximative',
+    'ma_frise_title'    => 'Ma Pas Si Grande Histoire Approximative',
     'ma_frise_intro'    => 'Visualise ta propre frise chronologique à partir d\'un fichier JSON.',
 
     'creer_frise_title'  => 'Créer Sa Grande Histoire Approximative',

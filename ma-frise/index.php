@@ -51,7 +51,7 @@ $breadcrumbs  = [
         </nav>
         <p>
             <?php echo sprintf($t['footer'], 'matimeline.json'); ?>
-            — <a href="/data/matimeline.json" download><?php echo htmlspecialchars($t['footer_download']); ?></a>
+            — <a href="/data_<?php echo $lang; ?>/matimeline.json" download><?php echo htmlspecialchars($t['footer_download']); ?></a>
         </p>
     </footer>
 
@@ -67,7 +67,7 @@ $breadcrumbs  = [
     <script>
     (function () {
         var req = new XMLHttpRequest();
-        req.open('GET', '/data/matimeline.json', true);
+        req.open('GET', '/data_<?php echo $lang; ?>/matimeline.json', true);
         req.onreadystatechange = function () {
             if (req.readyState !== 4 || req.status !== 200) return;
             try {
