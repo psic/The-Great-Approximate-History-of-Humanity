@@ -39,8 +39,15 @@ $breadcrumbs  = [
     </header>
 
     <main class="main">
-<p class="description" id="timeline-scale-desc" style="margin-bottom:1.5rem"></p>
-        <div class="timeline" id="timeline"></div>
+        <p class="description" id="timeline-scale-desc" style="margin-bottom:1.5rem"></p>
+        <div class="timeline-sticky-header">
+            <div class="timeline-axis-sticky" id="timeline-axis-sticky">
+                <div class="timeline-axis-sticky-inner" id="timeline-axis-sticky-inner"></div>
+            </div>
+        </div>
+        <div class="timeline-scroll-wrapper">
+            <div class="timeline" id="timeline"></div>
+        </div>
     </main>
 
     <footer class="footer">

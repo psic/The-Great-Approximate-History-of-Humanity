@@ -50,6 +50,14 @@ Puis ouvrir : **http://localhost:8000**
 
 Voir le dossier **`apache/`** et le fichier **`apache/README.md`** pour la configuration VirtualHost et l’accès au site via Apache.
 
+## URL de prod
+
+http://taghoh.web-en-royans.fr/
+
+## Temps de travail
+
+4 à 5 jours (~2.5M tokens Claude)
+
 ## Fonctionnalités
 
 - Affichage de la frise à partir de `timeline.json` (pas, periodes, evenements)
