@@ -561,6 +561,9 @@
   if (btn) btn.addEventListener('click', refreshTimeline);
 
   window.renderTimeline = renderTimeline;
+  window.buildFilters = buildFilters;
+  window.buildZoomSlider = buildZoomSlider;
+  window.setTimelineData = function (d) { data = d; };
 
   // --- Sticky header : calcule la hauteur et l'expose en CSS var ---
   function updateStickyOffset() {

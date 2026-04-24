@@ -38,9 +38,11 @@ $breadcrumbs  = [
         <a href="<?php echo $altUrl; ?>" class="lang-switch" title="<?php echo $altLabel; ?>" aria-label="<?php echo $altLabel; ?>"><?php echo $altFlag; ?></a>
     </header>
 
-    <main class="main">
-        <p class="description" id="timeline-scale-desc" style="margin-bottom:1.5rem"></p>
-        <div class="timeline-sticky-header">
+    <main class="main" style="padding-top:0">
+        <div class="timeline-sticky-header" id="timeline-sticky-header">
+            <p class="description" id="timeline-scale-desc"></p>
+            <div class="timeline-filters" id="timeline-filters"></div>
+            <div class="timeline-zoom" id="timeline-zoom"></div>
             <div class="timeline-axis-sticky" id="timeline-axis-sticky">
                 <div class="timeline-axis-sticky-inner" id="timeline-axis-sticky-inner"></div>
             </div>
@@ -78,8 +80,11 @@ $breadcrumbs  = [
         req.onreadystatechange = function () {
             if (req.readyState !== 4 || req.status !== 200) return;
             try {
-                var data = JSON.parse(req.responseText);
-                if (window.renderTimeline) window.renderTimeline(data);
+                var d = JSON.parse(req.responseText);
+                if (window.setTimelineData) window.setTimelineData(d);
+                if (window.renderTimeline) window.renderTimeline(d);
+                if (window.buildFilters) window.buildFilters();
+                if (window.buildZoomSlider) window.buildZoomSlider();
             } catch (e) {
                 document.getElementById('timeline').innerHTML = '<p class="error">Erreur de lecture du fichier JSON.</p>';
             }

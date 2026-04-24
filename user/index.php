@@ -98,6 +98,8 @@ $_ogImage = file_exists($pngFile)
         var data = window.TIMELINE_INITIAL_DATA;
         if (data && window.renderTimeline) {
             window.renderTimeline(data);
+            if (window.buildFilters) window.buildFilters();
+            if (window.buildZoomSlider) window.buildZoomSlider();
         }
     }());
     </script>
