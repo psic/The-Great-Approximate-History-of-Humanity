@@ -1,67 +1,80 @@
 # Frise chronologique (PHP / HTML / CSS)
 
-Site minimal qui affiche une **frise chronologique** générée à partir d’un fichier JSON.  
-Pas de framework PHP, JavaScript limité à l’AJAX pour rafraîchir la frise sans recharger la page.
+Site qui affiche des **frises chronologiques** interactives générées à partir de fichiers JSON, bilingue FR/EN, sans framework ni dépendance externe.
+
+**URL de prod** : http://taghoh.web-en-royans.fr/
 
 ## Structure
 
 ```
 greatHistory/
-├── apache/
-│   ├── greatHistory.conf   # Exemple de VirtualHost Apache
-│   └── README.md           # Instructions configuration Apache
-├── data/
-│   └── timeline.json      # Données de la frise (à éditer)
+├── apache/                  # Config VirtualHost + scripts de déploiement
 ├── api/
-│   └── timeline.php       # Endpoint JSON pour l’AJAX
-├── css/
-│   └── style.css
-├── js/
-│   └── ajax.js            # Uniquement appel AJAX
-├── index.php
-└── README.md
+│   ├── timeline.php         # Endpoint AJAX (données normalisées JSON)
+│   └── share.php            # Endpoint partage de frise
+├── contact/                 # Page contact (FR)
+├── creer-ta-frise/          # Éditeur de frise personnalisée (FR)
+├── ma-frise/                # Frise personnelle (FR)
+├── user/                    # Espace utilisateur (FR)
+├── en/                      # Miroir EN de toutes les pages
+├── fr/                      # Redirection langue FR
+├── data_fr/                 # Données des frises en français
+├── data_en/                 # Données des frises en anglais
+├── data_user/               # Frises créées par les utilisateurs
+├── css/style.css            # Thème sombre
+├── js/ajax.js               # Rechargement dynamique
+├── lang/fr.php              # Traductions FR
+├── lang/en.php              # Traductions EN
+├── includes/seo-head.php    # SEO commun
+├── config.php               # Configuration globale (SITE_URL, etc.)
+├── docs/                    # Documentation interne
+└── index.php                # Page principale
 ```
+
+## Vues disponibles
+
+Sélection via `?vue=` : `moderne` (défaut), `histoire`, `humanite`, `terre`, `vie`, `univers`.  
+Chaque vue correspond à un fichier `data_fr/<vue>.json` ou `data_en/<vue>.json`.
 
 ## Format du JSON
 
-Dans `data/timeline.json` :
+```json
+{
+  "pas": 100,
+  "tableaux": [[ { "nom": "...", "debut": -500, "fin": 200, "couleur": "..." } ]],
+  "evenements": [ { "nom": "...", "date": 1066 } ]
+}
+```
 
-- **pas** : nombre. Échelle d’affichage des années (ex. `50` = graduation de 50 en 50 ans).
-- **tableaux** : tableau de **tableaux** de périodes. Chaque sous-tableau = **une ligne** de la frise. Si vous n’avez qu’un seul tableau de périodes, vous pouvez encore utiliser **periodes** (un seul tableau) : il sera affiché sur une ligne.
-  - Dans un même sous-tableau, si deux périodes se **chevauchent** (dates qui se recoupent), elles sont affichées sur des **lignes différentes** (lanes) dans cette ligne.
-  - Chaque période : **debut**, **fin**, **titre**, **description** (optionnel).
-- **evenements** : tableau d’événements (tri par date). Chaque élément : **date**, **titre**, **description** (optionnel).
-
-Chaque période a une **couleur différente**, aléatoire et harmonieuse (palette HSL).
+- **pas** : intervalle des graduations (en années)
+- **tableaux** : groupes de périodes — chaque sous-tableau est une ligne de la frise ; les chevauchements sont gérés automatiquement en lanes
+- **evenements** : marqueurs ponctuels sur la frise
 
 ## Lancer le site
 
-### Serveur PHP intégré
-
-À la racine du projet :
-
 ```bash
+# Serveur PHP intégré
 php -S localhost:8000
+
+# Déploiement Apache
+bash apache/deploy-vers-varwww.sh && sudo systemctl reload apache2
 ```
 
-Puis ouvrir : **http://localhost:8000**
+## Fonctionnalités
 
-### Avec Apache
-
-Voir le dossier **`apache/`** et le fichier **`apache/README.md`** pour la configuration VirtualHost et l’accès au site via Apache.
-
-## URL de prod
-
-http://taghoh.web-en-royans.fr/
+- **Multilingue FR/EN** : toutes les pages et données disponibles dans les deux langues
+- **6 frises thématiques** : Monde moderne, Histoire, Humanité, Terre, Vie, Univers
+- **Header sticky** : navigation par onglets, filtres par groupe, axe des années et slider de zoom toujours visibles
+- **Zoom sur plage de dates** : slider interactif pour restreindre la période affichée
+- **Filtres par groupe** : afficher/masquer des groupes de périodes indépendamment
+- **Rechargement AJAX** : changement de vue sans rechargement de page
+- **Couleurs harmonieuses** : palette HSL automatique si aucune couleur définie
+- **Gestion des lanes** : détection des chevauchements, affichage sur plusieurs lignes
+- **Partage** : bouton de partage avec cooldown 5 min, boutons réseaux sociaux
+- **"Créer ta frise"** : éditeur pour créer et exporter une frise personnalisée
+- **"Ma frise"** : frise personnelle configurable
+- **SEO complet** : balises Open Graph, canonical, sitemap, robots.txt
 
 ## Temps de travail
 
 4 à 5 jours (~2.5M tokens Claude)
-
-## Fonctionnalités
-
-- Affichage de la frise à partir de `timeline.json` (pas, periodes, evenements)
-- Échelle des années selon **pas** (graduations sur l’axe)
-- Périodes affichées en barres (debut → fin), tri automatique par date de début
-- Événements affichés comme points sur la frise, tri automatique par date
-- Bouton « Rafraîchir la frise (AJAX) » : recharge les données via `api/timeline.php` sans recharger la page
