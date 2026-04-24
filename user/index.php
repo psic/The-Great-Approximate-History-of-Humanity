@@ -76,6 +76,7 @@ $_ogImage = file_exists($pngFile)
     <footer class="footer">
         <nav class="footer-nav">
             <a href="<?php echo $home; ?>"><?php echo htmlspecialchars($t['home']); ?></a>
+            <a href="<?php echo $base; ?>/ma-frise/"><?php echo htmlspecialchars($t['nav_ma_frise']); ?></a>
             <a href="<?php echo $base; ?>/creer-ta-frise/"><?php echo htmlspecialchars($t['nav_creer_frise']); ?></a>
             <a href="<?php echo $base; ?>/contact/"><?php echo htmlspecialchars($t['nav_contact']); ?></a>
         </nav>
