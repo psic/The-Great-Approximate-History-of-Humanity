@@ -45,7 +45,8 @@ $_ogImage = file_exists($pngFile)
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($pageTitle); ?></title>
     <?php require __DIR__ . '/../includes/seo-head.php'; ?>
-    <link rel="stylesheet" href="<?php echo $lang === 'en' ? '../' : ''; ?>css/style.css">
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <?php
@@ -90,7 +91,7 @@ $_ogImage = file_exists($pngFile)
     };
     window.TIMELINE_INITIAL_DATA = <?php echo json_encode($data); ?>;
     </script>
-    <script src="<?php echo $lang === 'en' ? '../' : ''; ?>js/ajax.js"></script>
+    <script src="/js/ajax.js"></script>
     <script>
     (function () {
         var data = window.TIMELINE_INITIAL_DATA;
