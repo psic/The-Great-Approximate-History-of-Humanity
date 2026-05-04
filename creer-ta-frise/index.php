@@ -80,6 +80,11 @@ $breadcrumbs  = [
     ?>
     <header class="header">
         <h1><a href="<?php echo $home; ?>"><?php echo htmlspecialchars($t['creer_frise_title']); ?></a></h1>
+        <nav class="header-nav">
+            <a href="<?php echo $home; ?>"><?php echo htmlspecialchars($t['home']); ?></a>
+            <a href="<?php echo $base; ?>/ma-frise/"><?php echo htmlspecialchars($t['nav_ma_frise']); ?></a>
+            <a href="<?php echo $base; ?>/contact/"><?php echo htmlspecialchars($t['nav_contact']); ?></a>
+        </nav>
         <a href="<?php echo $altUrl; ?>" class="lang-switch" title="<?php echo $altLabel; ?>" aria-label="<?php echo $altLabel; ?>"><?php echo $altFlag; ?></a>
     </header>
 

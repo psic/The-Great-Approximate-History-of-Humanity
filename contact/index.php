@@ -183,6 +183,11 @@ $captcha_label = sprintf($t['contact_captcha_label'], $captcha_a, $captcha_b);
     ?>
     <header class="header">
         <h1><a href="<?php echo $home; ?>"><?php echo htmlspecialchars($t['contact_title']); ?></a></h1>
+        <nav class="header-nav">
+            <a href="<?php echo $home; ?>"><?php echo htmlspecialchars($t['home']); ?></a>
+            <a href="<?php echo $base; ?>/ma-frise/"><?php echo htmlspecialchars($t['nav_ma_frise']); ?></a>
+            <a href="<?php echo $base; ?>/creer-ta-frise/"><?php echo htmlspecialchars($t['nav_creer_frise']); ?></a>
+        </nav>
         <a href="<?php echo $altUrl; ?>" class="lang-switch" title="<?php echo $altLabel; ?>" aria-label="<?php echo $altLabel; ?>"><?php echo $altFlag; ?></a>
     </header>
 

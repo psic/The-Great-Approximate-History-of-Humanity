@@ -28,6 +28,7 @@ $jsonPath = __DIR__ . '/data_' . $lang . '/' . $vues[$vue];
 
 // SEO
 $langPrefix   = $lang === 'en' ? '/en' : '';
+$base         = $langPrefix;
 $vueParam     = $vue !== 'moderne' ? '?vue=' . $vue : '';
 $canonicalUrl = SITE_URL . $langPrefix . '/' . $vueParam;
 $frCanonical  = SITE_URL . '/' . $vueParam;
@@ -288,6 +289,11 @@ if (!is_readable($jsonPath)) {
     ?>
     <header class="header">
         <h1><?php echo htmlspecialchars($t['title']); ?></h1>
+        <nav class="header-nav">
+            <a href="<?php echo $base; ?>/ma-frise/"><?php echo htmlspecialchars($t['nav_ma_frise']); ?></a>
+            <a href="<?php echo $base; ?>/creer-ta-frise/"><?php echo htmlspecialchars($t['nav_creer_frise']); ?></a>
+            <a href="<?php echo $base; ?>/contact/"><?php echo htmlspecialchars($t['nav_contact']); ?></a>
+        </nav>
         <a href="<?php echo $altUrl; ?>" class="lang-switch" title="<?php echo $altLabel; ?>" aria-label="<?php echo $altLabel; ?>"><?php echo $altFlag; ?></a>
     </header>
 
@@ -472,7 +478,6 @@ if (!is_readable($jsonPath)) {
 
     <footer class="footer">
         <nav class="footer-nav">
-            <?php $base = $lang === 'en' ? '/en' : ''; ?>
             <a href="<?php echo $base; ?>/ma-frise/"><?php echo htmlspecialchars($t['nav_ma_frise']); ?></a>
             <a href="<?php echo $base; ?>/creer-ta-frise/"><?php echo htmlspecialchars($t['nav_creer_frise']); ?></a>
             <a href="<?php echo $base; ?>/contact/"><?php echo htmlspecialchars($t['nav_contact']); ?></a>
